@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow,noarchive,nosnippet">
+<title>Arsenal Cleanup · Seleção em blocos</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  body { font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; }
+  .mono { font-family: 'JetBrains Mono', monospace; }
+  .item:has(input:checked) { background: rgba(239,68,68,0.08); }
+  .item:has(input:checked) .item-name { text-decoration: line-through; opacity: 0.6; }
+  .block-actions button { transition: all 0.15s; }
+  details[open] > summary .arrow { transform: rotate(90deg); }
+  .arrow { transition: transform 0.2s; display: inline-block; }
+</style>
+</head>
+<body class="bg-gray-950 text-gray-100">
+
+<!-- ─── FLOATING TOP BAR ─── -->
+<div class="sticky top-0 z-50 bg-gray-950/95 backdrop-blur border-b border-gray-800">
+  <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between flex-wrap gap-3">
+    <div>
+      <div class="text-[10px] uppercase tracking-[0.3em] text-amber-400 mono">Arsenal Cleanup · v1</div>
+      <h1 class="text-xl font-bold">Marca o que <span class="text-red-400">REMOVER</span> do seu setup</h1>
+    </div>
+    <div class="flex items-center gap-3 flex-wrap">
+      <div class="bg-gray-900 border border-gray-800 rounded px-3 py-2 text-sm">
+        <span class="text-gray-500">Marcados pra remover:</span>
+        <span id="count-marked" class="text-red-400 font-bold ml-1">0</span>
+        <span class="text-gray-600">/</span>
+        <span id="count-total" class="text-gray-500">0</span>
+      </div>
+      <button id="select-all-recommended" class="px-3 py-2 bg-amber-600 hover:bg-amber-500 text-gray-900 font-bold rounded text-sm">⚡ Marca recomendados</button>
+      <button id="export-text" class="px-3 py-2 bg-gray-800 hover:bg-gray-700 text-gray-100 font-semibold rounded text-sm">📋 Copiar lista</button>
+      <button id="export-json" class="px-3 py-2 bg-gray-800 hover:bg-gray-700 text-gray-100 font-semibold rounded text-sm">⬇ JSON</button>
+      <button id="reset-all" class="px-3 py-2 bg-gray-800 hover:bg-gray-700 text-gray-400 rounded text-sm">↺ Reset</button>
+    </div>
+  </div>
+  <div id="status-bar" class="max-w-6xl mx-auto px-6 pb-3 text-xs text-amber-300 hidden"></div>
+</div>
+
+<main class="max-w-6xl mx-auto px-6 py-8 space-y-6" id="blocks">
+<!-- blocks injetados via JS -->
+</main>
+
+<footer class="border-t border-gray-800 mt-12 py-8 text-center text-xs text-gray-500 mono">
+  Suas seleções salvam no navegador. Use "Copiar lista" pra pegar pra colar em qualquer lugar.
+</footer>
+
+<script>
+const STORAGE = 'alpha-arsenal-cleanup-v1';
+
+// ═══════════ BLOCOS ═══════════
+const BLOCKS = [
+  {
+    id: 'windows',
+    title: '🪟 Plataforma Windows / Microsoft enterprise',
+    desc: 'Específicos do mundo Microsoft · raramente úteis num Mac de marketing',
+    severity: 'high',
+    items: [
+      { name: 'dotnet-framework-4.8-expert', type: 'Agente', reason: '.NET Framework 4.8 é Windows-only legacy' },
+      { name: 'ad-security-reviewer', type: 'Agente', reason: 'Active Directory · Windows enterprise' },
+      { name: 'azure-devops-specialist', type: 'Agente', reason: 'Microsoft Azure cloud' },
+      { name: 'azure-infra-engineer', type: 'Agente', reason: 'Azure + Entra ID + Bicep' },
+      { name: 'csharp-developer', type: 'Agente', reason: 'C# raramente em projetos Mac/marketing' },
+      { name: 'dotnet-core-expert', type: 'Agente', reason: '.NET Core · cross-platform mas geralmente Win' },
+    ]
+  },
+  {
+    id: 'mobile',
+    title: '📱 Mobile dev (não desktop)',
+    desc: 'Você não desenvolve apps mobile',
+    severity: 'high',
+    items: [
+      { name: 'mobile-developer', type: 'Agente', reason: 'React Native + Flutter pra apps' },
+      { name: 'flutter-expert', type: 'Agente', reason: 'iOS/Android/Web mobile' },
+      { name: 'kotlin-specialist', type: 'Agente', reason: 'Android principalmente' },
+      { name: 'App Store Optimizer', type: 'Agente', reason: 'ASO · só se tiver app na store' },
+    ]
+  },
+  {
+    id: 'idiomas',
+    title: '🌐 Idiomas que você não usa',
+    desc: 'Squads de treinamento em idiomas que você não fala',
+    severity: 'medium',
+    items: [
+      { name: 'mktg-training-zh', type: 'Squad', reason: 'Chinês' },
+      { name: 'mktg-training-ar', type: 'Squad', reason: 'Árabe' },
+      { name: 'mktg-training-ru', type: 'Squad', reason: 'Russo' },
+      { name: 'mktg-training-vi', type: 'Squad', reason: 'Vietnamita' },
+      { name: 'mktg-training-ja', type: 'Squad', reason: 'Japonês' },
+      { name: 'mktg-training-ko', type: 'Squad', reason: 'Coreano' },
+      { name: 'mktg-training-de', type: 'Squad', reason: 'Alemão' },
+      { name: 'mktg-training-fr', type: 'Squad', reason: 'Francês' },
+      { name: 'mktg-training-es', type: 'Squad', reason: 'Espanhol' },
+    ]
+  },
+  {
+    id: 'china',
+    title: '🇨🇳 China-specific',
+    desc: 'Plataformas só usadas na China',
+    severity: 'high',
+    items: [
+      { name: 'WeChat Official Account Manager', type: 'Agente', reason: 'Plataforma China · você não opera lá' },
+    ]
+  },
+  {
+    id: 'cloud',
+    title: '☁ Cloud / DevOps pesado',
+    desc: 'Você opera Alpha + Matrix + comunidade — não cluster K8s',
+    severity: 'high',
+    items: [
+      { name: 'cloud-architect', type: 'Agente', reason: 'AWS/Azure/GCP enterprise' },
+      { name: 'kubernetes-specialist', type: 'Agente', reason: 'Clusters K8s produção' },
+      { name: 'terraform-engineer', type: 'Agente', reason: 'IaC multi-cloud' },
+      { name: 'terraform-specialist', type: 'Agente', reason: 'Módulos Terraform + state' },
+      { name: 'terragrunt-expert', type: 'Agente', reason: 'Terragrunt DRY' },
+      { name: 'network-engineer', type: 'Agente', reason: 'Redes cloud/híbridas' },
+      { name: 'platform-engineer', type: 'Agente', reason: 'IDPs corporativos' },
+      { name: 'chaos-engineer', type: 'Agente', reason: 'Experimentos de falha em produção' },
+      { name: 'sre-engineer', type: 'Agente', reason: 'SLO/error budget de produção' },
+      { name: 'mlops-engineer', type: 'Agente', reason: 'MLflow/Kubeflow produção' },
+      { name: 'machine-learning-engineer', type: 'Agente', reason: 'Deploy de modelos em escala' },
+      { name: 'microservices-architect', type: 'Agente', reason: 'Decomposição de monólitos enterprise' },
+      { name: 'devops-engineer', type: 'Agente', reason: 'CI/CD enterprise · pode manter se tiver dev pessoal' },
+      { name: 'deployment-engineer', type: 'Agente', reason: 'Pipelines + K8s + GitOps' },
+      { name: 'devops-troubleshooter', type: 'Agente', reason: 'Debug produção · só se for o seu trabalho' },
+      { name: 'devops-incident-responder', type: 'Agente', reason: 'Resposta a incidentes' },
+      { name: 'incident-responder', type: 'Agente', reason: 'Incident commander Google SRE' },
+    ]
+  },
+  {
+    id: 'linguagens',
+    title: '👨‍💻 Linguagens / frameworks que você não usa',
+    desc: 'Stacks de programação fora do seu uso',
+    severity: 'medium',
+    items: [
+      { name: 'c-pro', type: 'Agente', reason: 'C embedded/kernel' },
+      { name: 'cpp-pro', type: 'Agente', reason: 'C++ moderno RAII' },
+      { name: 'golang-pro', type: 'Agente', reason: 'Go arquitetura' },
+      { name: 'rust-pro', type: 'Agente', reason: 'Rust ownership + async' },
+      { name: 'rust-engineer', type: 'Agente', reason: 'Rust systems' },
+      { name: 'elixir-expert', type: 'Agente', reason: 'OTP/Phoenix' },
+      { name: 'java-architect', type: 'Agente', reason: 'Arquitetura Java enterprise' },
+      { name: 'spring-boot-engineer', type: 'Agente', reason: 'Spring Boot 3+ microserviços' },
+      { name: 'php-pro', type: 'Agente', reason: 'PHP 8.3 Laravel/Symfony' },
+      { name: 'wordpress-master', type: 'Agente', reason: 'WordPress enterprise · só se tiver site WP' },
+      { name: 'laravel-specialist', type: 'Agente', reason: 'Laravel 10+' },
+      { name: 'rails-expert', type: 'Agente', reason: 'Rails + Hotwire' },
+      { name: 'django-developer', type: 'Agente', reason: 'Django 4+ async' },
+      { name: 'angular-architect', type: 'Agente', reason: 'Angular 15+ enterprise' },
+      { name: 'react-pro', type: 'Agente', reason: 'React moderno · manter se for usar' },
+      { name: 'nextjs-pro', type: 'Agente', reason: 'Next.js · manter se for usar' },
+      { name: 'vue-expert', type: 'Agente', reason: 'Vue 3' },
+      { name: 'svelte-development', type: 'Agente', reason: 'Svelte 5+' },
+      { name: 'svelte-storybook', type: 'Agente', reason: 'Storybook Svelte' },
+      { name: 'svelte-testing', type: 'Agente', reason: 'Testes Svelte' },
+      { name: 'electron-pro', type: 'Agente', reason: 'Desktop Electron · não é foco' },
+    ]
+  },
+  {
+    id: 'database',
+    title: '🗄 Banco de dados / API enterprise',
+    desc: 'A não ser que você administre bancos ou APIs em escala',
+    severity: 'medium',
+    items: [
+      { name: 'postgres-pro', type: 'Agente', reason: 'PostgreSQL avançado' },
+      { name: 'postgresql-pglite-pro', type: 'Agente', reason: 'Pglite in-browser DB' },
+      { name: 'database-administrator', type: 'Agente', reason: 'DBA HA + DR' },
+      { name: 'database-admin', type: 'Agente', reason: 'DBA operacional' },
+      { name: 'database-optimizer', type: 'Agente', reason: 'Otimização queries' },
+      { name: 'graphql-architect', type: 'Agente', reason: 'GraphQL federation' },
+      { name: 'websocket-engineer', type: 'Agente', reason: 'WebSockets em escala' },
+      { name: 'sql-pro', type: 'Agente', reason: 'SQL complexo · CTEs · window functions' },
+    ]
+  },
+  {
+    id: 'zoom',
+    title: '📹 Suite Zoom inteira',
+    desc: 'A não ser que tenha projeto de integração Zoom ativo',
+    severity: 'high',
+    items: [
+      { name: 'setup-zoom-mcp', type: 'Skill', reason: 'MCP do Zoom' },
+      { name: 'setup-zoom-oauth', type: 'Skill', reason: 'OAuth do Zoom' },
+      { name: 'plan-zoom-integration', type: 'Skill', reason: 'Planejamento de integração' },
+      { name: 'plan-zoom-product', type: 'Skill', reason: 'Product zoom' },
+      { name: 'choose-zoom-approach', type: 'Skill', reason: 'Escolha de abordagem zoom' },
+      { name: 'build-zoom-meeting-app', type: 'Skill', reason: 'App Zoom meeting' },
+      { name: 'build-zoom-bot', type: 'Skill', reason: 'Bot Zoom' },
+      { name: 'debug-zoom', type: 'Skill', reason: 'Debug Zoom' },
+      { name: 'debug-zoom-integration', type: 'Skill', reason: 'Debug integração' },
+      { name: 'zoom-mcp', type: 'Skill', reason: 'Zoom MCP' },
+      { name: 'zoom-apps-sdk', type: 'Skill', reason: 'Apps SDK' },
+      { name: 'meeting-sdk', type: 'Skill', reason: 'Meeting SDK' },
+      { name: 'video-sdk', type: 'Skill', reason: 'Video SDK' },
+      { name: 'probe-sdk', type: 'Skill', reason: 'Probe SDK' },
+      { name: 'cobrowse-sdk', type: 'Skill', reason: 'Cobrowse SDK' },
+      { name: 'rivet-sdk', type: 'Skill', reason: 'Rivet SDK' },
+      { name: 'contact-center', type: 'Skill', reason: 'Contact center Zoom' },
+      { name: 'phone', type: 'Skill', reason: 'Phone Zoom' },
+      { name: 'virtual-agent', type: 'Skill', reason: 'Virtual agent Zoom' },
+      { name: 'team-chat', type: 'Skill', reason: 'Team chat Zoom' },
+      { name: 'rtms', type: 'Skill', reason: 'RTMS Zoom' },
+    ]
+  },
+  {
+    id: 'enterprise-dev',
+    title: '🏢 Squads / skills enterprise & dev pesado',
+    desc: 'Frameworks complexos que provavelmente não usa pra marketing/Alpha',
+    severity: 'medium',
+    items: [
+      { name: 'cybersecurity (squad inteiro)', type: 'Squad', reason: 'Pentest / red team' },
+      { name: 'penetration-tester', type: 'Agente', reason: 'Pentest autorizado' },
+      { name: 'compliance-auditor', type: 'Agente', reason: 'GDPR/HIPAA/PCI/SOC 2 enterprise' },
+      { name: 'security-engineer', type: 'Agente', reason: 'Security shift-left enterprise' },
+      { name: 'security-auditor', type: 'Agente', reason: 'Auditoria security' },
+      { name: 'slack-expert', type: 'Agente', reason: 'Só se construir bot Slack' },
+      { name: 'mcp-developer', type: 'Agente', reason: 'Construir MCP servers' },
+      { name: 'mcp-manager', type: 'Agente', reason: 'Gerenciar MCPs · útil pra você manter' },
+      { name: 'electron-pro', type: 'Agente', reason: 'Desktop apps Electron' },
+      { name: 'scientific-literature-researcher', type: 'Agente', reason: 'Papers científicos' },
+    ]
+  },
+  {
+    id: 'ln-pipeline',
+    title: '🔧 Pipeline LN (Linear) inteira (~100+ skills)',
+    desc: 'Pipelines numeradas de dev enterprise (ln-100 → ln-1000)',
+    severity: 'medium',
+    items: [
+      { name: 'ln-100-documents-pipeline → ln-160 (docs)', type: 'Skills', reason: 'Docs pipeline · não é seu workflow' },
+      { name: 'ln-200-scope-decomposer → ln-230 (scope)', type: 'Skills', reason: 'Decomposição de escopo dev' },
+      { name: 'ln-300-task-coordinator → ln-310 (tasks)', type: 'Skills', reason: 'Coordenação tasks dev' },
+      { name: 'ln-400-story-executor → ln-404 (stories)', type: 'Skills', reason: 'Execução de stories Linear' },
+      { name: 'ln-500-story-quality-gate → ln-523 (quality)', type: 'Skills', reason: 'Quality gates dev' },
+      { name: 'ln-600s (auditors test/security/docs/build)', type: 'Skills', reason: 'Auditores enterprise' },
+      { name: 'ln-700s (bootstrap/frontend/backend/devops)', type: 'Skills', reason: 'Setup enterprise' },
+      { name: 'ln-800s (performance/optimization/modernization)', type: 'Skills', reason: 'Otimização enterprise' },
+      { name: 'ln-900s (community: announcer/triager/debater)', type: 'Skills', reason: 'Community engagement automation · talvez útil futuro' },
+      { name: 'ln-1000-pipeline-orchestrator', type: 'Skill', reason: 'Master orchestrator do LN' },
+    ]
+  },
+  {
+    id: 'gsd',
+    title: '⚙ GSD Framework inteiro',
+    desc: '"Get Shit Done" framework de execução de software · 90% não usa pra marketing',
+    severity: 'low',
+    items: [
+      { name: 'gsd-new-project / gsd-new-milestone', type: 'Skill', reason: 'Iniciar projeto GSD' },
+      { name: 'gsd-explore / gsd-sketch / gsd-spike', type: 'Skill', reason: 'Ideação' },
+      { name: 'gsd-discuss-phase / gsd-plan-phase / gsd-ultraplan-phase', type: 'Skill', reason: 'Fases GSD' },
+      { name: 'gsd-spec-phase / gsd-execute-phase / gsd-validate-phase', type: 'Skill', reason: 'Fases GSD' },
+      { name: 'gsd-ui-phase / gsd-ai-integration-phase / gsd-secure-phase', type: 'Skill', reason: 'Fases GSD' },
+      { name: 'gsd-mvp-phase / gsd-phase', type: 'Skill', reason: 'Fases GSD' },
+      { name: 'gsd-code-review / gsd-audit-fix / gsd-ui-review / gsd-eval-review', type: 'Skill', reason: 'Reviews GSD' },
+      { name: 'gsd-audit-uat / gsd-audit-milestone / gsd-verify-work', type: 'Skill', reason: 'Auditorias GSD' },
+      { name: 'gsd-debug / gsd-forensics / gsd-add-tests', type: 'Skill', reason: 'Debug + testes' },
+      { name: 'gsd-ship / gsd-pr-branch / gsd-complete-milestone', type: 'Skill', reason: 'Ship GSD' },
+      { name: 'gsd-resume-work / gsd-pause-work / gsd-undo', type: 'Skill', reason: 'Gestão de work' },
+      { name: 'gsd-manager / gsd-progress / gsd-stats / gsd-health', type: 'Skill', reason: 'Comando central GSD' },
+      { name: 'gsd-workspace / gsd-thread / gsd-graphify', type: 'Skill', reason: 'Workspace GSD' },
+      { name: 'gsd-capture / gsd-inbox / gsd-ingest-docs', type: 'Skill', reason: 'Captura GSD' },
+      { name: 'gsd-map-codebase / gsd-docs-update', type: 'Skill', reason: 'Codebase GSD' },
+      { name: 'gsd-profile-user / gsd-extract-learnings', type: 'Skill', reason: 'Aprendizado GSD' },
+      { name: 'gsd-help / gsd-update / gsd-cleanup / gsd-config / gsd-settings', type: 'Skill', reason: 'Config GSD' },
+      { name: 'gsd-autonomous', type: 'Skill', reason: 'Modo autônomo' },
+      { name: 'gsd-import / gsd-review-backlog / gsd-milestone-summary', type: 'Skill', reason: 'Import GSD' },
+      { name: 'gsd-workstreams / gsd-plan-review-convergence', type: 'Skill', reason: 'Workstreams' },
+      { name: 'gsd-ns-* (não-software)', type: 'Skill', reason: 'GSD pra não-software · talvez útil mas duplicado com Alpha' },
+      { name: 'TODOS os agentes gsd-*', type: 'Agente', reason: 'Spawned pelo GSD · só úteis se usar GSD' },
+    ]
+  },
+  {
+    id: 'hooks-gsd',
+    title: '🪝 Hooks específicos do GSD',
+    desc: 'Hooks que só rodam no fluxo GSD · adicionam ruído se você não usa',
+    severity: 'low',
+    items: [
+      { name: 'gsd-prompt-guard.js', type: 'Hook', reason: 'Guarda prompts GSD' },
+      { name: 'gsd-read-guard.js', type: 'Hook', reason: 'Guarda leitura GSD' },
+      { name: 'gsd-workflow-guard.js', type: 'Hook', reason: 'Guarda workflow GSD' },
+      { name: 'gsd-validate-commit.sh', type: 'Hook', reason: 'Valida commits GSD' },
+      { name: 'gsd-context-monitor.js', type: 'Hook', reason: 'Monitora contexto GSD' },
+      { name: 'gsd-read-injection-scanner.js', type: 'Hook', reason: 'Detecta injection em reads' },
+      { name: 'gsd-phase-boundary.sh', type: 'Hook', reason: 'Marca limites de fase' },
+    ]
+  },
+  {
+    id: 'ambiguos',
+    title: '⚠ Provavelmente irrelevantes, mas confirmar',
+    desc: 'Itens que talvez você queira manter dependendo do uso',
+    severity: 'low',
+    items: [
+      { name: 'prompt-engineer', type: 'Agente', reason: 'Você faz prompts manual · pode ser útil pontual' },
+      { name: 'data-scientist', type: 'Agente', reason: 'Se for usar pra Alpha analytics · manter' },
+      { name: 'data-engineer', type: 'Agente', reason: 'ETL pipelines · só se precisar' },
+      { name: 'ml-engineer', type: 'Agente', reason: 'ML production · só se for trabalhar com modelos' },
+      { name: 'nlp-engineer', type: 'Agente', reason: 'NLP production' },
+      { name: 'ai-engineer', type: 'Agente', reason: 'Sistemas AI ponta a ponta' },
+      { name: 'llm-architect', type: 'Agente', reason: 'LLM produção + RAG' },
+      { name: 'Programmatic & Display Buyer', type: 'Agente', reason: 'Se rodar campanhas DV360 / ABM' },
+      { name: 'mktg-training (inglês)', type: 'Squad', reason: 'Pode manter pra consultar EN' },
+      { name: 'WordPress skills', type: 'Skill', reason: 'Só se ainda tiver site WordPress ativo' },
+      { name: 'wfgy:wfgy-* (WFGY framework)', type: 'Skills', reason: 'Framework específico · não usado' },
+      { name: 'boundary:boundary-* (boundary detection)', type: 'Skills', reason: 'Detecção de limites técnicos' },
+      { name: 'semantic:semantic-* (semantic tree)', type: 'Skills', reason: 'Árvore semântica · talvez útil pra pesquisa profunda' },
+      { name: 'opensquad', type: 'Squad', reason: 'Framework multi-agente · útil só se for usar' },
+      { name: 'agents:create-crew', type: 'Skill', reason: 'Cria crews · meta-skill' },
+      { name: 'spec-workflow', type: 'Squad', reason: 'Workflow de especificações dev' },
+    ]
+  },
+];
+
+// Items que faltariam dependendo do contexto — não inclusos
+const RECOMMENDED_BLOCKS = ['windows', 'mobile', 'idiomas', 'china', 'cloud', 'zoom', 'hooks-gsd'];
+
+// ═══════════ RENDER ═══════════
+const main = document.getElementById('blocks');
+let totalItems = 0;
+
+BLOCKS.forEach(block => {
+  totalItems += block.items.length;
+  const severityColor = { high: 'red', medium: 'amber', low: 'gray' }[block.severity];
+
+  const html = `
+    <details class="bg-gray-900 border border-${severityColor}-700/40 rounded-lg overflow-hidden" data-block="${block.id}" open>
+      <summary class="cursor-pointer p-5 hover:bg-gray-800/40 flex items-start justify-between gap-3">
+        <div class="flex-1">
+          <div class="flex items-center gap-2 mb-1">
+            <span class="arrow text-${severityColor}-400">▶</span>
+            <h2 class="text-xl font-bold">${block.title}</h2>
+            <span class="bg-${severityColor}-900/60 text-${severityColor}-300 text-[10px] uppercase tracking-widest mono px-2 py-0.5 rounded">${block.severity}</span>
+          </div>
+          <p class="text-sm text-gray-400 ml-5">${block.desc}</p>
+          <p class="text-xs text-gray-500 ml-5 mt-1"><span class="block-count" data-block-id="${block.id}">0</span>/${block.items.length} marcados</p>
+        </div>
+        <div class="block-actions flex gap-2 shrink-0">
+          <button class="select-block px-3 py-1.5 bg-red-700 hover:bg-red-600 text-white rounded text-xs font-semibold" data-block-id="${block.id}">marca todos</button>
+          <button class="deselect-block px-3 py-1.5 bg-gray-800 hover:bg-gray-700 text-gray-300 rounded text-xs" data-block-id="${block.id}">desmarca</button>
+        </div>
+      </summary>
+      <div class="border-t border-gray-800 divide-y divide-gray-800/60">
+        ${block.items.map((item, i) => `
+          <label class="item flex items-start gap-3 p-3 hover:bg-gray-800/30 cursor-pointer" data-block-id="${block.id}">
+            <input type="checkbox" class="mt-1 item-check" data-block-id="${block.id}" data-name="${item.name.replace(/"/g, '&quot;')}" data-type="${item.type}">
+            <div class="flex-1 min-w-0">
+              <div class="flex items-baseline gap-2 flex-wrap">
+                <span class="item-name font-mono text-sm text-amber-300">${item.name}</span>
+                <span class="text-[10px] uppercase tracking-widest text-gray-500 mono">${item.type}</span>
+              </div>
+              <p class="text-xs text-gray-400 mt-0.5">${item.reason}</p>
+            </div>
+          </label>
+        `).join('')}
+      </div>
+    </details>
+  `;
+  main.insertAdjacentHTML('beforeend', html);
+});
+
+document.getElementById('count-total').textContent = totalItems;
+
+// ═══════════ LOGIC ═══════════
+function load() {
+  const saved = JSON.parse(localStorage.getItem(STORAGE) || '[]');
+  document.querySelectorAll('.item-check').forEach(cb => {
+    if (saved.includes(cb.dataset.name)) cb.checked = true;
+  });
+  updateCounts();
+}
+
+function save() {
+  const checked = Array.from(document.querySelectorAll('.item-check:checked')).map(cb => cb.dataset.name);
+  localStorage.setItem(STORAGE, JSON.stringify(checked));
+}
+
+function updateCounts() {
+  const totalChecked = document.querySelectorAll('.item-check:checked').length;
+  document.getElementById('count-marked').textContent = totalChecked;
+  BLOCKS.forEach(block => {
+    const blockChecked = document.querySelectorAll(`.item-check[data-block-id="${block.id}"]:checked`).length;
+    const el = document.querySelector(`.block-count[data-block-id="${block.id}"]`);
+    if (el) el.textContent = blockChecked;
+  });
+}
+
+document.querySelectorAll('.item-check').forEach(cb => {
+  cb.addEventListener('change', () => { save(); updateCounts(); });
+});
+
+document.querySelectorAll('.select-block').forEach(btn => {
+  btn.addEventListener('click', e => {
+    e.preventDefault();
+    e.stopPropagation();
+    const id = btn.dataset.blockId;
+    document.querySelectorAll(`.item-check[data-block-id="${id}"]`).forEach(cb => cb.checked = true);
+    save(); updateCounts();
+  });
+});
+
+document.querySelectorAll('.deselect-block').forEach(btn => {
+  btn.addEventListener('click', e => {
+    e.preventDefault();
+    e.stopPropagation();
+    const id = btn.dataset.blockId;
+    document.querySelectorAll(`.item-check[data-block-id="${id}"]`).forEach(cb => cb.checked = false);
+    save(); updateCounts();
+  });
+});
+
+document.getElementById('select-all-recommended').addEventListener('click', () => {
+  RECOMMENDED_BLOCKS.forEach(id => {
+    document.querySelectorAll(`.item-check[data-block-id="${id}"]`).forEach(cb => cb.checked = true);
+  });
+  save(); updateCounts();
+  showStatus('✓ Marcados todos os blocos de severidade ALTA recomendada');
+});
+
+document.getElementById('reset-all').addEventListener('click', () => {
+  if (!confirm('Limpar TODAS as marcações?')) return;
+  document.querySelectorAll('.item-check').forEach(cb => cb.checked = false);
+  save(); updateCounts();
+  showStatus('Todas as marcações limpas');
+});
+
+document.getElementById('export-json').addEventListener('click', () => {
+  const checked = Array.from(document.querySelectorAll('.item-check:checked')).map(cb => ({
+    name: cb.dataset.name,
+    type: cb.dataset.type,
+    block: cb.dataset.blockId
+  }));
+  const blob = new Blob([JSON.stringify({ exported: new Date().toISOString(), count: checked.length, items: checked }, null, 2)], { type: 'application/json' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `arsenal-remover-${new Date().toISOString().slice(0,10)}.json`;
+  a.click();
+  showStatus(`✓ ${checked.length} itens exportados como JSON`);
+});
+
+document.getElementById('export-text').addEventListener('click', async () => {
+  const grouped = {};
+  document.querySelectorAll('.item-check:checked').forEach(cb => {
+    const b = cb.dataset.blockId;
+    if (!grouped[b]) grouped[b] = [];
+    grouped[b].push({ name: cb.dataset.name, type: cb.dataset.type });
+  });
+
+  let txt = `ARSENAL · ITENS MARCADOS PRA REMOVER\nData: ${new Date().toLocaleString('pt-BR')}\nTotal: ${document.querySelectorAll('.item-check:checked').length} itens\n\n`;
+
+  Object.keys(grouped).forEach(blockId => {
+    const block = BLOCKS.find(b => b.id === blockId);
+    txt += `\n═══ ${block.title} (${grouped[blockId].length} itens) ═══\n`;
+    grouped[blockId].forEach(i => {
+      txt += `  [${i.type}] ${i.name}\n`;
+    });
+  });
+
+  try {
+    await navigator.clipboard.writeText(txt);
+    showStatus('✓ Lista copiada pra área de transferência · cola onde quiser');
+  } catch {
+    const blob = new Blob([txt], { type: 'text/plain' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = `arsenal-remover-${new Date().toISOString().slice(0,10)}.txt`;
+    a.click();
+    showStatus('✓ Lista baixada como .txt (clipboard não funcionou)');
+  }
+});
+
+function showStatus(msg) {
+  const s = document.getElementById('status-bar');
+  s.textContent = msg;
+  s.classList.remove('hidden');
+  setTimeout(() => s.classList.add('hidden'), 4000);
+}
+
+load();
+</script>
+
+</body>
+</html>
