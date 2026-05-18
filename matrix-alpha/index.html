@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow,noarchive,nosnippet">
+<title>Comunidade Alpha · A janela que se abre uma única vez</title>
+<meta name="description" content="Comunidade Alpha + Matrix Energia. Uma oportunidade que combina timing regulatório, empresa Rating A pela S&P e uma comunidade construída para transformação real em 24 meses.">
+<meta property="og:title" content="Comunidade Alpha · A janela que se abre uma única vez">
+<meta property="og:description" content="O setor de energia no Brasil está vivendo a maior abertura em 30 anos. Quem entra agora — antes da curva — tem multiplicador.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fraunces:ital,wght@0,400;0,600;0,700;0,900;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0e0c;
+    --bg-2: #11161a;
+    --bg-3: #1a2128;
+    --paper: #f7f6f1;
+    --ink: #f0ebe0;
+    --ink-2: #c5beb0;
+    --muted: #8a8478;
+    --gold: #d4a64a;
+    --gold-2: #b88a35;
+    --green: #4ea374;
+    --line: rgba(245,238,220,0.08);
+    --line-strong: rgba(212,166,74,0.3);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection { background: var(--gold); color: var(--bg); }
+
+  /* Typography */
+  .serif { font-family: 'Fraunces', Georgia, serif; }
+  h1, h2, h3 { font-family: 'Fraunces', Georgia, serif; font-weight: 700; line-height: 1.15; letter-spacing: -0.01em; }
+  .display { font-size: clamp(2.5rem, 6.5vw, 5.5rem); font-weight: 800; }
+  .h1 { font-size: clamp(2rem, 4.5vw, 3.5rem); }
+  .h2 { font-size: clamp(1.5rem, 3vw, 2.25rem); }
+  .h3 { font-size: clamp(1.15rem, 2vw, 1.5rem); }
+  .lead { font-size: clamp(1.1rem, 1.5vw, 1.35rem); color: var(--ink-2); line-height: 1.55; font-weight: 300; }
+  .eyebrow { font-size: 0.72rem; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); font-weight: 600; margin-bottom: 1rem; }
+  .small { font-size: 0.875rem; }
+  .tiny { font-size: 0.75rem; color: var(--muted); }
+
+  /* Layout */
+  .container { max-width: 1180px; margin: 0 auto; padding: 0 2rem; }
+  .container-narrow { max-width: 780px; margin: 0 auto; padding: 0 2rem; }
+  section { padding: 7rem 0; position: relative; }
+  @media (max-width: 768px) { section { padding: 4.5rem 0; } }
+
+  /* Hero */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    background: radial-gradient(ellipse at 30% 20%, rgba(212,166,74,0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(78,163,116,0.04) 0%, transparent 50%),
+                var(--bg);
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(circle at 50% 0%, transparent 0%, var(--bg) 70%);
+    pointer-events: none;
+  }
+  .hero-content { position: relative; z-index: 2; }
+  .hero-brand {
+    display: flex; flex-direction: column; align-items: center;
+    margin-bottom: 3rem; text-align: center;
+  }
+  .hero-brand .top {
+    font-size: 0.65rem; letter-spacing: 6px; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 0.6rem; font-weight: 500;
+  }
+  .hero-brand .name {
+    font-family: 'Fraunces', serif; font-size: clamp(1.4rem, 2.2vw, 1.8rem);
+    font-weight: 700; letter-spacing: 6px; color: var(--gold);
+    text-transform: uppercase;
+  }
+  .hero h1 { text-align: center; margin-bottom: 1.5rem; }
+  .hero h1 .accent { color: var(--gold); font-style: italic; font-weight: 400; }
+  .hero .lead { text-align: center; max-width: 760px; margin: 0 auto 3rem; }
+  .scroll-cue {
+    position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+    color: var(--muted); font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase;
+    display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+    animation: bounce 2.5s infinite;
+  }
+  .scroll-cue::after { content: ''; width: 1px; height: 30px; background: var(--gold); opacity: 0.5; }
+  @keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(8px)} }
+
+  /* Sections with background variations */
+  .bg-paper { background: var(--paper); color: #2a2620; }
+  .bg-paper .lead { color: #5a544a; }
+  .bg-paper .eyebrow { color: var(--gold-2); }
+  .bg-paper h1, .bg-paper h2, .bg-paper h3 { color: #1a1610; }
+  .bg-deep { background: var(--bg-2); }
+
+  /* Frame setter */
+  .frame-setter {
+    padding: 5rem 0; text-align: center;
+    border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+  }
+  .frame-setter .quote-mark { font-size: 6rem; color: var(--gold); line-height: 0.7; opacity: 0.3; font-family: 'Fraunces', serif; }
+  .frame-setter .quote {
+    font-family: 'Fraunces', serif; font-size: clamp(1.5rem, 3vw, 2.4rem);
+    font-style: italic; line-height: 1.3; max-width: 800px; margin: 1rem auto 2rem;
+    font-weight: 400;
+  }
+  .frame-setter .attribution { color: var(--muted); font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; }
+
+  /* Stats Grid */
+  .stats-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1px; background: var(--line); border: 1px solid var(--line); margin-top: 3rem;
+  }
+  .stat {
+    background: var(--bg); padding: 2.5rem 1.5rem; text-align: center;
+    transition: background 0.3s;
+  }
+  .stat:hover { background: var(--bg-2); }
+  .stat-num {
+    font-family: 'Fraunces', serif; font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 700; color: var(--gold); line-height: 1; margin-bottom: 0.5rem;
+  }
+  .stat-label { font-size: 0.8rem; color: var(--ink-2); letter-spacing: 1px; text-transform: uppercase; }
+
+  /* 2-col layout */
+  .two-col {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
+  }
+  @media (max-width: 900px) { .two-col { grid-template-columns: 1fr; gap: 2.5rem; } }
+
+  /* Cards */
+  .card-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem; margin-top: 3rem;
+  }
+  .card {
+    background: var(--bg-2); border: 1px solid var(--line);
+    padding: 2rem 1.75rem; border-radius: 6px;
+    transition: all 0.3s; position: relative;
+  }
+  .card:hover { border-color: var(--line-strong); transform: translateY(-3px); }
+  .card .num { font-family: 'Fraunces', serif; font-size: 0.85rem; color: var(--gold); font-weight: 600; letter-spacing: 2px; margin-bottom: 0.75rem; display: block; }
+  .card h3 { margin-bottom: 0.75rem; font-size: 1.3rem; }
+  .card p { color: var(--ink-2); font-size: 0.95rem; }
+  .bg-paper .card { background: white; border-color: #e8e3d4; color: #2a2620; }
+  .bg-paper .card p { color: #5a544a; }
+
+  /* Mechanism diagram */
+  .mechanism {
+    background: var(--bg-2); border: 1px solid var(--line-strong);
+    border-radius: 8px; padding: 3rem 2rem; margin-top: 2.5rem;
+  }
+  .flow {
+    display: grid; grid-template-columns: 1fr; gap: 1rem;
+    text-align: center; max-width: 600px; margin: 0 auto;
+  }
+  .flow-step {
+    padding: 1.25rem 1.5rem; background: var(--bg-3);
+    border-left: 3px solid var(--gold); border-radius: 4px;
+    text-align: left; font-size: 1rem;
+  }
+  .flow-arrow { color: var(--gold); font-size: 1.5rem; line-height: 1; text-align: center; }
+
+  /* Comparison table */
+  .compare {
+    width: 100%; border-collapse: collapse; margin-top: 2.5rem;
+    background: var(--bg-2); border-radius: 6px; overflow: hidden;
+  }
+  .compare th, .compare td {
+    padding: 1rem 1.25rem; text-align: left; border-bottom: 1px solid var(--line);
+    font-size: 0.95rem;
+  }
+  .compare thead { background: var(--bg-3); }
+  .compare th { font-weight: 600; color: var(--gold); font-size: 0.78rem; letter-spacing: 1.5px; text-transform: uppercase; }
+  .compare td:first-child { font-weight: 600; color: var(--ink); }
+  .compare .winner { color: var(--gold); font-weight: 600; }
+  .compare .loser { color: var(--muted); }
+  @media (max-width: 700px) { .compare { font-size: 0.85rem; } .compare th, .compare td { padding: 0.75rem 0.6rem; } }
+
+  /* Bonus list */
+  .bonus-list { display: grid; gap: 1rem; margin-top: 2rem; }
+  .bonus {
+    display: grid; grid-template-columns: auto 1fr;
+    gap: 1.5rem; align-items: start;
+    background: var(--bg-2); border: 1px solid var(--line);
+    padding: 1.5rem 1.75rem; border-radius: 6px;
+  }
+  .bonus-num {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: var(--gold); color: var(--bg);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Fraunces', serif; font-weight: 700; font-size: 1.1rem;
+  }
+  .bonus h3 { font-size: 1.1rem; margin-bottom: 0.4rem; }
+  .bonus p { color: var(--ink-2); font-size: 0.92rem; line-height: 1.5; }
+  .bonus .badge { display: inline-block; background: rgba(212,166,74,0.15); color: var(--gold); font-size: 0.72rem; padding: 0.2rem 0.6rem; border-radius: 3px; margin-top: 0.5rem; font-weight: 600; letter-spacing: 0.5px; }
+
+  /* Math table */
+  .math-table {
+    width: 100%; border-collapse: collapse; margin-top: 2rem;
+    font-size: 0.95rem;
+  }
+  .math-table th, .math-table td {
+    padding: 0.9rem 1rem; text-align: right; border-bottom: 1px solid var(--line);
+  }
+  .math-table th:first-child, .math-table td:first-child { text-align: left; font-weight: 500; color: var(--ink-2); }
+  .math-table thead { background: var(--bg-3); }
+  .math-table th { color: var(--gold); font-size: 0.75rem; letter-spacing: 1.5px; text-transform: uppercase; }
+  .math-table td.gold { color: var(--gold); font-weight: 600; }
+  .math-table tr:hover td { background: rgba(212,166,74,0.04); }
+
+  /* Quotes / pull */
+  .pullquote {
+    border-left: 3px solid var(--gold); padding: 1rem 1.5rem; margin: 2.5rem 0;
+    font-family: 'Fraunces', serif; font-style: italic; font-size: 1.25rem;
+    color: var(--ink); line-height: 1.5;
+  }
+  .bg-paper .pullquote { color: #2a2620; border-color: var(--gold-2); }
+
+  /* Objections accordion */
+  .obj {
+    background: var(--bg-2); border: 1px solid var(--line); border-radius: 6px;
+    margin-bottom: 0.75rem; overflow: hidden; transition: border-color 0.2s;
+  }
+  .obj:hover { border-color: var(--line-strong); }
+  .obj summary {
+    padding: 1.25rem 1.5rem; cursor: pointer; user-select: none;
+    font-weight: 500; font-size: 1rem; display: flex; justify-content: space-between; align-items: center;
+    list-style: none;
+  }
+  .obj summary::-webkit-details-marker { display: none; }
+  .obj summary::after { content: '+'; color: var(--gold); font-size: 1.5rem; font-weight: 300; transition: transform 0.3s; }
+  .obj[open] summary::after { transform: rotate(45deg); }
+  .obj-body {
+    padding: 0 1.5rem 1.5rem; color: var(--ink-2); font-size: 0.95rem; line-height: 1.65;
+  }
+
+  /* CTA */
+  .cta-section {
+    background: linear-gradient(135deg, var(--bg-2) 0%, var(--bg) 100%);
+    text-align: center; border-top: 1px solid var(--line-strong);
+    border-bottom: 1px solid var(--line-strong);
+  }
+  .cta-box {
+    max-width: 720px; margin: 0 auto; padding: 3.5rem 2.5rem;
+    border: 1px solid var(--gold); border-radius: 8px;
+    background: var(--bg-2); position: relative;
+  }
+  .cta-box .who { color: var(--gold); font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 1rem; }
+  .cta-button {
+    display: inline-block; background: var(--gold); color: var(--bg);
+    padding: 1.1rem 2.5rem; font-weight: 700; font-size: 1rem; letter-spacing: 1.5px;
+    text-decoration: none; text-transform: uppercase; border-radius: 4px;
+    margin-top: 2rem; transition: all 0.2s;
+  }
+  .cta-button:hover { background: var(--ink); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(212,166,74,0.25); }
+  .cta-secondary {
+    color: var(--ink-2); font-size: 0.9rem; margin-top: 1rem; display: block;
+  }
+
+  /* Footer */
+  footer {
+    padding: 3rem 0; text-align: center; color: var(--muted);
+    font-size: 0.85rem; border-top: 1px solid var(--line);
+  }
+  footer .latin { font-family: 'Fraunces', serif; font-style: italic; font-size: 1rem; color: var(--gold); display: block; margin-top: 0.5rem; }
+
+  /* Reveal animation */
+  .reveal {
+    opacity: 0; transform: translateY(30px); transition: all 0.8s ease;
+  }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+
+  /* Brand mark in sections */
+  .section-mark {
+    text-align: center; margin-bottom: 4rem;
+  }
+  .section-mark .ec { font-size: 0.65rem; letter-spacing: 5px; color: var(--muted); text-transform: uppercase; }
+  .section-mark .nm { color: var(--gold); font-size: 0.9rem; letter-spacing: 4px; font-weight: 600; margin-top: 0.3rem; }
+
+  /* List with check */
+  ul.check { list-style: none; padding: 0; margin-top: 1.5rem; }
+  ul.check li {
+    padding: 0.6rem 0 0.6rem 2rem; position: relative;
+    border-bottom: 1px solid var(--line); color: var(--ink-2);
+  }
+  ul.check li::before {
+    content: '✓'; position: absolute; left: 0; top: 0.55rem;
+    color: var(--gold); font-weight: 700;
+  }
+  .bg-paper ul.check li { color: #5a544a; border-color: #e8e3d4; }
+
+  /* Honesty box */
+  .honesty {
+    background: rgba(212,166,74,0.05);
+    border: 1px dashed var(--gold);
+    padding: 1.5rem 1.75rem;
+    border-radius: 6px;
+    margin-top: 2rem;
+    font-size: 0.95rem;
+    color: var(--ink-2);
+  }
+  .honesty strong { color: var(--gold); }
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════════ HERO ════════════════════════════════ -->
+<section class="hero">
+  <div class="container hero-content">
+    <div class="hero-brand">
+      <span class="top">ecossistema alpha</span>
+      <span class="name">COMUNIDADE ALPHA</span>
+    </div>
+    <div class="eyebrow" style="text-align:center;">Para os poucos · convite estratégico</div>
+    <h1 class="display serif">
+      O Brasil acaba de abrir <span class="accent">a maior janela</span><br>
+      do setor de energia em 30 anos.
+    </h1>
+    <p class="lead">
+      Em <strong>novembro de 2027</strong> o mercado livre se abre para empresas. Em <strong>novembro de 2028</strong>, para residências.
+      90 milhões de unidades consumidoras · entre R$ 800 bilhões e R$ 1 trilhão por ano em movimentação.
+      Quem entra agora — antes da curva — fica do lado certo da matemática.
+    </p>
+  </div>
+  <div class="scroll-cue">role para continuar</div>
+</section>
+
+<!-- ════════════════════════════════ FRAME SETTER ════════════════════════════════ -->
+<div class="frame-setter">
+  <div class="container-narrow">
+    <div class="quote-mark">"</div>
+    <div class="quote">
+      Se você está lendo isto, é porque alguém da Comunidade Alpha pensou em você.<br>
+      Não é uma proposta. É uma janela. Você decide se entra.
+    </div>
+    <div class="attribution">Eduardo Ferreira · fundador</div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════ TIMING ════════════════════════════════ -->
+<section class="bg-paper">
+  <div class="container-narrow">
+    <div class="eyebrow">Parte 1 · O que está acontecendo</div>
+    <h2 class="h1 serif">O setor de energia no Brasil está vivendo a maior transformação desde a privatização das telecoms nos anos 90.</h2>
+    <p class="lead" style="margin-top:1.5rem;">
+      Três forças se alinharam ao mesmo tempo — pela primeira vez. Não é onda. É reconfiguração estrutural.
+    </p>
+
+    <div class="card-grid">
+      <div class="card">
+        <span class="num">FORÇA 01</span>
+        <h3 class="serif">Regulatória</h3>
+        <p>A Lei 14.300 regulou a Geração Distribuída. A Lei 15.269 de 2025 abriu progressivamente o mercado livre. Pela primeira vez, qualquer consumidor — não só grande indústria — pode escolher de quem comprar energia.</p>
+      </div>
+      <div class="card">
+        <span class="num">FORÇA 02</span>
+        <h3 class="serif">Tecnológica</h3>
+        <p>Solar barato, geração descentralizada em escala, BESS para armazenamento. O custo de gerar energia caiu, e o controle saiu das distribuidoras centralizadas.</p>
+      </div>
+      <div class="card">
+        <span class="num">FORÇA 03</span>
+        <h3 class="serif">Comportamental</h3>
+        <p>O varejo de energia está se aproximando do consumidor — como aconteceu com telecom e fintechs. Quem ocupou o início desses mercados ficou décadas à frente.</p>
+      </div>
+    </div>
+
+    <div class="pullquote">
+      O que telecom fez nos anos 2000 com a portabilidade, energia vai fazer entre 2026 e 2030. A diferença: agora dá pra entrar antes da curva, não no meio dela.
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════ MECHANISM ════════════════════════════════ -->
+<section>
+  <div class="container-narrow">
+    <div class="eyebrow">Parte 2 · O mecanismo</div>
+    <h2 class="h1 serif">Como uma empresa consegue entregar 2x a 3x mais desconto que toda a concorrência.</h2>
+    <p class="lead" style="margin-top:1.5rem;">
+      Chamamos isso de <strong style="color:var(--gold)">Ponto Zero</strong>. É a diferença entre uma fábrica e um revendedor.
+      Quem fabrica tem margem. Quem revende, divide.
+    </p>
+
+    <div class="mechanism">
+      <div style="text-align:center; color:var(--gold); font-size:0.75rem; letter-spacing:2px; text-transform:uppercase; margin-bottom:1.5rem;">Como a Matrix opera</div>
+      <div class="flow">
+        <div class="flow-step"><strong>1.</strong> Usinas próprias e parceiras (arrendamento 20–30 anos)</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step"><strong>2.</strong> Energia gerada dentro do ecossistema Matrix</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step"><strong>3.</strong> Distribuidora local entrega via mesma rede</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step"><strong>4.</strong> Cliente recebe créditos · economiza 20% a 30%</div>
+      </div>
+      <div style="margin-top:2rem; padding-top:2rem; border-top:1px solid var(--line); text-align:center;">
+        <div style="color:var(--muted); font-size:0.75rem; letter-spacing:2px; text-transform:uppercase; margin-bottom:1rem;">A concorrência</div>
+        <div style="font-family:'Fraunces',serif; font-size:1.1rem; color:var(--ink-2); font-style:italic;">
+          Gerador externo → Comercializador → Revenda → Consultor → Cliente
+        </div>
+        <div style="color:var(--muted); margin-top:0.75rem; font-size:0.88rem;">Mais etapas, mais margem perdida, menos desconto no fim da linha.</div>
+      </div>
+    </div>
+
+    <div class="pullquote">
+      O cliente não compra placa. Não faz obra. Não tem manutenção. Não muda de distribuidora. A única diferença na rotina: a fatura passa a ter duas linhas — e o número final é menor.
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════ AUTHORITY ════════════════════════════════ -->
+<section class="bg-deep">
+  <div class="container">
+    <div class="container-narrow" style="padding:0;">
+      <div class="eyebrow">Parte 3 · A empresa por trás</div>
+      <h2 class="h1 serif">Matrix Energia não nasceu do marketing multinível. Nasceu da indústria — e é Rating A pela S&P Global.</h2>
+      <p class="lead" style="margin-top:1.5rem;">
+        Isso muda completamente a leitura de risco. A maioria das empresas de MMN cresce a marca primeiro e tenta construir a estrutura depois. Aqui é o inverso.
+      </p>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat"><div class="stat-num">2014</div><div class="stat-label">Fundação</div></div>
+      <div class="stat"><div class="stat-num">R$ 2 bi</div><div class="stat-label">Faturamento anual</div></div>
+      <div class="stat"><div class="stat-num">R$ 1,4 bi</div><div class="stat-label">Patrimônio líquido</div></div>
+      <div class="stat"><div class="stat-num">Rating A</div><div class="stat-label">S&P Global</div></div>
+      <div class="stat"><div class="stat-num">~10%</div><div class="stat-label">Market share</div></div>
+      <div class="stat"><div class="stat-num">~50 mil</div><div class="stat-label">Clientes</div></div>
+      <div class="stat"><div class="stat-num">Top 500</div><div class="stat-label">Empresas Brasil</div></div>
+      <div class="stat"><div class="stat-num">2036</div><div class="stat-label">Contratos de fornecimento</div></div>
+    </div>
+
+    <div class="container-narrow" style="padding:3rem 0 0;">
+      <h3 class="h3 serif" style="color:var(--gold); margin-bottom:1rem;">Quem está por trás</h3>
+      <ul class="check">
+        <li><strong>Grupo Duferco</strong> — grupo internacional bilionário · atuação global em commodities, energia e infraestrutura</li>
+        <li><strong>Prisma Capital</strong> — uma das maiores gestoras independentes do Brasil · bilhões sob gestão</li>
+        <li><strong>Wilson Ferreira Jr.</strong> — Presidente do Conselho · ex-Eletrobras · ex-Vibra</li>
+        <li><strong>Rubens Mizzorelli</strong> — CEO desde 2018</li>
+      </ul>
+
+      <h3 class="h3 serif" style="color:var(--gold); margin: 3rem 0 1rem;">Quem já é cliente</h3>
+      <p style="color:var(--ink-2);">Toyota · Volkswagen · Klabin · Panasonic · Burger King · grandes redes de shoppings.</p>
+      <p class="tiny" style="margin-top:1.5rem;">Não são logos decorativas — são empresas que migraram a operação inteira para energia Matrix porque o número fechou. Quando Toyota assina, alguém auditou.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════ OPORTUNIDADE / Matrix360 ════════════════════════════════ -->
+<section class="bg-paper">
+  <div class="container-narrow">
+    <div class="eyebrow">Parte 4 · A oportunidade</div>
+    <h2 class="h1 serif">Matrix360 é o canal pelo qual qualquer pessoa pode participar economicamente dessa abertura de mercado.</h2>
+    <p class="lead" style="margin-top:1.5rem;">
+      A Matrix abriu uma estrutura de marketing direto para escalar a entrega da energia por assinatura — chega onde mídia paga não chega:
+      no boca a boca de alguém que confia em você.
+    </p>
+
+    <div style="margin-top:3rem; display:grid; grid-template-columns:1fr 1fr; gap:2rem;">
+      <div style="background:white; border:1px solid #e8e3d4; padding:2rem; border-radius:6px;">
+        <div style="color:var(--gold-2); font-size:0.7rem; letter-spacing:2px; text-transform:uppercase; margin-bottom:0.5rem;">Para entrar</div>
+        <div style="font-family:'Fraunces',serif; font-size:2rem; font-weight:700; color:#1a1610;">R$ 249,90</div>
+        <div style="font-size:0.85rem; color:#5a544a; margin-top:0.5rem;">Taxa de adesão · única vez</div>
+      </div>
+      <div style="background:white; border:1px solid #e8e3d4; padding:2rem; border-radius:6px;">
+        <div style="color:var(--gold-2); font-size:0.7rem; letter-spacing:2px; text-transform:uppercase; margin-bottom:0.5rem;">Para manter ativo</div>
+        <div style="font-family:'Fraunces',serif; font-size:2rem; font-weight:700; color:#1a1610;">R$ 34,90<span style="font-size:0.9rem; color:#5a544a; font-weight:400;">/mês</span></div>
+        <div style="font-size:0.85rem; color:#5a544a; margin-top:0.5rem;">Plataforma · treinamentos · suporte · direito aos bônus</div>
+      </div>
+    </div>
+    <p class="tiny" style="margin-top:1rem; color:#8a8478;">Comparativo: a concorrente direta cobra ~R$ 2.000 só de adesão. Você está entrando com 8x menos custo.</p>
+  </div>
+
+  <div class="container-narrow" style="margin-top:5rem;">
+    <h3 class="h2 serif" style="text-align:center;">Os 6 bônus do plano</h3>
+    <p style="text-align:center; color:#5a544a; margin-top:0.5rem;">Você ganha por gerar valor real — não só por trazer pessoas.</p>
+
+    <div class="bonus-list">
+      <div class="bonus" style="background:white; border-color:#e8e3d4;">
+        <div class="bonus-num">1</div>
+        <div>
+          <h3 class="serif" style="color:#1a1610;">Conexão de clientes</h3>
+          <p style="color:#5a544a;">Até <strong>60% sobre o kWh injetado</strong> pela Matrix para aquele cliente. Pago em duas etapas: metade na aprovação, metade após a primeira fatura. Caixa rápido.</p>
+          <span class="badge" style="background:rgba(180,138,53,0.15); color:var(--gold-2);">renda imediata</span>
+        </div>
+      </div>
+      <div class="bonus" style="background:white; border-color:#e8e3d4;">
+        <div class="bonus-num">2</div>
+        <div>
+          <h3 class="serif" style="color:#1a1610;">Recorrência direta</h3>
+          <p style="color:#5a544a;">Até <strong>1% da conta, pra sempre</strong>, enquanto o cliente continuar pagando energia. Você fez a conexão uma vez — ganha pra sempre. Renda passiva real.</p>
+          <span class="badge" style="background:rgba(180,138,53,0.15); color:var(--gold-2);">passiva pra sempre</span>
+        </div>
+      </div>
+      <div class="bonus" style="background:white; border-color:#e8e3d4;">
+        <div class="bonus-num">3</div>
+        <div>
+          <h3 class="serif" style="color:#1a1610;">Expansão</h3>
+          <p style="color:#5a544a;">R$ 50 por pessoa do primeiro nível que entra na sua equipe. Escala por nível.</p>
+        </div>
+      </div>
+      <div class="bonus" style="background:white; border-color:#e8e3d4;">
+        <div class="bonus-num">4</div>
+        <div>
+          <h3 class="serif" style="color:#1a1610;">Ativação</h3>
+          <p style="color:#5a544a;">Pago quando pessoas da sua equipe mantêm a mensalidade. Até o 7º nível. Com 3.000 pessoas ativas: mais de R$ 12.000/mês só de ativação.</p>
+        </div>
+      </div>
+      <div class="bonus" style="background:white; border-color:#e8e3d4;">
+        <div class="bonus-num">5</div>
+        <div>
+          <h3 class="serif" style="color:#1a1610;">Recorrência indireta</h3>
+          <p style="color:#5a544a;">Pago quando clientes conectados pela sua equipe pagam conta de energia. Até o 6º nível. Esse é o mais poderoso — escala exponencial sustentada por uma necessidade universal: conta de luz paga.</p>
+          <span class="badge" style="background:rgba(180,138,53,0.15); color:var(--gold-2);">o mais poderoso</span>
+        </div>
+      </div>
+      <div class="bonus" style="background:white; border-color:#e8e3d4;">
+        <div class="bonus-num">6</div>
+        <div>
+          <h3 class="serif" style="color:#1a1610;">Bônus executivo</h3>
+          <p style="color:#5a544a;">Parte do faturamento gerado pelo canal é distribuído entre executivos. Cotas: Diretor (1), VP (3), Presidente (10).</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════ THE MATH ════════════════════════════════ -->
+<section>
+  <div class="container-narrow">
+    <div class="eyebrow">Parte 5 · A matemática</div>
+    <h2 class="h1 serif">Sem hype. Os números do plano oficial, projetados pra você ver com clareza.</h2>
+    <p class="lead" style="margin-top:1.5rem;">
+      Cenário: 12.000 kWh injetados por mês (atingível com ~6 contas conectadas, mix residencial + comercial). Sem construir equipe.
+    </p>
+
+    <table class="math-table">
+      <thead>
+        <tr>
+          <th>Período</th>
+          <th>Bônus Conexão (60%)</th>
+          <th>Recorrência acumulada (1%)</th>
+          <th>Total no mês</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Mês 1</td><td>R$ 7.200</td><td>R$ 120</td><td class="gold">R$ 7.320</td></tr>
+        <tr><td>Mês 6</td><td>R$ 7.200</td><td>R$ 720</td><td class="gold">R$ 7.920</td></tr>
+        <tr><td>Mês 12</td><td>R$ 7.200</td><td>R$ 1.440</td><td class="gold">R$ 8.640</td></tr>
+        <tr><td>Mês 36</td><td>R$ 7.200</td><td>R$ 4.320</td><td class="gold">R$ 11.520</td></tr>
+        <tr><td>Mês 60</td><td>R$ 7.200</td><td>R$ 7.200</td><td class="gold">R$ 14.400</td></tr>
+        <tr><td>Mês 120</td><td>R$ 7.200</td><td>R$ 14.400</td><td class="gold">R$ 21.600</td></tr>
+      </tbody>
+    </table>
+
+    <p style="margin-top:1.5rem; color:var(--ink-2);">Acumulado em 10 anos, só de conexão + recorrência: aproximadamente <strong style="color:var(--gold);">R$ 1,76 milhão</strong>.</p>
+
+    <div style="margin-top:3rem;">
+      <h3 class="h3 serif" style="color:var(--gold);">A pergunta que muda a leitura</h3>
+      <div class="pullquote" style="margin-top:1rem;">
+        Para gerar R$ 14.400/mês com renda fixa hoje, você precisaria de aproximadamente R$ 1,4 milhão de capital parado.
+        Aqui, a entrada é R$ 249,90 + execução durante 24 a 60 meses.
+      </div>
+      <p style="color:var(--ink-2);">
+        Os modelos são diferentes — renda fixa não exige nada depois do aporte. Matrix exige execução real.
+        Mas a barreira de capital é incomparável. Quem não tem o capital, tem o tempo. Quem tem disciplina, troca uma coisa pela outra.
+      </p>
+    </div>
+
+    <div class="honesty">
+      <strong>Honestidade obrigatória:</strong> esses números são projeções do modelo, não promessa.
+      Resultado depende da sua execução, da manutenção das contas conectadas e da estabilidade dos parâmetros do plano.
+      Quem entra esperando fórmula mágica sai decepcionado. Quem entra disposto a aprender e executar, em 12 a 24 meses está rindo da decisão.
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════ ALPHA LAYER ════════════════════════════════ -->
+<section class="bg-paper">
+  <div class="container-narrow">
+    <div class="section-mark">
+      <div class="ec">ecossistema alpha</div>
+      <div class="nm">COMUNIDADE ALPHA</div>
+    </div>
+
+    <div class="eyebrow">Parte 6 · Por que a Matrix sozinha não basta</div>
+    <h2 class="h1 serif">Empresa boa, com matemática fechando, mais comunidade séria por trás. Esse é o ponto.</h2>
+    <p class="lead" style="margin-top:1.5rem;">
+      A Matrix entrega plataforma, produto, treinamento e suporte. A Comunidade Alpha entrega o que nenhuma empresa entrega: ambiente, convivência, identidade coletiva, mentores reais, pressão positiva e pertencimento.
+    </p>
+
+    <div class="pullquote">
+      A Comunidade Alpha é a casa. Matrix é o veículo financeiro escolhido para 2026.
+      Se a Matrix sumir amanhã, a comunidade continua. Mas, escolhida a Matrix, ela é a melhor escolha possível neste momento.
+    </div>
+
+    <h3 class="h2 serif" style="margin-top:3rem;">O que a Comunidade Alpha entrega que a Matrix sozinha não entrega</h3>
+    <ul class="check">
+      <li><strong>Ambiente</strong> — lugares físicos e digitais que sustentam novos comportamentos</li>
+      <li><strong>Convivência</strong> — pessoas que já chegaram onde você quer chegar</li>
+      <li><strong>Mentoria real</strong> — não coaching motivacional, mas líderes que executam o que ensinam</li>
+      <li><strong>Métodos testados</strong> — scripts, abordagens, materiais já validados em campo</li>
+      <li><strong>Tribo</strong> — pertencimento por mérito, não por hierarquia rígida</li>
+      <li><strong>Pressão positiva</strong> — cadência viva, sem crueldade</li>
+      <li><strong>Identidade ancestral</strong> — honra, coragem, adaptabilidade, superação, verdade. Valores que sobrevivem a qualquer mercado.</li>
+    </ul>
+
+    <h3 class="h3 serif" style="margin-top:3rem; color:#1a1610;">A promessa dos 24 meses</h3>
+    <p style="margin-top:0.5rem; color:#5a544a;">
+      Para quem chega com zero experiência e se compromete com 15 horas semanais de dedicação às atividades, cronogramas e práticas da comunidade:
+      <strong>em 24 meses, renda residual de pelo menos R$ 10 mil/mês.</strong>
+    </p>
+    <p style="margin-top:1rem; color:#5a544a;">
+      A promessa parece ousada, mas é conservadora. Soma de tecnologia em evolução (IA, automação, tráfego), influência de liderança ativa, ferramentas, suporte, estratégia, timing de empresa e mercado, produto recorrente, margens reais.
+      Praticamente impossível alguém comprometido não prosperar absurdamente. Mas exige comprometimento.
+    </p>
+  </div>
+</section>
+
+<!-- ════════════════════════════════ COMPARISON ════════════════════════════════ -->
+<section>
+  <div class="container-narrow">
+    <div class="eyebrow">Parte 7 · Comparativo</div>
+    <h2 class="h1 serif">Matrix vs. a concorrente direta — números públicos.</h2>
+    <p class="lead" style="margin-top:1.5rem;">
+      Não é briga. É leitura objetiva pra você entender por que esta janela é específica.
+    </p>
+
+    <table class="compare">
+      <thead>
+        <tr><th>Dimensão</th><th>Matrix Energia</th><th>Concorrente direta (iGreen)</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Modelo</td><td class="winner">Geração própria + comercialização</td><td class="loser">Comercialização/revenda</td></tr>
+        <tr><td>Desconto típico ao cliente</td><td class="winner">20% – 30% (até 26% em MG)</td><td class="loser">8% – 12% (média 10–12%)</td></tr>
+        <tr><td>Taxa de adesão consultor</td><td class="winner">R$ 249,90</td><td class="loser">~R$ 2.000</td></tr>
+        <tr><td>Faturamento</td><td class="winner">R$ 2 bi/ano (institucional)</td><td class="loser">Não público</td></tr>
+        <tr><td>Rating financeiro</td><td class="winner">A pela S&P Global</td><td class="loser">Não público</td></tr>
+        <tr><td>Verticais operadas</td><td class="winner">5 (Comercialização, GD, GC, Services, Cogeração)</td><td class="loser">1 (GD por assinatura)</td></tr>
+        <tr><td>Acionistas</td><td class="winner">Duferco + Prisma Capital</td><td class="loser">Familiar/privado</td></tr>
+        <tr><td>Estágio MMN</td><td class="winner">Pré-expansão</td><td class="loser">Expansão/saturação</td></tr>
+      </tbody>
+    </table>
+    <p class="tiny" style="margin-top:1rem;">Fontes: documento institucional Matrix · S&P Global · análise comparativa cruzada · dados de domínio público iGreen.</p>
+  </div>
+</section>
+
+<!-- ════════════════════════════════ FOR WHOM ════════════════════════════════ -->
+<section class="bg-deep">
+  <div class="container">
+    <div class="two-col">
+      <div>
+        <div class="eyebrow">Parte 8 · Para quem é</div>
+        <h2 class="h1 serif">Para quem é, e para quem não é.</h2>
+        <p class="lead" style="margin-top:1.5rem;">
+          A Comunidade Alpha é aberta. Mas é honesta sobre quem encontra ambiente fértil aqui — e quem não vai gostar.
+        </p>
+      </div>
+      <div>
+        <h3 class="h3 serif" style="color:var(--gold);">É para</h3>
+        <ul class="check">
+          <li>Quem está verdadeiramente comprometido a crescer profissional e pessoalmente</li>
+          <li>Quem busca sucesso de forma ética, sem atalho</li>
+          <li>Quem tem bom senso, valores ou desejo de tê-los</li>
+          <li>Quem já é grande e quer crescer ainda mais ajudando outros a crescer</li>
+          <li>Quem aceita ser corrigido amorosamente para acertar</li>
+        </ul>
+
+        <h3 class="h3 serif" style="color:#a85a5a; margin-top:2.5rem;">Não é para</h3>
+        <ul class="check" style="--gold:#a85a5a;">
+          <li>Quem quer dinheiro fácil</li>
+          <li>Quem prefere vitimizar-se a evoluir</li>
+          <li>Quem não tem humildade pra aprender</li>
+          <li>Quem prefere zona de conforto a crescer</li>
+          <li>Quem acredita que sucesso é sorte</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════ OBJECTIONS ════════════════════════════════ -->
+<section>
+  <div class="container-narrow">
+    <div class="eyebrow">Parte 9 · Perguntas honestas</div>
+    <h2 class="h1 serif">As objeções que toda pessoa séria faz — respondidas direto.</h2>
+
+    <div style="margin-top:2.5rem;">
+      <details class="obj">
+        <summary>Isso é pirâmide?</summary>
+        <div class="obj-body">
+          Pirâmide é quando o ganho depende <strong>só de recrutar</strong>, sem produto real. Aqui o ganho principal é sobre <strong>conta de energia paga</strong> — algo que 90 milhões de pessoas pagam todo mês no Brasil. Você pode ganhar sem recrutar ninguém, apenas conectando contas. Construir equipe é opção, não obrigação.
+        </div>
+      </details>
+      <details class="obj">
+        <summary>E se a empresa quebrar?</summary>
+        <div class="obj-body">
+          Matrix tem 10 anos de operação, fatura R$ 2 bi/ano, é Rating A pela S&P Global, está entre as 500 maiores empresas do Brasil. Acionistas: Duferco (europeu, bilionário) + Prisma Capital. Contratos de fornecimento até 2036. Não é uma startup de MMN.
+        </div>
+      </details>
+      <details class="obj">
+        <summary>Já tentei MMN e não deu certo.</summary>
+        <div class="obj-body">
+          Concordo — muitos MMNs decepcionam. Geralmente por (1) produto sem demanda real, (2) empresa pequena que quebra, (3) modelo dependente só de recrutamento. Aqui o produto é conta de luz (necessidade universal), a empresa é bilionária e o ganho vem da conta paga. Estrutura inversa.
+        </div>
+      </details>
+      <details class="obj">
+        <summary>Não tenho tempo.</summary>
+        <div class="obj-body">
+          Dá pra começar com pouco — 1 ou 2 contas conectadas por semana já é início. Se quiser intensidade, existe um caminho mais rápido (a Maratona Explosiva). Se quiser ritmo leve, dá pra construir aos poucos. Quanto tempo você tem realisticamente?
+        </div>
+      </details>
+      <details class="obj">
+        <summary>Não conheço ninguém pra indicar.</summary>
+        <div class="obj-body">
+          Você conhece pessoas que pagam conta de luz? Família, vizinhos, comerciantes da sua rua. Não estamos vendendo coisa nova — estamos oferecendo economia em algo que essas pessoas já pagam todo mês. É um "sim" mais fácil de conseguir.
+        </div>
+      </details>
+      <details class="obj">
+        <summary>E se eu não conseguir resultado?</summary>
+        <div class="obj-body">
+          Honestidade: resultado depende da sua execução. A empresa entrega plataforma, produto, treinamento e suporte. A comunidade entrega ambiente, mentoria, métodos e tribo. O que você faz com isso depende de você. Quem entra esperando fórmula mágica, sai decepcionado. Quem entra disposto a aprender, em 12 a 24 meses está rindo da decisão.
+        </div>
+      </details>
+      <details class="obj">
+        <summary>E se eu quiser sair?</summary>
+        <div class="obj-body">
+          A qualquer momento. Sem multa, sem contrato preso. Para de pagar mensalidade, vira inativo. Pode voltar quando quiser.
+        </div>
+      </details>
+      <details class="obj">
+        <summary>Vou pensar.</summary>
+        <div class="obj-body">
+          Claro. Pra "pensar" virar decisão, geralmente precisa de uma informação específica que ainda falta. O que ainda te deixa em dúvida? Quero te ajudar a ter clareza, não pressionar.
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════ TIMING URGENCY (REAL) ════════════════════════════════ -->
+<section class="bg-paper">
+  <div class="container-narrow">
+    <div class="eyebrow">Parte 10 · Por que agora</div>
+    <h2 class="h1 serif">Existem três estágios em todo mercado de marketing direto. Matrix está no primeiro.</h2>
+
+    <div style="margin-top:3rem; display:grid; gap:1rem;">
+      <div style="display:grid; grid-template-columns:auto 1fr; gap:1.5rem; padding:1.5rem; background:white; border:2px solid var(--gold); border-radius:6px;">
+        <div style="font-family:'Fraunces',serif; font-size:2rem; color:var(--gold); font-weight:700;">01</div>
+        <div>
+          <h3 class="serif" style="color:#1a1610;">Pré-expansão <span style="color:var(--gold); font-weight:400; font-style:italic; font-size:0.9rem; margin-left:0.5rem;">← Matrix está aqui</span></h3>
+          <p style="color:#5a544a; margin-top:0.3rem;">Estrutura existe, produto validado, mas a rede ainda é pequena. Quem entra agora, pega o multiplicador exponencial. Cada nova pessoa importa muito.</p>
+        </div>
+      </div>
+      <div style="display:grid; grid-template-columns:auto 1fr; gap:1.5rem; padding:1.5rem; background:white; border:1px solid #e8e3d4; border-radius:6px;">
+        <div style="font-family:'Fraunces',serif; font-size:2rem; color:#a8a399; font-weight:700;">02</div>
+        <div>
+          <h3 class="serif" style="color:#1a1610;">Expansão</h3>
+          <p style="color:#5a544a; margin-top:0.3rem;">Crescimento explosivo, todo mundo soube. Ainda dá pra ganhar — mas as melhores posições da rede já estão ocupadas.</p>
+        </div>
+      </div>
+      <div style="display:grid; grid-template-columns:auto 1fr; gap:1.5rem; padding:1.5rem; background:white; border:1px solid #e8e3d4; border-radius:6px;">
+        <div style="font-family:'Fraunces',serif; font-size:2rem; color:#a8a399; font-weight:700;">03</div>
+        <div>
+          <h3 class="serif" style="color:#1a1610;">Saturação</h3>
+          <p style="color:#5a544a; margin-top:0.3rem;">A maioria das pessoas já recebeu a oportunidade. Os que entram agora ganham menos. Modelo continua viável, mas o multiplicador acabou.</p>
+        </div>
+      </div>
+    </div>
+
+    <p style="margin-top:3rem; color:#5a544a;">
+      A pergunta não é "isso vale a pena?". A pergunta é <strong>"quando estou entrando?"</strong>.
+      Quem soube primeiro, conseguiu mais. Quem soube por último, conseguiu o que sobrou.
+      Você está sabendo agora.
+    </p>
+  </div>
+</section>
+
+<!-- ════════════════════════════════ THE PRIZE FRAME ════════════════════════════════ -->
+<section class="frame-setter">
+  <div class="container-narrow">
+    <div class="quote-mark">"</div>
+    <div class="quote">
+      Você não precisa entrar. Esta é uma comunidade séria, exigente, que valoriza quem chega disposto a ser melhor.
+      Se você está aqui só porque viu um número grande no slide, não é o lugar.
+      Se você está aqui porque reconhece a janela e quer ambiente real para atravessar ela — converse com quem te enviou.
+    </div>
+    <div class="attribution">Eduardo Ferreira</div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════ CTA ════════════════════════════════ -->
+<section class="cta-section">
+  <div class="container-narrow">
+    <div class="cta-box">
+      <div class="who">próximo passo</div>
+      <h2 class="h1 serif">A conversa que decide.</h2>
+      <p class="lead" style="margin-top:1rem;">
+        Volte para a pessoa que te enviou este link. Diga que leu e que quer conversar sobre o próximo passo. Combinem 30 a 45 minutos para tirar todas as dúvidas que sobraram — sem pressão, sem script.
+      </p>
+      <a href="#topo" class="cta-button" onclick="window.scrollTo({top:0, behavior:'smooth'}); return false;">Falar com quem me enviou</a>
+      <span class="cta-secondary">Sem urgência forçada. A janela é real, mas a decisão é sua.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════ FOOTER ════════════════════════════════ -->
+<footer>
+  <div class="container">
+    <div>Comunidade Alpha · ecossistema alpha</div>
+    <div style="margin-top:0.5rem;">Documento de orientação — não constitui oferta pública. Resultados dependem de execução individual.</div>
+    <div class="latin">Audace Fortuna Sequitur</div>
+  </div>
+</footer>
+
+<script>
+  // Reveal on scroll
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('section > *, .card, .bonus').forEach(el => {
+    el.classList.add('reveal');
+    io.observe(el);
+  });
+</script>
+</body>
+</html>
