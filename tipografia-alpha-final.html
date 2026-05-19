@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sistema Tipográfico · Comunidade Alpha</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,700;0,6..96,900;1,6..96,300;1,6..96,400;1,6..96,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+:root {
+  --azul:    #060E14;
+  --azul-1:  #0D1F2D;
+  --azul-2:  #152B3D;
+  --azul-3:  #1E3A50;
+  --ouro:    #C8A951;
+  --ouro-cl: #E0C57A;
+  --creme:   #F5F0E6;
+  --branco:  #FFFFFF;
+  --muted:   rgba(245,240,230,.52);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--azul); color: var(--branco); font-family: 'Plus Jakarta Sans', sans-serif; }
+
+/* ── HERO ─────────────────────────────────────────── */
+.hero {
+  min-height: 100vh;
+  background: var(--azul-1);
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 80px 10vw;
+  position: relative; overflow: hidden;
+}
+.hero-bg {
+  position: absolute; right: -2vw; top: 50%; transform: translateY(-50%);
+  font-family: 'Bodoni Moda', serif; font-size: 28vw; font-weight: 900;
+  color: rgba(200,169,81,.04); line-height: 1;
+  pointer-events: none; user-select: none; letter-spacing: -.02em;
+}
+.hero-inner { position: relative; z-index: 1; max-width: 900px; }
+
+.h-eyebrow {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(.65rem, 1vw, .8rem);
+  letter-spacing: .28em; color: var(--ouro); margin-bottom: 32px;
+}
+.h-title {
+  font-family: 'Bodoni Moda', serif;
+  font-size: clamp(3.8rem, 8vw, 8rem);
+  font-weight: 900; line-height: .95;
+  letter-spacing: -.01em; color: var(--branco);
+  margin-bottom: 16px;
+}
+.h-sub {
+  font-family: 'Bodoni Moda', serif;
+  font-size: clamp(1.4rem, 3vw, 2.6rem);
+  font-weight: 400; font-style: italic;
+  color: var(--ouro-cl); margin-bottom: 40px;
+  line-height: 1.2;
+}
+.h-rule { width: 60px; height: 2px; background: var(--ouro); margin-bottom: 36px; opacity: .7; }
+.h-body {
+  font-size: clamp(.9rem, 1.4vw, 1.05rem);
+  font-weight: 400; line-height: 1.85;
+  color: var(--muted); max-width: 540px;
+  margin-bottom: 48px;
+}
+.h-cta {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(.85rem, 1.2vw, 1rem);
+  letter-spacing: .18em; color: var(--creme);
+  display: inline-flex; align-items: center; gap: 12px;
+}
+.h-cta::after {
+  content: ''; display: block;
+  width: 40px; height: 1px; background: var(--ouro);
+}
+
+/* ── SYSTEM STRIP ─────────────────────────────────── */
+.system-strip {
+  background: var(--azul-2);
+  border-top: 1px solid rgba(200,169,81,.15);
+  border-bottom: 1px solid rgba(200,169,81,.15);
+  padding: 28px 10vw;
+  display: flex; gap: 0;
+}
+.ss-item {
+  flex: 1; padding: 0 32px 0 0;
+  border-right: 1px solid rgba(200,169,81,.12);
+}
+.ss-item:last-child { border-right: none; padding-right: 0; padding-left: 32px; }
+.ss-item:first-child { padding-left: 0; }
+.ss-label {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: .6rem; letter-spacing: .2em;
+  color: var(--ouro); margin-bottom: 6px;
+}
+.ss-font { font-size: .82rem; font-weight: 700; color: var(--branco); margin-bottom: 2px; }
+.ss-detail { font-size: .72rem; color: var(--muted); }
+
+/* ── MOCK SECTION ─────────────────────────────────── */
+.section { padding: 80px 10vw; }
+.section-label {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: .62rem; letter-spacing: .25em; color: var(--ouro);
+  margin-bottom: 48px; display: block;
+}
+
+/* 3-COLUMN MOCKS */
+.mocks { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; }
+
+/* CARD */
+.mock-card {
+  background: var(--azul-2);
+  border: 1px solid rgba(200,169,81,.14);
+  padding: 32px;
+  aspect-ratio: 1.6;
+  display: flex; flex-direction: column; justify-content: space-between;
+  position: relative; overflow: hidden;
+}
+.mock-card::after {
+  content: '';
+  position: absolute; right: -24px; bottom: -24px;
+  width: 120px; height: 120px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(200,169,81,.12), transparent);
+}
+.mc-top {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: .55rem; letter-spacing: .22em; color: var(--ouro);
+}
+.mc-title {
+  font-family: 'Bodoni Moda', serif;
+  font-size: clamp(1.3rem, 2.2vw, 1.8rem);
+  font-weight: 900; line-height: 1.05; color: var(--branco);
+}
+.mc-body {
+  font-size: .75rem; color: var(--muted); line-height: 1.7; margin-top: 8px;
+}
+.mc-foot {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: .55rem; letter-spacing: .15em; color: rgba(200,169,81,.4);
+}
+
+/* POST */
+.mock-post {
+  background: var(--azul-3);
+  border: 1px solid rgba(200,169,81,.1);
+  aspect-ratio: 1;
+  padding: 28px;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  position: relative; overflow: hidden;
+}
+.mp-label {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: .52rem; letter-spacing: .2em; color: var(--ouro);
+  position: absolute; top: 22px; left: 24px;
+}
+.mp-num {
+  position: absolute; right: 16px; bottom: 52px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 6rem; color: rgba(200,169,81,.07); line-height: 1;
+}
+.mp-title {
+  font-family: 'Bodoni Moda', serif;
+  font-size: clamp(1.5rem, 2.8vw, 2rem);
+  font-weight: 900; line-height: 1.0; color: var(--branco);
+  margin-bottom: 8px;
+}
+.mp-sub {
+  font-family: 'Bodoni Moda', serif;
+  font-style: italic;
+  font-size: clamp(.85rem, 1.4vw, 1rem);
+  color: var(--ouro-cl); margin-bottom: 12px;
+}
+.mp-body { font-size: .72rem; color: var(--muted); line-height: 1.6; }
+
+/* SLIDE */
+.mock-slide {
+  background: var(--azul-1);
+  border: 1px solid rgba(200,169,81,.1);
+  aspect-ratio: 1.77;
+  padding: 28px 32px;
+  display: flex; flex-direction: column; justify-content: space-between;
+  position: relative; overflow: hidden;
+}
+.ms-top {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: .52rem; letter-spacing: .2em; color: var(--ouro);
+}
+.ms-content { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+.ms-title {
+  font-family: 'Bodoni Moda', serif;
+  font-size: clamp(1.1rem, 2vw, 1.5rem);
+  font-weight: 900; line-height: 1.05; color: var(--branco); margin-bottom: 10px;
+}
+.ms-body {
+  font-size: .7rem; line-height: 1.7; color: var(--muted); max-width: 400px;
+}
+.ms-foot {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: .5rem; letter-spacing: .12em; color: rgba(200,169,81,.3);
+}
+
+/* ── SCALE SECTION ──────────────────────────────────── */
+.scale-section {
+  padding: 80px 10vw;
+  background: var(--azul-1);
+  border-top: 1px solid rgba(200,169,81,.1);
+}
+.scale-row {
+  display: flex; align-items: baseline; gap: 32px;
+  margin-bottom: 32px; padding-bottom: 32px;
+  border-bottom: 1px solid rgba(200,169,81,.08);
+}
+.scale-row:last-child { border-bottom: none; margin-bottom: 0; }
+.scale-meta {
+  width: 140px; flex-shrink: 0;
+}
+.sm-role {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: .55rem; letter-spacing: .2em; color: var(--ouro);
+  display: block; margin-bottom: 3px;
+}
+.sm-spec { font-size: .68rem; color: var(--muted); line-height: 1.5; }
+.scale-text { flex: 1; }
+
+/* SCALE EXAMPLES */
+.s-h1 {
+  font-family: 'Bodoni Moda', serif;
+  font-size: clamp(2.5rem, 5vw, 5rem); font-weight: 900; line-height: .95;
+  color: var(--branco);
+}
+.s-h2 {
+  font-family: 'Bodoni Moda', serif;
+  font-size: clamp(1.6rem, 3vw, 2.8rem); font-weight: 700; font-style: italic;
+  color: var(--ouro-cl); line-height: 1.1;
+}
+.s-h3 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: clamp(1rem, 1.8vw, 1.4rem); font-weight: 700;
+  color: var(--branco); letter-spacing: .01em;
+}
+.s-body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: clamp(.88rem, 1.2vw, 1rem); font-weight: 400; line-height: 1.8;
+  color: var(--muted);
+}
+.s-label {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(.65rem, .9vw, .78rem); letter-spacing: .22em; color: var(--ouro);
+}
+.s-caption {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: .72rem; font-weight: 400; line-height: 1.6; color: var(--muted); opacity: .7;
+}
+
+/* ── LANDING MOCK ──────────────────────────────────── */
+.landing-mock {
+  margin-top: 80px;
+  background: var(--azul-1);
+  border: 1px solid rgba(200,169,81,.15);
+  padding: 64px 7vw 56px;
+  position: relative; overflow: hidden;
+}
+.lm-bg {
+  position: absolute; right: -2vw; bottom: -4vw;
+  font-family: 'Bodoni Moda', serif; font-size: 18vw; font-weight: 900;
+  color: rgba(200,169,81,.03); line-height: 1;
+  pointer-events: none; user-select: none;
+}
+.lm-inner { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+.lm-left {}
+.lm-right {}
+.lm-eyebrow {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: .62rem; letter-spacing: .25em; color: var(--ouro); margin-bottom: 24px;
+}
+.lm-title {
+  font-family: 'Bodoni Moda', serif;
+  font-size: clamp(2rem, 3.5vw, 3.2rem); font-weight: 900; line-height: 1.0;
+  color: var(--branco); margin-bottom: 16px;
+}
+.lm-sub {
+  font-family: 'Bodoni Moda', serif;
+  font-style: italic; font-size: clamp(1.1rem, 1.8vw, 1.5rem);
+  color: var(--ouro-cl); margin-bottom: 28px; line-height: 1.2;
+}
+.lm-rule { width: 40px; height: 1px; background: var(--ouro); margin-bottom: 24px; opacity: .6; }
+.lm-body {
+  font-size: clamp(.85rem, 1.2vw, .95rem); line-height: 1.85;
+  color: var(--muted); margin-bottom: 36px;
+}
+.lm-cta-btn {
+  display: inline-block;
+  background: var(--ouro); color: var(--azul);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: .8rem; letter-spacing: .18em;
+  padding: 14px 32px; cursor: pointer;
+}
+.lm-right-inner {
+  background: var(--azul-2);
+  border: 1px solid rgba(200,169,81,.12);
+  padding: 36px 32px;
+}
+.lr-stat { margin-bottom: 28px; padding-bottom: 28px; border-bottom: 1px solid rgba(200,169,81,.1); }
+.lr-stat:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+.lr-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2.2rem; color: var(--ouro); line-height: 1; margin-bottom: 4px;
+}
+.lr-desc {
+  font-size: .78rem; line-height: 1.6; color: var(--muted);
+  font-weight: 500;
+}
+
+/* ── FOOTER ────────────────────────────────────────── */
+.footer {
+  background: var(--azul); border-top: 1px solid rgba(200,169,81,.1);
+  padding: 40px 10vw;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.footer-brand {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1rem; letter-spacing: .2em; color: var(--ouro);
+}
+.footer-system {
+  font-size: .72rem; color: var(--muted); text-align: right; line-height: 1.7;
+}
+
+@media (max-width: 880px) {
+  .hero { padding: 60px 7vw; }
+  .section { padding: 56px 7vw; }
+  .mocks { grid-template-columns: 1fr; }
+  .mock-post { aspect-ratio: 4/3; }
+  .lm-inner { grid-template-columns: 1fr; }
+  .system-strip { flex-direction: column; gap: 20px; }
+  .ss-item { border-right: none; padding: 0 0 16px 0; border-bottom: 1px solid rgba(200,169,81,.1); }
+  .ss-item:last-child { border-bottom: none; padding-bottom: 0; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ HERO ═════════════════════════════════════════ -->
+<section class="hero">
+  <div class="hero-bg" aria-hidden="true">α</div>
+  <div class="hero-inner">
+    <div class="h-eyebrow">COMUNIDADE ALPHA · 2026</div>
+    <h1 class="h-title">MODERNOS<br>NO MÉTODO.</h1>
+    <p class="h-sub">Ancestrais no caráter.</p>
+    <div class="h-rule"></div>
+    <p class="h-body">Crescimento deixa de ser pesado quando você não cresce sozinho. A convivência certa acelera transformação. O ambiente certo muda o destino.</p>
+    <div class="h-cta">JUNTE-SE AGORA</div>
+  </div>
+</section>
+
+<!-- ═══ SYSTEM STRIP ══════════════════════════════════ -->
+<div class="system-strip">
+  <div class="ss-item">
+    <div class="ss-label">Display · Títulos</div>
+    <div class="ss-font">Bodoni Moda</div>
+    <div class="ss-detail">Peso 900 · Contraste máximo · Didone</div>
+  </div>
+  <div class="ss-item">
+    <div class="ss-label">Italic · Subtítulos</div>
+    <div class="ss-font">Bodoni Moda Italic</div>
+    <div class="ss-detail">Peso 400–700 · Elegância serif</div>
+  </div>
+  <div class="ss-item">
+    <div class="ss-label">Body · Texto corrido</div>
+    <div class="ss-font">Plus Jakarta Sans</div>
+    <div class="ss-detail">Peso 400 / 600 / 800 · Premium geométrico</div>
+  </div>
+  <div class="ss-item">
+    <div class="ss-label">Accent · Labels · CTAs</div>
+    <div class="ss-font">Bebas Neue</div>
+    <div class="ss-detail">Condensado · Uppercase · Impacto</div>
+  </div>
+</div>
+
+<!-- ═══ MOCKS ════════════════════════════════════════ -->
+<section class="section">
+  <span class="section-label">APLICAÇÕES EM CONTEXTO</span>
+  <div class="mocks">
+
+    <!-- CARD -->
+    <div class="mock-card">
+      <div class="mc-top">ECOSSISTEMA ALPHA · 2026</div>
+      <div>
+        <div class="mc-title">MODERNOS<br>NO MÉTODO.</div>
+        <div class="mc-body">A convivência certa acelera transformação.</div>
+      </div>
+      <div class="mc-foot">COMUNIDADE ALPHA · CARTÃO</div>
+    </div>
+
+    <!-- POST -->
+    <div class="mock-post">
+      <span class="mp-label">COMUNIDADE ALPHA · 2026</span>
+      <div class="mp-num" aria-hidden="true">01</div>
+      <div>
+        <div class="mp-title">SEM<br>ATALHOS.</div>
+        <div class="mp-sub">Sem desculpas.</div>
+        <div class="mp-body">O ambiente certo muda o destino.</div>
+      </div>
+    </div>
+
+    <!-- SLIDE -->
+    <div class="mock-slide">
+      <div class="ms-top">ECOSSISTEMA ALPHA · APRESENTAÇÃO</div>
+      <div class="ms-content">
+        <div class="ms-title">CRESCIMENTO<br>COMO<br>CONSEQUÊNCIA.</div>
+        <div class="ms-body">Não perseguimos número — focamos no processo. O processo nos transforma na pessoa que precisamos ser.</div>
+      </div>
+      <div class="ms-foot">COMUNIDADE ALPHA · 2026 · CONFIDENCIAL</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══ ESCALA TIPOGRÁFICA ═══════════════════════════ -->
+<section class="scale-section">
+  <span class="section-label" style="display:block; margin-bottom:48px;">HIERARQUIA TIPOGRÁFICA COMPLETA</span>
+
+  <div class="scale-row">
+    <div class="scale-meta">
+      <span class="sm-role">H1 · Display</span>
+      <span class="sm-spec">Bodoni Moda<br>900 · normal</span>
+    </div>
+    <div class="scale-text">
+      <div class="s-h1">MODERNOS<br>NO MÉTODO.</div>
+    </div>
+  </div>
+
+  <div class="scale-row">
+    <div class="scale-meta">
+      <span class="sm-role">H2 · Italic</span>
+      <span class="sm-spec">Bodoni Moda<br>400 · italic</span>
+    </div>
+    <div class="scale-text">
+      <div class="s-h2">Ancestrais no caráter.</div>
+    </div>
+  </div>
+
+  <div class="scale-row">
+    <div class="scale-meta">
+      <span class="sm-role">H3 · Destaque</span>
+      <span class="sm-spec">Plus Jakarta Sans<br>700 · normal</span>
+    </div>
+    <div class="scale-text">
+      <div class="s-h3">Crescimento deixa de ser pesado quando você não cresce sozinho.</div>
+    </div>
+  </div>
+
+  <div class="scale-row">
+    <div class="scale-meta">
+      <span class="sm-role">Body · Corrido</span>
+      <span class="sm-spec">Plus Jakarta Sans<br>400 · normal</span>
+    </div>
+    <div class="scale-text">
+      <div class="s-body">A convivência certa acelera transformação. O ambiente certo muda o destino. Não vendemos curso — formamos líderes. Não prometemos resultado — entregamos as condições para quem vai buscar.</div>
+    </div>
+  </div>
+
+  <div class="scale-row">
+    <div class="scale-meta">
+      <span class="sm-role">Label · Accent</span>
+      <span class="sm-spec">Bebas Neue<br>400 · uppercase</span>
+    </div>
+    <div class="scale-text">
+      <div class="s-label">COMUNIDADE ALPHA · SISTEMA TIPOGRÁFICO · 2026</div>
+    </div>
+  </div>
+
+  <div class="scale-row">
+    <div class="scale-meta">
+      <span class="sm-role">Caption</span>
+      <span class="sm-spec">Plus Jakarta Sans<br>400 · 12px</span>
+    </div>
+    <div class="scale-text">
+      <div class="s-caption">Opção 02 · O Contraste · Bodoni Moda + Plus Jakarta Sans + Bebas Neue · Paleta: Azul Militar #0D1F2D + Dourado #C8A951</div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ═══ LANDING MOCK ══════════════════════════════════ -->
+<section class="section" style="padding-top:0; padding-bottom:80px;">
+  <span class="section-label">MOCK DE LANDING PAGE</span>
+  <div class="landing-mock">
+    <div class="lm-bg" aria-hidden="true">α</div>
+    <div class="lm-inner">
+      <div class="lm-left">
+        <div class="lm-eyebrow">COMUNIDADE ALPHA · 2026</div>
+        <h2 class="lm-title">ONDE O PADRÃO<br>É ALTO.</h2>
+        <p class="lm-sub">O suporte é real. O crescimento é consequência.</p>
+        <div class="lm-rule"></div>
+        <p class="lm-body">Para empreendedores e líderes que querem crescer com método, inteligência e propósito. Aqui você aprende, se conecta e constrói resultado real.</p>
+        <div class="lm-cta-btn">QUERO FAZER PARTE</div>
+      </div>
+      <div class="lm-right">
+        <div class="lm-right-inner">
+          <div class="lr-stat">
+            <div class="lr-num">01</div>
+            <div class="lr-desc"><strong style="color:#E0C57A;font-size:.82rem;">Não vendemos curso.</strong><br>Formamos líderes com método real.</div>
+          </div>
+          <div class="lr-stat">
+            <div class="lr-num">02</div>
+            <div class="lr-desc"><strong style="color:#E0C57A;font-size:.82rem;">Não prometemos resultado.</strong><br>Entregamos as condições para quem vai buscar.</div>
+          </div>
+          <div class="lr-stat">
+            <div class="lr-num">03</div>
+            <div class="lr-desc"><strong style="color:#E0C57A;font-size:.82rem;">Você não está sozinho.</strong><br>Mas o resultado depende de você.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══════════════════════════════════════ -->
+<footer class="footer">
+  <div class="footer-brand">COMUNIDADE ALPHA</div>
+  <div class="footer-system">
+    Bodoni Moda · Plus Jakarta Sans · Bebas Neue<br>
+    Azul Militar #0D1F2D · Dourado #C8A951
+  </div>
+</footer>
+
+</body>
+</html>
