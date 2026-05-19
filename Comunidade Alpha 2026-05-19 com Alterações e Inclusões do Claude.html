@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Comunidade Alpha · Original · 2026-05-19 · Organizado por Claude</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,700;0,6..96,900;1,6..96,300;1,6..96,400;1,6..96,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#060E14;
+  --c1:#0D1F2D;
+  --c2:#152B3D;
+  --c3:#1E3A50;
+  --gold:#C8A951;
+  --gold-l:#E0C57A;
+  --cream:#F5F0E6;
+  --white:#FFFFFF;
+  --muted:rgba(245,240,230,.55);
+  --border:rgba(200,169,81,.18);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--white);font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;line-height:1.7}
+
+/* NAV */
+.nav{
+  position:sticky;top:0;z-index:100;
+  background:rgba(6,14,20,.97);backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--border);
+  padding:12px 6vw;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;
+}
+.nav-brand{font-family:'Bebas Neue',sans-serif;font-size:12px;letter-spacing:.25em;color:var(--gold)}
+.nav-meta{font-size:10px;color:var(--muted);letter-spacing:.06em}
+
+/* TOC */
+.toc{
+  background:var(--c1);padding:32px 6vw;border-bottom:1px solid var(--border);
+}
+.toc-title{
+  font-family:'Bebas Neue',sans-serif;font-size:11px;letter-spacing:.28em;
+  color:var(--gold);margin-bottom:18px;
+}
+.toc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border)}
+.toc-item{
+  background:var(--c1);padding:14px 16px;
+  font-size:.82rem;color:var(--muted);text-decoration:none;
+  transition:.2s;display:flex;gap:10px;align-items:baseline;
+}
+.toc-item:hover{background:var(--c2);color:var(--gold-l)}
+.toc-num{font-family:'Bebas Neue',sans-serif;color:var(--gold);font-size:.85rem;letter-spacing:.1em;flex-shrink:0}
+
+/* HERO */
+.hero{
+  padding:100px 6vw 80px;
+  background:linear-gradient(180deg,var(--c1) 0%,var(--bg) 100%);
+  position:relative;overflow:hidden;
+  border-bottom:1px solid var(--border);
+}
+.hero::before{
+  content:'α';position:absolute;right:-3vw;top:-2vw;
+  font-family:'Bodoni Moda',serif;font-size:42vw;font-weight:900;
+  color:rgba(200,169,81,.025);line-height:1;pointer-events:none;
+}
+.hero-inner{position:relative;z-index:1;max-width:1000px}
+.hero-label{
+  font-family:'Bebas Neue',sans-serif;font-size:12px;letter-spacing:.3em;
+  color:var(--gold);margin-bottom:24px;
+}
+.hero h1{
+  font-family:'Bodoni Moda',serif;font-size:clamp(2.6rem,6vw,5.5rem);
+  font-weight:900;line-height:.95;margin-bottom:14px;letter-spacing:-.01em;
+}
+.hero-sub{
+  font-family:'Bodoni Moda',serif;font-style:italic;
+  font-size:clamp(1.3rem,2.4vw,2rem);
+  color:var(--gold-l);margin-bottom:32px;line-height:1.3;
+}
+.hero-rule{width:50px;height:2px;background:var(--gold);margin-bottom:28px;opacity:.7}
+.hero-body{font-size:clamp(.95rem,1.3vw,1.05rem);line-height:1.85;color:var(--muted);max-width:680px;margin-bottom:32px}
+.hero-meta{
+  display:flex;gap:18px;flex-wrap:wrap;
+  font-family:'Bebas Neue',sans-serif;font-size:11px;letter-spacing:.16em;color:var(--gold);
+}
+.hero-meta span{padding:6px 12px;border:1px solid var(--border)}
+
+/* SECTION */
+.section{padding:72px 6vw;border-bottom:1px solid var(--border);position:relative}
+.section-roman{
+  font-family:'Bodoni Moda',serif;font-style:italic;font-size:6rem;font-weight:300;
+  color:rgba(200,169,81,.08);line-height:.9;
+  position:absolute;right:6vw;top:60px;pointer-events:none;
+}
+.section-num{
+  font-family:'Bebas Neue',sans-serif;font-size:11px;letter-spacing:.3em;
+  color:var(--gold);margin-bottom:12px;display:block;position:relative;z-index:1;
+}
+.section-title{
+  font-family:'Bodoni Moda',serif;font-size:clamp(1.8rem,3.5vw,2.8rem);
+  font-weight:900;line-height:1.05;margin-bottom:12px;color:var(--white);
+  position:relative;z-index:1;
+}
+.section-sub{
+  font-family:'Bodoni Moda',serif;font-style:italic;
+  font-size:clamp(1rem,1.5vw,1.3rem);color:var(--gold-l);
+  margin-bottom:40px;position:relative;z-index:1;
+}
+
+/* MANIFESTO BLOCK */
+.manifesto{
+  background:var(--c1);border-left:3px solid var(--gold);
+  padding:36px 40px;margin:0 0 32px 0;
+}
+.manifesto p{
+  font-family:'Bodoni Moda',serif;font-style:italic;
+  font-size:clamp(1.15rem,2vw,1.6rem);
+  line-height:1.5;color:var(--cream);
+}
+.manifesto p strong{color:var(--gold-l);font-style:normal;font-weight:700}
+
+/* PROSE */
+.prose{max-width:780px;margin-bottom:32px}
+.prose p{margin-bottom:18px;font-size:.95rem;line-height:1.85;color:var(--muted)}
+.prose p strong{color:var(--white);font-weight:600}
+.prose p em{color:var(--gold-l);font-style:italic}
+.prose h3{
+  font-family:'Bodoni Moda',serif;font-size:1.3rem;font-weight:700;
+  color:var(--white);margin:30px 0 12px;line-height:1.2;
+}
+.prose ul{padding-left:0;list-style:none;margin-bottom:18px}
+.prose li{position:relative;padding-left:20px;margin-bottom:10px;color:var(--muted);font-size:.92rem;line-height:1.7}
+.prose li::before{content:'›';position:absolute;left:0;color:var(--gold);font-weight:700}
+
+/* CARDS */
+.cards{display:grid;gap:1px;background:var(--border);margin-bottom:32px}
+.card{background:var(--c1);padding:24px 26px}
+.card-label{font-family:'Bebas Neue',sans-serif;font-size:10px;letter-spacing:.25em;color:var(--gold);margin-bottom:6px}
+.card-title{font-size:1rem;font-weight:700;color:var(--white);margin-bottom:8px;line-height:1.3}
+.card-text{font-size:.86rem;color:var(--muted);line-height:1.7}
+.card-text strong{color:var(--gold-l);font-weight:600}
+.grid-2{grid-template-columns:1fr 1fr}
+.grid-3{grid-template-columns:repeat(3,1fr)}
+.grid-4{grid-template-columns:repeat(4,1fr)}
+
+/* TABLE */
+.tbl{width:100%;border-collapse:collapse;margin:8px 0 32px}
+.tbl th{
+  background:var(--c2);text-align:left;padding:12px 14px;
+  font-family:'Bebas Neue',sans-serif;font-size:11px;letter-spacing:.18em;color:var(--gold);font-weight:400;
+  border-bottom:1px solid var(--border);
+}
+.tbl td{padding:12px 14px;border-bottom:1px solid rgba(200,169,81,.08);font-size:.86rem;color:var(--muted);line-height:1.6;vertical-align:top}
+.tbl td strong{color:var(--white)}
+.tbl td.gold{color:var(--gold-l);font-weight:600}
+
+/* PRINCIPLE LIST (numbered) */
+.principles{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border)}
+.principle{background:var(--c1);padding:24px 26px;display:grid;grid-template-columns:50px 1fr;gap:16px}
+.principle-num{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;color:var(--gold);line-height:1}
+.principle-text h4{font-size:.98rem;font-weight:700;color:var(--white);margin-bottom:6px;line-height:1.3}
+.principle-text p{font-size:.82rem;color:var(--muted);line-height:1.65}
+
+/* È / NÃO È */
+.dichotomy{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);margin-bottom:32px}
+.dicho-side{padding:28px 30px}
+.dicho-is{background:linear-gradient(180deg,#0E1F18 0%,var(--c1) 100%)}
+.dicho-not{background:linear-gradient(180deg,#1A0B0B 0%,var(--c1) 100%)}
+.dicho-label{font-family:'Bebas Neue',sans-serif;font-size:11px;letter-spacing:.26em;margin-bottom:14px}
+.dicho-is .dicho-label{color:#5A8F5A}
+.dicho-not .dicho-label{color:#B85450}
+.dicho-side ul{list-style:none;padding:0}
+.dicho-side li{padding-left:22px;position:relative;margin-bottom:10px;font-size:.9rem;line-height:1.6;color:var(--cream)}
+.dicho-is li::before{content:'✓';position:absolute;left:0;color:#5A8F5A;font-weight:700}
+.dicho-not li::before{content:'✕';position:absolute;left:0;color:#B85450;font-weight:700}
+
+/* COLOR SWATCHES */
+.swatches{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);margin-bottom:24px}
+.swatch{background:var(--c1);padding:30px 24px;text-align:center}
+.swatch-color{width:100%;height:80px;border-radius:2px;margin-bottom:14px;border:1px solid rgba(200,169,81,.2)}
+.swatch h4{font-size:.92rem;color:var(--white);font-weight:700;margin-bottom:4px}
+.swatch .hex{font-family:'Bebas Neue',sans-serif;font-size:.85rem;letter-spacing:.12em;color:var(--gold);margin-bottom:6px}
+.swatch p{font-size:.78rem;color:var(--muted);line-height:1.5}
+
+/* FONTS */
+.fonts{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);margin-bottom:24px}
+.font-card{background:var(--c1);padding:30px 26px}
+.fc-role{font-family:'Bebas Neue',sans-serif;font-size:10px;letter-spacing:.25em;color:var(--gold);margin-bottom:8px}
+.fc-sample{margin-bottom:14px;color:var(--white)}
+.fc-sample.bodoni{font-family:'Bodoni Moda',serif;font-size:2rem;font-weight:900;line-height:1.05}
+.fc-sample.jakarta{font-family:'Plus Jakarta Sans',sans-serif;font-size:1.5rem;font-weight:600}
+.fc-sample.bebas{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:.12em}
+.fc-name{font-size:.92rem;font-weight:700;color:var(--white);margin-bottom:4px}
+.fc-detail{font-size:.78rem;color:var(--muted);line-height:1.5}
+
+/* QUOTES */
+.quotes{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--border);margin-bottom:32px}
+.quote{background:var(--c1);padding:30px 28px;position:relative}
+.quote::before{
+  content:'"';font-family:'Bodoni Moda',serif;font-size:5rem;font-weight:900;
+  color:rgba(200,169,81,.15);position:absolute;top:0;left:18px;line-height:1;
+}
+.quote p{
+  font-family:'Bodoni Moda',serif;font-style:italic;
+  font-size:1.05rem;line-height:1.55;color:var(--cream);
+  position:relative;z-index:1;margin-bottom:10px;
+}
+.quote-attr{
+  font-family:'Bebas Neue',sans-serif;font-size:10px;letter-spacing:.22em;
+  color:var(--gold);position:relative;z-index:1;
+}
+
+/* HIGHLIGHT BLOCK */
+.highlight{
+  background:linear-gradient(135deg,var(--c2) 0%,var(--c1) 100%);
+  border:1px solid var(--border);padding:32px 36px;margin:24px 0;
+  position:relative;
+}
+.highlight::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--gold)}
+.highlight-label{font-family:'Bebas Neue',sans-serif;font-size:10px;letter-spacing:.26em;color:var(--gold);margin-bottom:10px}
+.highlight p{font-size:1rem;line-height:1.75;color:var(--cream)}
+.highlight p strong{color:var(--white);font-weight:700}
+.highlight p+p{margin-top:12px}
+
+/* FOOTER */
+.footer{padding:48px 6vw;background:var(--bg);text-align:center;border-top:1px solid var(--border)}
+.footer-brand{font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:.28em;color:var(--gold);margin-bottom:8px}
+.footer p{font-size:.78rem;color:var(--muted);margin-bottom:4px}
+
+/* RESPONSIVE */
+@media(max-width:880px){
+  .nav{flex-direction:column;align-items:flex-start;gap:6px;padding:10px 5vw}
+  .hero,.section,.toc,.footer{padding-left:5vw;padding-right:5vw}
+  .hero{padding-top:60px;padding-bottom:60px}
+  .toc-grid,.grid-2,.grid-3,.grid-4,.principles,.dichotomy,.swatches,.fonts,.quotes{grid-template-columns:1fr}
+  .section-roman{display:none}
+  .tbl{font-size:.78rem}
+  .tbl th,.tbl td{padding:8px 6px}
+  .manifesto{padding:24px 20px}
+  .principle{grid-template-columns:36px 1fr;padding:20px 18px}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-brand">COMUNIDADE ALPHA · DOCUMENTO ORIGINAL</div>
+  <div class="nav-meta">2026-05-19 · ORGANIZADO POR CLAUDE</div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-label">ECOSSISTEMA ALPHA · DOCUMENTO CANÔNICO · 2026-05-19</div>
+    <h1>COMUNIDADE<br>ALPHA.</h1>
+    <p class="hero-sub">Onde o padrão é alto, o suporte é real, e o crescimento é consequência.</p>
+    <div class="hero-rule"></div>
+    <p class="hero-body">Este documento consolida tudo que foi enviado nesta sessão sobre a Comunidade Alpha — manifesto, princípios, frameworks, identidade visual, audiência, estrutura, ativos, decisões e diretrizes. <strong>É a versão "original" — síntese fiel do que você passou, organizada por Claude sem influência de squads externos.</strong></p>
+    <div class="hero-meta">
+      <span>AUDACE FORTUNA SEQUITUR</span>
+      <span>MODERNOS NO MÉTODO</span>
+      <span>ANCESTRAIS NO CARÁTER</span>
+    </div>
+  </div>
+</section>
+
+<!-- TOC -->
+<section class="toc">
+  <div class="toc-title">SUMÁRIO · 17 SEÇÕES</div>
+  <div class="toc-grid">
+    <a class="toc-item" href="#s1"><span class="toc-num">I</span><span>Manifesto e Origem</span></a>
+    <a class="toc-item" href="#s2"><span class="toc-num">II</span><span>Essência e Filosofia</span></a>
+    <a class="toc-item" href="#s3"><span class="toc-num">III</span><span>Personalidade e Voz</span></a>
+    <a class="toc-item" href="#s4"><span class="toc-num">IV</span><span>É e Não-É</span></a>
+    <a class="toc-item" href="#s5"><span class="toc-num">V</span><span>Os Sete Princípios</span></a>
+    <a class="toc-item" href="#s6"><span class="toc-num">VI</span><span>Governança Cultural</span></a>
+    <a class="toc-item" href="#s7"><span class="toc-num">VII</span><span>Os Frameworks</span></a>
+    <a class="toc-item" href="#s8"><span class="toc-num">VIII</span><span>Audiência Alpha</span></a>
+    <a class="toc-item" href="#s9"><span class="toc-num">IX</span><span>Estrutura da Matilha</span></a>
+    <a class="toc-item" href="#s10"><span class="toc-num">X</span><span>Cinco Sistemas Vivos</span></a>
+    <a class="toc-item" href="#s11"><span class="toc-num">XI</span><span>Identidade Visual</span></a>
+    <a class="toc-item" href="#s12"><span class="toc-num">XII</span><span>Hierarquia de Marcas</span></a>
+    <a class="toc-item" href="#s13"><span class="toc-num">XIII</span><span>Brandbooks por Nível</span></a>
+    <a class="toc-item" href="#s14"><span class="toc-num">XIV</span><span>Ativos Patrimoniais</span></a>
+    <a class="toc-item" href="#s15"><span class="toc-num">XV</span><span>Inimigos e Comparativo</span></a>
+    <a class="toc-item" href="#s16"><span class="toc-num">XVI</span><span>Diretrizes Permanentes</span></a>
+    <a class="toc-item" href="#s17"><span class="toc-num">XVII</span><span>Decisões e Pendências</span></a>
+  </div>
+</section>
+
+<!-- I · MANIFESTO E ORIGEM -->
+<section class="section" id="s1">
+  <div class="section-roman">I</div>
+  <span class="section-num">PARTE I</span>
+  <h2 class="section-title">Manifesto e Origem</h2>
+  <p class="section-sub">Antes da estratégia, antes da identidade — vem o porquê.</p>
+
+  <div class="manifesto">
+    <p><strong>Modernos o suficiente</strong> para usar as melhores ferramentas digitais. <strong>Ancestrais o suficiente</strong> para entender que nenhuma tecnologia substitui disciplina, presença e caráter.</p>
+  </div>
+
+  <div class="prose">
+    <h3>Origem do nome</h3>
+    <p>O nome <strong>Alpha com PH</strong> não é estilo — é origem. Vem do <strong>Grupamento Alpha</strong> da Academia Militar das Agulhas Negras: os mais exigidos, os que escolheram estar entre os melhores — não por natureza, mas por esforço e decisão.</p>
+    <p>Sempre grafado com PH. Nunca "<em>Alfa</em>". Quem grafa errado não é da casa.</p>
+    <h3>Slogan</h3>
+    <p><em>Audace Fortuna Sequitur</em> — "A fortuna favorece os audaciosos". Frase latina usada por militares e líderes ao longo de séculos. Audácia não é impulsividade — é agir com coragem quando outros esperam. Bilíngue por natureza — abre portas para expansão internacional futura.</p>
+    <h3>Posicionamento</h3>
+    <p>Para empreendedores e líderes que querem crescer com método, inteligência e propósito — a Comunidade Alpha é o ambiente onde você aprende, se conecta e constrói resultado real. Diferente de comunidades de conteúdo, aqui o padrão é alto, o suporte é real e o <strong>crescimento é consequência de quem você se torna</strong>.</p>
+  </div>
+
+  <div class="highlight">
+    <div class="highlight-label">MANIFESTO CURTO</div>
+    <p><em>"Aqui é sério. Aqui tem padrão. Aqui eu pertenço se eu merecer."</em></p>
+  </div>
+</section>
+
+<!-- II · ESSÊNCIA -->
+<section class="section" id="s2">
+  <div class="section-roman">II</div>
+  <span class="section-num">PARTE II</span>
+  <h2 class="section-title">Essência e Filosofia</h2>
+  <p class="section-sub">Biohackers de negócios.</p>
+
+  <div class="prose">
+    <p>Somos um <strong>ecossistema de negócios e formação de líderes</strong>. Puxamos o que há de mais ancestral no ser humano — disciplina, honra, pertencimento, propósito — sem abrir mão do que há de mais moderno: inteligência digital, dados, automação, tráfego, biohacking de negócios.</p>
+    <p>Não seguimos tendência. <strong>Entendemos o jogo, agimos com inteligência e construímos resultado.</strong></p>
+  </div>
+
+  <h3 style="font-family:'Bodoni Moda',serif;font-size:1.4rem;color:var(--white);margin-bottom:16px">Os 5 Vetores de Otimização</h3>
+  <div class="cards grid-3">
+    <div class="card"><div class="card-label">01</div><div class="card-title">Produto</div><div class="card-text">A oferta que entrega. <strong>Sem isso, nada existe.</strong></div></div>
+    <div class="card"><div class="card-label">02</div><div class="card-title">Método</div><div class="card-text">O passo a passo que torna replicável.</div></div>
+    <div class="card"><div class="card-label">03</div><div class="card-title">Comunidade</div><div class="card-text">O ambiente que sustenta o crescimento.</div></div>
+    <div class="card"><div class="card-label">04</div><div class="card-title">Mentalidade</div><div class="card-text">Quem você precisa se tornar para chegar lá.</div></div>
+    <div class="card"><div class="card-label">05</div><div class="card-title">Execução</div><div class="card-text">A disciplina diária. O que separa quem fala de quem faz.</div></div>
+  </div>
+
+  <div class="manifesto">
+    <p>Produto, método, comunidade, mentalidade, execução. Todos funcionando juntos. Ao mesmo tempo. <strong>Resultado é a sinfonia — nunca o solo.</strong></p>
+  </div>
+
+  <h3 style="font-family:'Bodoni Moda',serif;font-size:1.4rem;color:var(--white);margin:32px 0 16px">Os 3 Pilares Alpha</h3>
+  <div class="cards grid-3">
+    <div class="card">
+      <div class="card-label">01 · INTELIGÊNCIA</div>
+      <div class="card-title">Estratégia</div>
+      <div class="card-text">Agimos com inteligência. Nada aqui é por impulso. Antes da ação, vem a leitura do jogo. Quem entende as variáveis chega primeiro — e chega com menos esforço.</div>
+    </div>
+    <div class="card">
+      <div class="card-label">02 · CONEXÃO</div>
+      <div class="card-title">Humanidade</div>
+      <div class="card-text">Crescemos juntos. A matilha avança unida. <strong>Resultado individual sem comunidade é um foguete sem solo</strong> — sobe rápido, mas não sustenta voo.</div>
+    </div>
+    <div class="card">
+      <div class="card-label">03 · RESULTADO</div>
+      <div class="card-title">Execução</div>
+      <div class="card-text">Resultado é consequência de quem você se torna. Não vem da intenção. Vem da repetição, da disciplina, da entrega no dia em que ninguém está olhando.</div>
+    </div>
+  </div>
+</section>
+
+<!-- III · PERSONALIDADE -->
+<section class="section" id="s3">
+  <div class="section-roman">III</div>
+  <span class="section-num">PARTE III</span>
+  <h2 class="section-title">Personalidade e Voz</h2>
+  <p class="section-sub">A marca fala assim.</p>
+
+  <h3 style="font-family:'Bodoni Moda',serif;font-size:1.4rem;color:var(--white);margin-bottom:16px">Os 3 Arquétipos</h3>
+  <div class="cards grid-3">
+    <div class="card">
+      <div class="card-label">PRINCIPAL · 01</div>
+      <div class="card-title">O Guerreiro</div>
+      <div class="card-text">Disciplinado, focado, age com precisão, não recua. Sabe que o campo de batalha exige presença e método — não sorte.</div>
+    </div>
+    <div class="card">
+      <div class="card-label">SECUNDÁRIO · 02</div>
+      <div class="card-title">O Sábio</div>
+      <div class="card-text">Estratégico, decide com inteligência, não com emoção. Não age por impulso — age por compreensão profunda do jogo.</div>
+    </div>
+    <div class="card">
+      <div class="card-label">TERCIÁRIO · 03</div>
+      <div class="card-title">O Explorador</div>
+      <div class="card-text">Biohacker, testa, otimiza, não se contenta com o padrão. Não para quando encontra o suficiente — quer o próximo nível.</div>
+    </div>
+  </div>
+
+  <h3 style="font-family:'Bodoni Moda',serif;font-size:1.4rem;color:var(--white);margin:32px 0 16px">Tom de Voz: Direto · Humano · Exigente · Motivador</h3>
+  <div class="prose">
+    <ul>
+      <li><strong>Frases curtas e diretas</strong> — cada palavra precisa merecer estar lá</li>
+      <li><strong>Linguagem séria, mas acessível</strong> — não é acadêmica, não é de guru</li>
+      <li><strong>Sem promessa fácil</strong> — resultado é consequência de caráter e método</li>
+      <li><strong>Sem "fique rico"</strong> — riqueza é subproduto de quem você se torna</li>
+      <li><strong>Resultado como consequência</strong> de escolhas e comprometimento</li>
+    </ul>
+  </div>
+
+  <div class="highlight">
+    <div class="highlight-label">VOZ ASSINATURA</div>
+    <p><em>"Líderes não estão aqui para agradar. Estão aqui para transformar."</em></p>
+  </div>
+</section>
+
+<!-- IV · É / NÃO É -->
+<section class="section" id="s4">
+  <div class="section-roman">IV</div>
+  <span class="section-num">PARTE IV</span>
+  <h2 class="section-title">O Que É · O Que Não É</h2>
+  <p class="section-sub">Diferenciação por exclusão é diferenciação real.</p>
+
+  <div class="dichotomy">
+    <div class="dicho-side dicho-is">
+      <div class="dicho-label">✓ ALPHA É</div>
+      <ul>
+        <li>Ambiente, não audiência</li>
+        <li>Comunidade fechada com critério, não grupo aberto</li>
+        <li>Método replicável + presença real</li>
+        <li>Pertencimento por mérito, nunca por compra</li>
+        <li>Resultado como consequência do processo</li>
+        <li>Ancestral + digital ao mesmo tempo</li>
+        <li>Sério, com padrão, com hierarquia</li>
+        <li>Casa para empreendedores e líderes em construção</li>
+        <li>Crescimento humano + crescimento de negócio</li>
+        <li>Biohacker de negócios</li>
+      </ul>
+    </div>
+    <div class="dicho-side dicho-not">
+      <div class="dicho-label">✕ ALPHA NÃO É</div>
+      <ul>
+        <li>Comunidade de conteúdo / curso digital</li>
+        <li>Mais um grupo de WhatsApp/Telegram</li>
+        <li>Pirâmide de marketing multinível raso</li>
+        <li>Promessa de enriquecimento rápido</li>
+        <li>Coach de motivação vazia</li>
+        <li>Audiência de seguidores passivos</li>
+        <li>Faculdade ou universidade tradicional</li>
+        <li>Espaço para empreendedores de alta performance que querem mais palco</li>
+        <li>Conteúdo raso para escala fácil</li>
+        <li>Lugar onde você compra acesso e pronto</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="highlight">
+    <div class="highlight-label">DIFERENCIADORES NÃO-NEGOCIÁVEIS</div>
+    <p><strong>✕</strong> Não vendemos curso <strong>—</strong> formamos líderes.</p>
+    <p><strong>✕</strong> Não prometemos resultado <strong>—</strong> entregamos as condições para quem vai buscar.</p>
+    <p><strong>✕</strong> Não somos só digitais nem só analógicos <strong>—</strong> somos os dois, com inteligência.</p>
+    <p><strong>✕</strong> Não somos só método <strong>—</strong> somos presença, exemplo e comunidade real.</p>
+    <p><strong>✕</strong> Você não está sozinho <strong>—</strong> mas o resultado depende de você.</p>
+  </div>
+</section>
+
+<!-- V · 7 PRINCÍPIOS -->
+<section class="section" id="s5">
+  <div class="section-roman">V</div>
+  <span class="section-num">PARTE V</span>
+  <h2 class="section-title">Os Sete Princípios Não-Negociáveis</h2>
+  <p class="section-sub">O que não se negocia.</p>
+
+  <div class="principles">
+    <div class="principle">
+      <div class="principle-num">01</div>
+      <div class="principle-text">
+        <h4>Padrão antes de pressa</h4>
+        <p>Velocidade sem padrão produz lixo bonito. Aqui se entrega quando está pronto — e pronto tem critério, não humor.</p>
+      </div>
+    </div>
+    <div class="principle">
+      <div class="principle-num">02</div>
+      <div class="principle-text">
+        <h4>Disciplina é privilégio</h4>
+        <p>Quem tem rotina tem liberdade. Disciplina não é se forçar a fazer — é ter clareza do benefício. Quando você enxerga o porquê, o como vira consequência.</p>
+      </div>
+    </div>
+    <div class="principle">
+      <div class="principle-num">03</div>
+      <div class="principle-text">
+        <h4>Ancestral + Digital</h4>
+        <p>Nem só tatame, nem só tela. A força do guerreiro com a alavancagem do operador digital. Uma sem a outra é metade.</p>
+      </div>
+    </div>
+    <div class="principle">
+      <div class="principle-num">04</div>
+      <div class="principle-text">
+        <h4>Resultado é consequência</h4>
+        <p>Não perseguimos número — focamos no processo. O processo nos transforma na pessoa que precisamos ser, e essa pessoa naturalmente alcança os resultados.</p>
+      </div>
+    </div>
+    <div class="principle">
+      <div class="principle-num">05</div>
+      <div class="principle-text">
+        <h4>Matilha, nunca solidão</h4>
+        <p>A força individual sustentada por convivência real. Resultado solo não escala. A matilha avança junta — cada um cumpre seu papel.</p>
+      </div>
+    </div>
+    <div class="principle">
+      <div class="principle-num">06</div>
+      <div class="principle-text">
+        <h4>Verdade antes de venda</h4>
+        <p>Capital de confiança é permanente. Vender é consequência de verdade. Verdade sem vender ainda gera respeito — venda sem verdade queima reputação.</p>
+      </div>
+    </div>
+    <div class="principle">
+      <div class="principle-num">07</div>
+      <div class="principle-text">
+        <h4>Mérito, nunca atalho</h4>
+        <p>Subir tem critério. Pertencer tem critério. Os Alphas não são naturalmente melhores — são os que se esforçaram para estar entre os melhores.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VI · GOVERNANÇA -->
+<section class="section" id="s6">
+  <div class="section-roman">VI</div>
+  <span class="section-num">PARTE VI</span>
+  <h2 class="section-title">Governança Cultural · Os Sete Pilares</h2>
+  <p class="section-sub">A cultura é mantida pela governança — não pela boa vontade.</p>
+
+  <div class="cards grid-2">
+    <div class="card"><div class="card-label">PILAR 01</div><div class="card-title">Critério de entrada</div><div class="card-text">Quem entra é selecionado, não cobrado pela mensalidade. Critério explícito, aplicado por humanos, não por algoritmo.</div></div>
+    <div class="card"><div class="card-label">PILAR 02</div><div class="card-title">Padrão de convivência</div><div class="card-text">Comportamentos não-negociáveis. O que se faz, o que não se faz. Aplicado a todos, sem exceção.</div></div>
+    <div class="card"><div class="card-label">PILAR 03</div><div class="card-title">Hierarquia de mérito</div><div class="card-text">4 níveis (Iniciante, Caçador, Líder, Alpha). Subir tem critério. Reconhecer tem ritual.</div></div>
+    <div class="card"><div class="card-label">PILAR 04</div><div class="card-title">Consequência clara</div><div class="card-text">O que acontece quando alguém quebra o padrão. Sem essa clareza, padrão vira sugestão.</div></div>
+    <div class="card"><div class="card-label">PILAR 05</div><div class="card-title">Ritual e cadência</div><div class="card-text">Encontros que mantêm o calor da convivência viva. Sem ritmo, comunidade morre.</div></div>
+    <div class="card"><div class="card-label">PILAR 06</div><div class="card-title">Linguagem própria</div><div class="card-text">Vocabulário, símbolos, frases. Quem é da casa fala como a casa fala. Identidade verbal cria pertencimento.</div></div>
+    <div class="card"><div class="card-label">PILAR 07</div><div class="card-title">Manutenção viva</div><div class="card-text">A cultura não é um documento que existe — é uma prática que se aplica todos os dias por alguém com autoridade clara.</div></div>
+  </div>
+
+  <div class="highlight">
+    <div class="highlight-label">REGRA CENTRAL</div>
+    <p><strong>Cultura &gt; Founder.</strong> A casa não pode depender de Eduardo estar presente. Os Líderes da matilha sustentam o padrão. Quando a cultura é forte, ela se reproduz mesmo na ausência do fundador.</p>
+  </div>
+</section>
+
+<!-- VII · FRAMEWORKS -->
+<section class="section" id="s7">
+  <div class="section-roman">VII</div>
+  <span class="section-num">PARTE VII</span>
+  <h2 class="section-title">Os Frameworks Alpha</h2>
+  <p class="section-sub">Modelos mentais nomeados. Patrimônio canônico.</p>
+
+  <table class="tbl">
+    <thead>
+      <tr><th style="width:8%">#</th><th style="width:30%">Framework</th><th style="width:42%">Função estratégica</th><th style="width:20%">Aplicação</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="gold">F1</td><td><strong>5 Vetores de Otimização</strong></td><td>Modelo sistêmico de negócio: Produto · Método · Comunidade · Mentalidade · Execução. Todos funcionando em sinfonia.</td><td>Diagnóstico de negócio</td></tr>
+      <tr><td class="gold">F2</td><td><strong>3 Pilares Alpha</strong></td><td>Trinity organizacional: Estratégia (Inteligência) · Humanidade (Conexão) · Execução (Resultado).</td><td>DNA da marca</td></tr>
+      <tr><td class="gold">F3</td><td><strong>7 Princípios Não-Negociáveis</strong></td><td>Código moral + filtro de cliente. Sistema fechado de respostas para qualquer objeção.</td><td>Filtro cultural</td></tr>
+      <tr><td class="gold">F4</td><td><strong>4 Níveis da Matilha</strong></td><td>Hierarquia por mérito: Iniciante → Caçador → Líder → Alpha. Gamificação adulta.</td><td>Operação da comunidade</td></tr>
+      <tr><td class="gold">F5</td><td><strong>5 Sistemas Vivos</strong></td><td>Operação real: Onboarding · Cadência · Mentoria · Tráfego/IA · Ritual.</td><td>Estrutura operacional</td></tr>
+      <tr><td class="gold">F6</td><td><strong>3 Arquétipos</strong></td><td>Personalidade institucional: Guerreiro · Sábio · Explorador.</td><td>Tom de voz e marca</td></tr>
+    </tbody>
+  </table>
+
+  <div class="highlight">
+    <div class="highlight-label">INSIGHT ESTRATÉGICO</div>
+    <p>Você tem <strong>6 frameworks nomeados e estruturados</strong>. A maioria dos players de mercado tem 1 ou 2. <strong>Os 6 podem ser amarrados em um mega-framework</strong> — "O Método Eduardo Ferreira" — onde F1 é diagnóstico, F3 é código, F4-F5 é operação, F2-F6 é alma. Hoje estão dispersos. Amarrados, viram patrimônio defensável.</p>
+  </div>
+</section>
+
+<!-- VIII · AUDIÊNCIA -->
+<section class="section" id="s8">
+  <div class="section-roman">VIII</div>
+  <span class="section-num">PARTE VIII</span>
+  <h2 class="section-title">Audiência · O Avatar Alpha</h2>
+  <p class="section-sub">Para quem isto existe.</p>
+
+  <div class="prose">
+    <p>Homem ou mulher entre <strong>28 e 48 anos</strong> que já provou que consegue executar — mas sente que está executando sozinho, sem método claro, sem um teto de vidro identificado.</p>
+    <p>Já investiu em cursos. Já tentou comunidades genéricas. Já leu os livros certos. <strong>O que falta não é mais informação — é ambiente, padrão e rota.</strong></p>
+  </div>
+
+  <div class="manifesto">
+    <p><em>"Eu não preciso de mais um curso. Preciso de um lugar que me impulsione tanto que minha única opção seja crescer."</em></p>
+  </div>
+
+  <h3 style="font-family:'Bodoni Moda',serif;font-size:1.4rem;color:var(--white);margin:32px 0 16px">Sinais de pertencimento</h3>
+  <div class="prose">
+    <ul>
+      <li>Tem <strong>disciplina pessoal</strong> — treina, lê, cuida da rotina mesmo quando ninguém está olhando</li>
+      <li>Já fatura ou está construindo — empreendedor, líder, profissional liberal, marketing de relacionamento consciente</li>
+      <li><strong>Cansou do raso</strong> — quer profundidade, comunidade real, mentor com vivência</li>
+      <li>Valoriza método — não acredita em sorte, acredita em sistema repetível</li>
+      <li>Quer construir legado — não viralizar, não aparecer, mas <em>permanecer</em></li>
+    </ul>
+  </div>
+
+  <div class="highlight">
+    <div class="highlight-label">QUEM NÃO É AVATAR</div>
+    <p>Empreendedor de alta performance que já tem método e só quer palco. Pessoa que quer audiência, não comunidade. Quem busca enriquecimento rápido. Quem rejeita disciplina. Quem confunde compra com pertencimento.</p>
+  </div>
+</section>
+
+<!-- IX · MATILHA -->
+<section class="section" id="s9">
+  <div class="section-roman">IX</div>
+  <span class="section-num">PARTE IX</span>
+  <h2 class="section-title">Estrutura da Matilha · 4 Níveis</h2>
+  <p class="section-sub">Toda matilha tem ordem natural. Aqui não é diferente.</p>
+
+  <div class="cards grid-4">
+    <div class="card">
+      <div class="card-label">I · ENTRADA</div>
+      <div class="card-title">Iniciante</div>
+      <div class="card-text">Acabou de chegar. Aprende observando. Pergunta antes de afirmar. <strong>Disciplina diária é o passaporte.</strong></div>
+    </div>
+    <div class="card">
+      <div class="card-label">II · OPERADOR</div>
+      <div class="card-title">Caçador</div>
+      <div class="card-text">Já fatura, já executa o método. Foco é repetição e consistência. A primeira matilha de mil.</div>
+    </div>
+    <div class="card">
+      <div class="card-label">III · LÍDER DE MATILHA</div>
+      <div class="card-title">Líder</div>
+      <div class="card-text">Conduz outros, dá aulas, treina, replica método e mantém padrão. <strong>Multiplica resultado sem perder identidade.</strong> Reconhecido e útil a toda a comunidade.</div>
+    </div>
+    <div class="card">
+      <div class="card-label">IV · MENTOR MAIOR</div>
+      <div class="card-title">Alpha</div>
+      <div class="card-text">Forma novos Líderes. Define direção. Carrega o padrão da marca. <strong>Há um Alpha. Há uma ordem.</strong> E todos se beneficiam dela.</div>
+    </div>
+  </div>
+
+  <div class="prose" style="margin-top:32px">
+    <p>Cada nível tem <strong>critério claro, papel definido e responsabilidade própria</strong>. Os Alphas não são naturalmente melhores — são os que se esforçaram para estar entre os melhores. Você não precisa ser o melhor, precisa querer evoluir para estar. <em>Subir é mérito — nunca atalho.</em></p>
+  </div>
+
+  <div class="highlight">
+    <div class="highlight-label">CONVOCAÇÃO</div>
+    <p>Será você um dos líderes dessa matilha? <strong>Quem é, não precisa dizer que é.</strong> A matilha reconhece pela postura, pela entrega, pela consistência. Os próximos líderes estão entre nós — ou prestes a chegar.</p>
+  </div>
+</section>
+
+<!-- X · 5 SISTEMAS -->
+<section class="section" id="s10">
+  <div class="section-roman">X</div>
+  <span class="section-num">PARTE X</span>
+  <h2 class="section-title">Os Cinco Sistemas Vivos</h2>
+  <p class="section-sub">A Comunidade Alpha não é um curso, nem um grupo. É um conjunto de sistemas integrados — cada um com função, ritmo e um responsável.</p>
+
+  <div class="cards grid-2">
+    <div class="card">
+      <div class="card-label">01</div>
+      <div class="card-title">Onboarding</div>
+      <div class="card-text">Ritual de entrada. Quem chega entende imediatamente <strong>o padrão, a linguagem e o próximo passo concreto.</strong></div>
+    </div>
+    <div class="card">
+      <div class="card-label">02</div>
+      <div class="card-title">Cadência</div>
+      <div class="card-text">Reuniões semanais, sprints mensais, encontros presenciais trimestrais. <strong>Ritmo é o que separa comunidade viva de grupo morto.</strong></div>
+    </div>
+    <div class="card">
+      <div class="card-label">03</div>
+      <div class="card-title">Mentoria</div>
+      <div class="card-text">Os Líderes mentoram os Caçadores. Os Caçadores acolhem os Iniciantes. <strong>Cada nível ensina o que já viveu</strong> — ninguém ensina o que não praticou.</div>
+    </div>
+    <div class="card">
+      <div class="card-label">04</div>
+      <div class="card-title">Tráfego & IA</div>
+      <div class="card-text">Tráfego pago, automações, scripts, agentes. A camada digital — escala sem perder identidade.</div>
+    </div>
+    <div class="card" style="grid-column:span 2">
+      <div class="card-label">05</div>
+      <div class="card-title">Ritual</div>
+      <div class="card-text">Cerimônias de subida de nível, encontros marcantes, simbologia compartilhada. <strong>O que separa uma comunidade de um grupo</strong> é a presença de rituais com significado.</div>
+    </div>
+  </div>
+
+  <div class="highlight">
+    <div class="highlight-label">LÓGICA OPERACIONAL</div>
+    <p><strong>Sistemas vivem porque pessoas mantêm. Pessoas mantêm porque o método é claro. Método é claro porque tudo está documentado</strong> — começando pelo brandbook canônico.</p>
+  </div>
+</section>
+
+<!-- XI · IDENTIDADE VISUAL -->
+<section class="section" id="s11">
+  <div class="section-roman">XI</div>
+  <span class="section-num">PARTE XI</span>
+  <h2 class="section-title">Identidade Visual Oficial</h2>
+  <p class="section-sub">Cada cor foi escolhida com intenção. Não é decoração — é linguagem.</p>
+
+  <h3 style="font-family:'Bodoni Moda',serif;font-size:1.3rem;color:var(--white);margin-bottom:16px">Paleta de cores</h3>
+  <div class="swatches">
+    <div class="swatch">
+      <div class="swatch-color" style="background:#0D1F2D"></div>
+      <h4>Azul Militar</h4>
+      <div class="hex">#0D1F2D</div>
+      <p>Fundo principal · autoridade institucional</p>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#C8A951"></div>
+      <h4>Dourado</h4>
+      <div class="hex">#C8A951</div>
+      <p>O fio condutor. <strong>"Onde houver Alpha, haverá #C8A951."</strong></p>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#F5F0E6"></div>
+      <h4>Creme</h4>
+      <div class="hex">#F5F0E6</div>
+      <p>Fundos claros · contraste suave</p>
+    </div>
+  </div>
+
+  <h3 style="font-family:'Bodoni Moda',serif;font-size:1.3rem;color:var(--white);margin:32px 0 16px">Tipografia · "Opção 02 · O Contraste"</h3>
+  <div class="fonts">
+    <div class="font-card">
+      <div class="fc-role">DISPLAY · TÍTULOS</div>
+      <div class="fc-sample bodoni">MODERNOS</div>
+      <div class="fc-name">Bodoni Moda</div>
+      <div class="fc-detail">Peso 900 · contraste máximo didone · autoridade editorial premium</div>
+    </div>
+    <div class="font-card">
+      <div class="fc-role">BODY · TEXTO CORRIDO</div>
+      <div class="fc-sample jakarta">Ancestrais no caráter.</div>
+      <div class="fc-name">Plus Jakarta Sans</div>
+      <div class="fc-detail">Pesos 400/600/800 · geométrico moderno · alta legibilidade</div>
+    </div>
+    <div class="font-card">
+      <div class="fc-role">ACCENT · LABELS · CTA</div>
+      <div class="fc-sample bebas">JUNTE-SE AGORA</div>
+      <div class="fc-name">Bebas Neue</div>
+      <div class="fc-detail">Condensado uppercase · ancoragem de impacto</div>
+    </div>
+  </div>
+
+  <h3 style="font-family:'Bodoni Moda',serif;font-size:1.3rem;color:var(--white);margin:32px 0 16px">Símbolo · O Lobo</h3>
+  <div class="prose">
+    <p>Cabeça de frente. Olhar direto. Geometria moderna, atemporal — traço bold, visível em qualquer tamanho, de 16px a outdoor.</p>
+    <ul>
+      <li><strong>Liderança coletiva</strong> — a matilha avança unida, cada um cumpre seu papel</li>
+      <li><strong>Hierarquia</strong> — há um Alpha, há uma ordem, e todos se beneficiam dela</li>
+      <li><strong>Força funcional</strong> — não decorativa. Força que serve, que protege, que avança</li>
+      <li><strong>Presença</strong> — olhar direto, não desvia. Transmite segurança e intenção</li>
+    </ul>
+    <p><strong>Nunca uivando</strong> (uivar remete à solidão, contradiz a matilha). <strong>Nunca cartoon</strong> (geométrico, escultural — nunca ilustrativo). Tipografia do logo em estilo Cinzel (clássico romano), em dourado sobre azul militar.</p>
+  </div>
+
+  <div class="highlight">
+    <div class="highlight-label">DECISÕES VISUAIS REGISTRADAS</div>
+    <p>✓ <strong>Escolhida:</strong> Opção 02 "O Contraste" — Bodoni Moda + Plus Jakarta Sans + Bebas Neue · Paleta Azul Militar + Dourado #C8A951 + Creme #F5F0E6</p>
+    <p>✕ <strong>Descartadas:</strong> Verde Floresta + Ouro (brandbook antigo) · Castanho + Bronze (Terra Profunda) · Cinzel como display principal · Cormorant Garamond no corpo · Inter no corpo</p>
+  </div>
+</section>
+
+<!-- XII · HIERARQUIA -->
+<section class="section" id="s12">
+  <div class="section-roman">XII</div>
+  <span class="section-num">PARTE XII</span>
+  <h2 class="section-title">Hierarquia de Marcas</h2>
+  <p class="section-sub">Ecossistema, Comunidade, Hunters · ordem canônica.</p>
+
+  <table class="tbl">
+    <thead>
+      <tr><th style="width:25%">Nível</th><th style="width:25%">Marca</th><th style="width:50%">Função</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Topo · guarda-chuva</strong></td><td class="gold">Ecossistema Alpha</td><td>Marca-mãe institucional. Aparece em assinaturas formais, eyebrows de documentos. Pequena, sutil, acima.</td></tr>
+      <tr><td><strong>Foco atual (NOW)</strong></td><td class="gold">Comunidade Alpha</td><td>O produto central agora. Para onde toda energia e construção convergem. Grande, na base, óbvia.</td></tr>
+      <tr><td><strong>Vertical de Negócios</strong></td><td>Alpha Hunters</td><td>Sub-comunidade ou produto específico de marketing de relacionamento / vendas. Já em formação.</td></tr>
+      <tr><td><strong>Vertical de Saúde</strong></td><td>Alpha Performance (provisório)</td><td>Vertical paralelo baseado nos 250 vídeos não-transcritos. Cross-sell natural com Comunidade Alpha.</td></tr>
+      <tr><td><strong>Veículo Digital</strong></td><td>Matrix</td><td>Plataforma de IA. <strong>Matrix é veículo, Alpha é casa.</strong> Matrix se alimenta do corpus Alpha.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="highlight">
+    <div class="highlight-label">REGRA CANÔNICA</div>
+    <p><strong>Nunca inverter a hierarquia.</strong> Ecossistema fica acima, pequeno. Comunidade Alpha fica na base, grande. Hunters e outros são satélites. Matrix é instrumento — não substitui Alpha.</p>
+  </div>
+</section>
+
+<!-- XIII · BRANDBOOKS -->
+<section class="section" id="s13">
+  <div class="section-roman">XIII</div>
+  <span class="section-num">PARTE XIII</span>
+  <h2 class="section-title">Brandbooks por Nível de Acesso</h2>
+  <p class="section-sub">Quatro níveis de confidencialidade. Cada um para um público.</p>
+
+  <div class="cards grid-2">
+    <div class="card">
+      <div class="card-label">BB1 · CONFIDENCIAL</div>
+      <div class="card-title">Pessoal Eduardo</div>
+      <div class="card-text">Projeções financeiras pessoais, história íntima, decisões privadas, contas, planos não-públicos. <strong>Apenas Eduardo.</strong></div>
+    </div>
+    <div class="card">
+      <div class="card-label">BB2 · RESTRITO</div>
+      <div class="card-title">Sócios</div>
+      <div class="card-text">Estratégia compartilhada, planos de longo prazo, números do negócio, decisões estratégicas. <strong>Apenas Eduardo + sócios diretos (incluindo Lucas Araújo).</strong></div>
+    </div>
+    <div class="card">
+      <div class="card-label">BB3 · INTERNO</div>
+      <div class="card-title">Equipe próxima</div>
+      <div class="card-text">Marca aplicada, operação, padrões, como executar. <strong>Eduardo + sócios + equipe de execução.</strong> Não circula fora.</div>
+    </div>
+    <div class="card">
+      <div class="card-label">BB4 · INSTRUMENTAL</div>
+      <div class="card-title">Matrix · Argumentos</div>
+      <div class="card-text">Posicionamento, narrativa, copy, argumentos de venda do Matrix. <strong>Usado para alimentar o veículo digital.</strong></div>
+    </div>
+  </div>
+</section>
+
+<!-- XIV · ATIVOS -->
+<section class="section" id="s14">
+  <div class="section-roman">XIV</div>
+  <span class="section-num">PARTE XIV</span>
+  <h2 class="section-title">Ativos Patrimoniais</h2>
+  <p class="section-sub">O que existe que ninguém pode copiar.</p>
+
+  <div class="cards grid-3">
+    <div class="card">
+      <div class="card-label">CORPUS</div>
+      <div class="card-title">600 horas de IP</div>
+      <div class="card-text"><strong>350 vídeos transcritos</strong> em txt (negócios) · <strong>250 não transcritos</strong> (saúde/performance) · 10 anos de produção contínua. Ativo único e defensável.</div>
+    </div>
+    <div class="card">
+      <div class="card-label">BIOGRAFIA</div>
+      <div class="card-title">Capital simbólico raro</div>
+      <div class="card-text">AMAN (5 anos internato) · 10 anos de judô em alta performance · biohacker · <strong>R$500k+ investidos em educação real.</strong></div>
+    </div>
+    <div class="card">
+      <div class="card-label">BRANDBOOK</div>
+      <div class="card-title">28 páginas canônicas</div>
+      <div class="card-text">Identidade, princípios, hierarquia formalizadas. Falta o "carne" tático — que vem dos 350 .txt.</div>
+    </div>
+    <div class="card">
+      <div class="card-label">IP NOMEADO</div>
+      <div class="card-title">6 frameworks</div>
+      <div class="card-text">5 Vetores · 3 Pilares · 7 Princípios · 4 Níveis · 5 Sistemas · 3 Arquétipos. <strong>Maturidade conceitual rara.</strong></div>
+    </div>
+    <div class="card">
+      <div class="card-label">REDE</div>
+      <div class="card-title">Aliança ativa</div>
+      <div class="card-text">Eduardo × Lucas Araújo · sócios da Alpha · Matrix em formação. Alavancagem pronta para usar.</div>
+    </div>
+    <div class="card">
+      <div class="card-label">COMUNIDADE</div>
+      <div class="card-title">Alpha em construção</div>
+      <div class="card-text">Modelo definido (4 níveis, 5 sistemas), avatar mapeado, fundação ideológica clara. <strong>Falta operação ao vivo.</strong></div>
+    </div>
+  </div>
+
+  <h3 style="font-family:'Bodoni Moda',serif;font-size:1.3rem;color:var(--white);margin:32px 0 16px">As 7 camadas de valor dentro do corpus</h3>
+  <div class="cards grid-2">
+    <div class="card"><div class="card-label">01</div><div class="card-title">Frameworks proprietários</div><div class="card-text">Modelos mentais já criados e testados — provavelmente nem sabe quantos.</div></div>
+    <div class="card"><div class="card-label">02</div><div class="card-title">Linguagem original</div><div class="card-text">Voz exata, vocabulário, ritmo, analogias recorrentes.</div></div>
+    <div class="card"><div class="card-label">03</div><div class="card-title">Histórias</div><div class="card-text">Cases reais, exemplos, narrativas testadas.</div></div>
+    <div class="card"><div class="card-label">04</div><div class="card-title">Evolução de pensamento</div><div class="card-text">10 anos = ver acertos, mudanças, amadurecimento.</div></div>
+    <div class="card"><div class="card-label">05</div><div class="card-title">Perguntas reais</div><div class="card-text">Toda dúvida ouvida, toda objeção respondida.</div></div>
+    <div class="card"><div class="card-label">06</div><div class="card-title">Conhecimento técnico</div><div class="card-text">O "como fazer" em cima de cada tema.</div></div>
+    <div class="card" style="grid-column:span 2"><div class="card-label">07</div><div class="card-title">Personalidade institucional</div><div class="card-text">O tom de voz que vira marca defensável.</div></div>
+  </div>
+</section>
+
+<!-- XV · INIMIGOS / COMPARATIVO -->
+<section class="section" id="s15">
+  <div class="section-roman">XV</div>
+  <span class="section-num">PARTE XV</span>
+  <h2 class="section-title">Inimigos e Comparativo</h2>
+  <p class="section-sub">Toda marca forte tem inimigos. Toda marca clara tem comparativo.</p>
+
+  <h3 style="font-family:'Bodoni Moda',serif;font-size:1.3rem;color:var(--white);margin-bottom:16px">Adversários implícitos</h3>
+  <div class="cards grid-2">
+    <div class="card"><div class="card-label">INIMIGO 01</div><div class="card-title">O guru digital genérico</div><div class="card-text">Promessa fácil, conteúdo raso, vende esperança. Alpha é o oposto: padrão alto, suporte real, sem promessa vazia.</div></div>
+    <div class="card"><div class="card-label">INIMIGO 02</div><div class="card-title">O MMN/relacionamento raso</div><div class="card-text">Foco em recrutamento, não em formação. Alpha é marketing de relacionamento consciente — forma líderes, não vende sonhos.</div></div>
+    <div class="card"><div class="card-label">INIMIGO 03</div><div class="card-title">O coach de motivação vazia</div><div class="card-text">Emoção sem método. Alpha tem emoção COM método — vivência antes de ensinar.</div></div>
+    <div class="card"><div class="card-label">INIMIGO 04</div><div class="card-title">A comunidade de conteúdo</div><div class="card-text">Audiência passiva consumindo posts. Alpha é ambiente ativo de transformação real, com hierarquia e mérito.</div></div>
+  </div>
+
+  <h3 style="font-family:'Bodoni Moda',serif;font-size:1.3rem;color:var(--white);margin:32px 0 16px">Alpha × Outros</h3>
+  <table class="tbl">
+    <thead>
+      <tr><th>Critério</th><th>Universidade tradicional</th><th>Curso digital / Comunidade de conteúdo</th><th class="gold" style="color:var(--gold)">Comunidade Alpha</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Foco</td><td>Conhecimento teórico</td><td>Conteúdo escalável</td><td><strong>Transformação real</strong></td></tr>
+      <tr><td>Padrão de entrada</td><td>Vestibular</td><td>Cartão de crédito</td><td><strong>Mérito + critério</strong></td></tr>
+      <tr><td>Hierarquia</td><td>Notas / formaturas</td><td>Inexistente</td><td><strong>4 níveis claros</strong></td></tr>
+      <tr><td>Resultado prometido</td><td>Diploma</td><td>"Acesso vitalício"</td><td><strong>Você se torna alguém</strong></td></tr>
+      <tr><td>Comunidade real</td><td>Limitada ao campus</td><td>Grupo de WhatsApp</td><td><strong>Matilha com rituais</strong></td></tr>
+      <tr><td>Mentor</td><td>Professor distante</td><td>Influenciador inacessível</td><td><strong>Líder que viveu o caminho</strong></td></tr>
+      <tr><td>Duração da relação</td><td>4-6 anos</td><td>30 dias a 1 ano</td><td><strong>Permanente, por mérito</strong></td></tr>
+    </tbody>
+  </table>
+
+  <div class="highlight">
+    <div class="highlight-label">POSICIONAMENTO ÚNICO</div>
+    <p>A Comunidade Alpha <strong>não compete com universidades</strong> (jogo diferente). Não compete com cursos digitais (categoria diferente). Não compete com comunidades de conteúdo (proposta oposta). <strong>Cria sua própria categoria.</strong></p>
+  </div>
+</section>
+
+<!-- XVI · DIRETRIZES -->
+<section class="section" id="s16">
+  <div class="section-roman">XVI</div>
+  <span class="section-num">PARTE XVI</span>
+  <h2 class="section-title">Diretrizes Permanentes</h2>
+  <p class="section-sub">Regras canônicas que não voltam para discussão.</p>
+
+  <div class="cards grid-2">
+    <div class="card">
+      <div class="card-label">DIRETRIZ 01</div>
+      <div class="card-title">"Marketing de relacionamento", nunca "multinível"</div>
+      <div class="card-text">Substituição global na linguagem da Alpha. <strong>"MMN" carrega estigma de pirâmide</strong>; "relacionamento" carrega o que é real: construção de rede via conexão.</div>
+    </div>
+    <div class="card">
+      <div class="card-label">DIRETRIZ 02</div>
+      <div class="card-title">Voz recalibrada · sem militarização excessiva</div>
+      <div class="card-text">Disciplina é mostrada pela consequência, não pela bandeira. Tom é de <strong>ambiente e convivência</strong>, não de cobrança militar. AMAN é raiz, não constante.</div>
+    </div>
+    <div class="card">
+      <div class="card-label">DIRETRIZ 03</div>
+      <div class="card-title">Cultura &gt; Founder</div>
+      <div class="card-text">A casa não pode depender de Eduardo estar presente. <strong>Líderes da matilha sustentam o padrão.</strong> Cultura forte se reproduz sozinha.</div>
+    </div>
+    <div class="card">
+      <div class="card-label">DIRETRIZ 04</div>
+      <div class="card-title">Alpha é casa · Matrix é veículo</div>
+      <div class="card-text">Matrix é instrumento digital que alimenta a Alpha — nunca o inverso. <strong>Sem corpus Alpha, Matrix é genérico.</strong></div>
+    </div>
+    <div class="card">
+      <div class="card-label">DIRETRIZ 05</div>
+      <div class="card-title">PH no Alpha é sagrado</div>
+      <div class="card-text">Sempre "<strong>Alpha</strong>", nunca "Alfa". É legado militar, não estilo. Quem grafa errado não é da casa.</div>
+    </div>
+    <div class="card">
+      <div class="card-label">DIRETRIZ 06</div>
+      <div class="card-title">Hierarquia de marcas</div>
+      <div class="card-text">Ecossistema (topo, sutil) → Comunidade Alpha (foco NOW) → Hunters e outros. <strong>Nunca inverter.</strong></div>
+    </div>
+  </div>
+</section>
+
+<!-- XVII · DECISÕES -->
+<section class="section" id="s17">
+  <div class="section-roman">XVII</div>
+  <span class="section-num">PARTE XVII</span>
+  <h2 class="section-title">Decisões Tomadas e Pendências</h2>
+  <p class="section-sub">O que está fechado e o que ainda precisa decisão.</p>
+
+  <h3 style="font-family:'Bodoni Moda',serif;font-size:1.3rem;color:var(--white);margin-bottom:16px">Já decidido (canônico)</h3>
+  <div class="prose">
+    <ul>
+      <li><strong>Tipografia oficial:</strong> Bodoni Moda + Plus Jakarta Sans + Bebas Neue (Opção 02 · O Contraste)</li>
+      <li><strong>Paleta oficial:</strong> Azul Militar #0D1F2D + Dourado #C8A951 + Creme #F5F0E6</li>
+      <li><strong>Hierarquia de marcas:</strong> Ecossistema → Comunidade Alpha (foco) → Hunters + outros</li>
+      <li><strong>Linguagem:</strong> "marketing de relacionamento", nunca "multinível"</li>
+      <li><strong>Voz:</strong> recalibrada, sem militarização excessiva</li>
+      <li><strong>Pasta da estratégia do corpus:</strong> sugerida como DOUTRINA no topo do Cérebro Operacional</li>
+      <li><strong>Caminho estratégico:</strong> A (IA/Matrix primeiro) + parte do C (biblioteca interna Alpha)</li>
+    </ul>
+  </div>
+
+  <h3 style="font-family:'Bodoni Moda',serif;font-size:1.3rem;color:var(--white);margin:32px 0 16px">Decisões pendentes</h3>
+  <div class="cards grid-2">
+    <div class="card">
+      <div class="card-label">PENDÊNCIA 01</div>
+      <div class="card-title">Localização dos 350 .txt</div>
+      <div class="card-text">Onde estão fisicamente? Pasta · Drive · Pendrive · Notion? Em que formato? <strong>Gargalo único de toda execução.</strong></div>
+    </div>
+    <div class="card">
+      <div class="card-label">PENDÊNCIA 02</div>
+      <div class="card-title">Confirmação do nome canônico</div>
+      <div class="card-text">DOUTRINA · LEGADO · ACERVO · CÂNONE — qual nome leva o projeto de extração do corpus?</div>
+    </div>
+    <div class="card">
+      <div class="card-label">PENDÊNCIA 03</div>
+      <div class="card-title">Transcrição dos 250 de saúde</div>
+      <div class="card-text">Faz no mesmo padrão? Quando? <strong>Sugestão atual:</strong> fica para a Fase 2, depois dos 350 indexados.</div>
+    </div>
+    <div class="card">
+      <div class="card-label">PENDÊNCIA 04</div>
+      <div class="card-title">Validação dos números do Matrix</div>
+      <div class="card-text">Pendente verificação com Lucas Araújo.</div>
+    </div>
+    <div class="card">
+      <div class="card-label">PENDÊNCIA 05</div>
+      <div class="card-title">Preenchimento dos BB1–BB4</div>
+      <div class="card-text">Brandbooks por nível precisam de conteúdo real. Cada nível tem público diferente.</div>
+    </div>
+    <div class="card">
+      <div class="card-label">PENDÊNCIA 06</div>
+      <div class="card-title">Vídeo institucional / PDF clicável</div>
+      <div class="card-text">Materiais de boas-vindas para sócios e primeiros membros.</div>
+    </div>
+  </div>
+
+  <div class="highlight" style="margin-top:32px">
+    <div class="highlight-label">⚠ GARGALO ÚNICO</div>
+    <p><strong>Sem indexar os 350 .txt, nenhuma das prioridades acima avança de verdade.</strong> 9 prioridades estratégicas dependem do mesmo pré-requisito técnico.</p>
+    <p style="color:var(--gold-l)"><em>1 ação destrava 9. Esse é o tipo de alavancagem que muda o jogo.</em></p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-brand">COMUNIDADE ALPHA · AUDACE FORTUNA SEQUITUR</div>
+  <p>Documento original · síntese canônica de tudo enviado na sessão · 2026-05-19</p>
+  <p>Organizado por Claude sem influência de squads externos · Identidade visual oficial aplicada</p>
+</footer>
+
+</body>
+</html>

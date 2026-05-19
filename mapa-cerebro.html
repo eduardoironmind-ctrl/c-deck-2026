@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mapa do Cérebro Operacional · Comunidade Alpha</title>
+<style>
+  :root {
+    --verde: #1a3a2a;
+    --verde-med: #2d5a40;
+    --ouro: #c9932a;
+    --ouro-claro: #e8b84b;
+    --creme: #f5f0e8;
+    --carvao: #1e1e1e;
+    --cinza: #6b7280;
+    --vermelho: #c0392b;
+    --azul: #2563eb;
+    --roxo: #7c3aed;
+    --card-bg: #ffffff;
+    --borda: #e5e7eb;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--creme); font-family: 'Segoe UI', system-ui, sans-serif; color: var(--carvao); }
+
+  header {
+    background: var(--verde);
+    color: white;
+    padding: 24px 32px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  header h1 { font-size: 1.4rem; font-weight: 700; letter-spacing: -0.02em; }
+  header span { font-size: 0.85rem; opacity: 0.7; }
+
+  .tabs {
+    background: var(--verde-med);
+    display: flex; gap: 4px; padding: 8px 32px 0;
+  }
+  .tab {
+    padding: 10px 20px; border-radius: 8px 8px 0 0;
+    color: rgba(255,255,255,0.6); cursor: pointer; font-size: 0.9rem; font-weight: 600;
+    border: none; background: transparent; transition: all .2s;
+  }
+  .tab.active { background: var(--creme); color: var(--verde); }
+  .tab:hover:not(.active) { color: white; background: rgba(255,255,255,0.1); }
+
+  .page { display: none; padding: 32px; max-width: 1200px; margin: 0 auto; }
+  .page.active { display: block; }
+
+  /* ALERTAS */
+  .alert-bar {
+    background: #fff3cd; border: 1px solid #ffc107; border-radius: 10px;
+    padding: 14px 20px; margin-bottom: 24px; display: flex; align-items: center; gap: 12px;
+    font-size: 0.9rem;
+  }
+  .alert-bar.red { background: #fde8e8; border-color: var(--vermelho); }
+
+  /* GRID DE BLOCOS */
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 20px; margin-bottom: 32px; }
+  .card {
+    background: white; border-radius: 14px; border: 1.5px solid var(--borda);
+    overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .card-head {
+    padding: 14px 18px; display: flex; align-items: center; gap: 10px;
+    border-bottom: 1px solid var(--borda);
+  }
+  .card-head .icon { font-size: 1.3rem; }
+  .card-head h3 { font-size: 0.95rem; font-weight: 700; flex: 1; }
+  .badge {
+    font-size: 0.7rem; font-weight: 700; padding: 3px 8px; border-radius: 99px;
+    white-space: nowrap;
+  }
+  .badge.verde { background: #dcfce7; color: #166534; }
+  .badge.amarelo { background: #fef9c3; color: #854d0e; }
+  .badge.vermelho { background: #fee2e2; color: #991b1b; }
+  .badge.cinza { background: #f3f4f6; color: #374151; }
+  .badge.roxo { background: #ede9fe; color: #5b21b6; }
+
+  .card-body { padding: 14px 18px; }
+  .file-list { list-style: none; }
+  .file-list li {
+    padding: 6px 0; font-size: 0.82rem; color: var(--cinza);
+    border-bottom: 1px solid #f3f4f6; display: flex; align-items: center; gap: 8px;
+  }
+  .file-list li:last-child { border-bottom: none; }
+  .file-list li .fi { font-size: 0.9rem; }
+  .file-list li.warn { color: #b45309; }
+  .file-list li.ok { color: #166534; }
+  .file-list li.dup { color: var(--vermelho); }
+
+  .card-actions { padding: 12px 18px; background: #fafafa; border-top: 1px solid var(--borda); display: flex; gap: 8px; flex-wrap: wrap; }
+  .btn {
+    font-size: 0.78rem; font-weight: 600; padding: 6px 14px; border-radius: 7px;
+    border: none; cursor: pointer; transition: all .15s;
+  }
+  .btn.verde { background: var(--verde); color: white; }
+  .btn.verde:hover { background: var(--verde-med); }
+  .btn.ouro { background: var(--ouro); color: white; }
+  .btn.ouro:hover { background: var(--ouro-claro); }
+  .btn.ghost { background: white; border: 1.5px solid var(--borda); color: var(--carvao); }
+  .btn.ghost:hover { background: var(--creme); }
+  .btn.danger { background: #fee2e2; color: #991b1b; }
+  .btn.danger:hover { background: #fca5a5; }
+
+  /* SEÇÃO DE PROBLEMAS */
+  .problem-list { list-style: none; }
+  .problem-list li {
+    padding: 14px 18px; border-radius: 10px; margin-bottom: 10px;
+    display: flex; align-items: flex-start; gap: 14px;
+    border: 1.5px solid;
+  }
+  .problem-list li.p-critico { background: #fde8e8; border-color: #fca5a5; }
+  .problem-list li.p-medio { background: #fff3cd; border-color: #fcd34d; }
+  .problem-list li.p-baixo { background: #eff6ff; border-color: #93c5fd; }
+  .problem-list li .icon { font-size: 1.4rem; margin-top: 2px; }
+  .problem-list li h4 { font-size: 0.9rem; font-weight: 700; margin-bottom: 4px; }
+  .problem-list li p { font-size: 0.82rem; color: #4b5563; line-height: 1.5; }
+  .problem-list li code { background: rgba(0,0,0,0.08); padding: 1px 5px; border-radius: 4px; font-family: monospace; font-size: 0.8rem; }
+
+  /* PROPOSTA DE REORGANIZAÇÃO */
+  .reorg-tree {
+    background: white; border-radius: 14px; border: 1.5px solid var(--borda);
+    padding: 24px; font-family: monospace; font-size: 0.85rem; line-height: 2;
+    margin-bottom: 24px;
+  }
+  .reorg-tree .folder { color: var(--verde); font-weight: 700; }
+  .reorg-tree .file { color: var(--cinza); }
+  .reorg-tree .new { color: var(--ouro); font-weight: 700; }
+  .reorg-tree .move { color: var(--azul); }
+  .reorg-tree .archive { color: #9ca3af; text-decoration: line-through; }
+  .reorg-tree .warn { color: var(--vermelho); }
+
+  /* DECISÕES */
+  .decision-card {
+    background: white; border-radius: 14px; border: 2px solid var(--borda);
+    padding: 20px; margin-bottom: 16px; transition: border-color .2s;
+  }
+  .decision-card:hover { border-color: var(--ouro); }
+  .decision-card h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 6px; }
+  .decision-card p { font-size: 0.84rem; color: var(--cinza); margin-bottom: 14px; line-height: 1.5; }
+  .decision-options { display: flex; gap: 8px; flex-wrap: wrap; }
+
+  .decided { border-color: #86efac !important; background: #f0fdf4; }
+  .decided-label { font-size: 0.78rem; font-weight: 700; color: #166534; padding: 3px 10px; background: #dcfce7; border-radius: 99px; }
+
+  /* MAPA VISUAL */
+  .map-container { overflow-x: auto; }
+  .map-grid {
+    display: flex; gap: 24px; padding: 8px 4px;
+    min-width: max-content;
+  }
+  .map-col { min-width: 220px; }
+  .map-col h3 { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--cinza); margin-bottom: 12px; }
+  .map-node {
+    background: white; border: 1.5px solid var(--borda); border-radius: 10px;
+    padding: 12px 14px; margin-bottom: 8px; cursor: pointer;
+    transition: all .2s;
+  }
+  .map-node:hover { border-color: var(--ouro); transform: translateX(2px); }
+  .map-node h4 { font-size: 0.85rem; font-weight: 700; margin-bottom: 3px; }
+  .map-node p { font-size: 0.75rem; color: var(--cinza); }
+  .map-node.ativo { border-color: var(--verde); border-left: 4px solid var(--verde); }
+  .map-node.atencao { border-color: #fcd34d; border-left: 4px solid #fcd34d; }
+  .map-node.problema { border-color: var(--vermelho); border-left: 4px solid var(--vermelho); }
+  .map-node.novo { border-color: var(--ouro); border-left: 4px solid var(--ouro); }
+
+  /* LEGEND */
+  .legend { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 20px; }
+  .legend-item { display: flex; align-items: center; gap: 6px; font-size: 0.78rem; font-weight: 600; }
+  .legend-dot { width: 10px; height: 10px; border-radius: 50%; }
+
+  /* TOAST */
+  #toast {
+    position: fixed; bottom: 24px; right: 24px;
+    background: var(--verde); color: white; padding: 12px 20px;
+    border-radius: 10px; font-size: 0.87rem; font-weight: 600;
+    opacity: 0; transition: opacity .3s; pointer-events: none;
+    z-index: 1000; box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  }
+  #toast.show { opacity: 1; }
+
+  /* STATUS BAR */
+  .status-bar {
+    background: var(--verde); color: white; padding: 10px 32px;
+    font-size: 0.82rem; display: flex; gap: 24px; align-items: center;
+  }
+  .status-bar span { opacity: 0.8; }
+  .status-bar strong { font-weight: 700; }
+  #decisions-count { font-weight: 700; color: var(--ouro-claro); }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>🧠 Mapa do Cérebro Operacional</h1>
+    <div style="font-size:0.82rem;opacity:0.7;margin-top:4px">Diagnóstico e reorganização · 2026-05-18</div>
+  </div>
+  <span>Comunidade Alpha · Eduardo Ferreira</span>
+</header>
+
+<div class="status-bar">
+  <span>📂 Pastas mapeadas: <strong>3 sistemas principais</strong></span>
+  <span>⚠️ Problemas encontrados: <strong>8</strong></span>
+  <span>✅ Decisões tomadas: <strong><span id="decisions-count">0</span></strong></span>
+</div>
+
+<div class="tabs">
+  <button class="tab active" onclick="showTab('diagnostico')">🔍 Diagnóstico</button>
+  <button class="tab" onclick="showTab('mapa')">🗺️ Mapa Visual</button>
+  <button class="tab" onclick="showTab('decisoes')">✅ Decisões</button>
+  <button class="tab" onclick="showTab('proposta')">🏗️ Proposta Final</button>
+</div>
+
+<!-- ============================================================ -->
+<!-- TAB 1: DIAGNÓSTICO -->
+<!-- ============================================================ -->
+<div id="diagnostico" class="page active">
+
+  <div class="alert-bar red">
+    ⚠️ <strong>8 problemas identificados</strong> — duplicatas, arquivos soltos e pastas conflitantes. Nada foi movido ainda. Você decide.
+  </div>
+
+  <h2 style="font-size:1.1rem;font-weight:700;margin-bottom:16px;color:var(--verde)">⚡ Problemas críticos (decidir primeiro)</h2>
+
+  <ul class="problem-list">
+
+    <li class="p-critico">
+      <div class="icon">🔴</div>
+      <div>
+        <h4>DUPLICATA: 2 pastas de formulários</h4>
+        <p>
+          <code>ALPHA-CENTRAL/07-FORMULARIOS-EQUIPE/</code> (criada hoje, com conteúdo novo)<br>
+          <code>COMUNIDADE-ALPHA-DIRETRIZES/FORMULARIOS-COMUNIDADE/</code> (criada em sessão anterior, conteúdo diferente)<br><br>
+          <strong>Problema:</strong> as duas têm formulários — mas com nomes e estruturas diferentes. Qual é a fonte única de verdade?
+        </p>
+      </div>
+    </li>
+
+    <li class="p-critico">
+      <div class="icon">🔴</div>
+      <div>
+        <h4>DUPLICATA: BRANDBOOKS_ALPHA_CONSOLIDADO.txt em 2 lugares</h4>
+        <p>
+          <code>Cérebro Operacional/brandsbooks alpha/BRANDBOOKS_ALPHA_CONSOLIDADO.txt</code><br>
+          <code>ALPHA-CENTRAL/01-BRANDBOOKS-TEXTO/BRANDBOOKS_ALPHA_CONSOLIDADO.txt</code><br><br>
+          <strong>Problema:</strong> se um for atualizado, o outro fica desatualizado. Qual manter?
+        </p>
+      </div>
+    </li>
+
+    <li class="p-critico">
+      <div class="icon">🔴</div>
+      <div>
+        <h4>RASCUNHO-V1 em 3 locais diferentes</h4>
+        <p>
+          <code>Desktop/COMUNIDADE-ALPHA-RASCUNHO-V1.docx</code> ← arquivo de trabalho ativo<br>
+          <code>ALPHA-CENTRAL/COMUNIDADE-ALPHA-RASCUNHO-V1.docx</code> ← cópia sincronizada hoje<br>
+          <strong>BASE-COMUNIDADE-ALPHA.docx</strong> só existe no Desktop — não está dentro de ALPHA-CENTRAL<br><br>
+          <strong>Problema:</strong> qual é o local oficial? Onde você vai abrir sempre?
+        </p>
+      </div>
+    </li>
+
+    <li class="p-medio">
+      <div class="icon">🟡</div>
+      <div>
+        <h4>Pasta "brandsbooks alpha" fora do ALPHA-CENTRAL</h4>
+        <p>
+          <code>Cérebro Operacional/brandsbooks alpha/</code> contém os brandbooks originais (PDFs, DOCX, PPTX, HTMLs, markdowns).<br>
+          Deveria estar dentro de <code>ALPHA-CENTRAL/</code> — ou é arquivo histórico para arquivar?<br><br>
+          Contém: 8 DOCXs de brandbook, PDFs, editores interativos, HTMLs originais.
+        </p>
+      </div>
+    </li>
+
+    <li class="p-medio">
+      <div class="icon">🟡</div>
+      <div>
+        <h4>Arquivos soltos na raiz do Cérebro Operacional</h4>
+        <p>
+          Arquivos sem pasta:
+          <code>Briefing_Hunters_Resumo.docx</code> · <code>Briefing_Hunters_Resumo.md</code> · <code>crm.docx</code> · <code>Atalhos-Mac.docx</code> · <code>Entrega-Design-App-CRM.docx</code> · <code>Relatorio_Sessao_Noturna.docx</code> · <code>CLAUDE-GUIA-COMPLETO.txt</code> · 5 capturas de tela<br><br>
+          <strong>Obs:</strong> <code>Briefing_Hunters_Resumo</code> e <code>crm.docx</code> já têm cópias dentro de ALPHA-CENTRAL. São duplicatas.
+        </p>
+      </div>
+    </li>
+
+    <li class="p-medio">
+      <div class="icon">🟡</div>
+      <div>
+        <h4>Pastas "fantasmas" na raiz do Cérebro Operacional</h4>
+        <p>
+          <code>Documentos</code> · <code>Negócios</code> · <code>Pessoal</code> · <code>Projetos</code> — aparecem como itens mas não são pastas acessíveis (possíveis aliases quebrados ou arquivos sem extensão).<br><br>
+          <strong>Ação sugerida:</strong> verificar e remover se estiverem vazios/quebrados.
+        </p>
+      </div>
+    </li>
+
+    <li class="p-baixo">
+      <div class="icon">🔵</div>
+      <div>
+        <h4>FORMULARIOS-COMUNIDADE/DECISOES-PENDENTES-E-L.md sem conteúdo estratégico</h4>
+        <p>
+          Arquivo de decisões pendentes existe dentro de FORMULARIOS-COMUNIDADE e dentro de INSTAGRAM-DA-COMUNIDADE-ALPHA, mas parecem estar vazios ou com conteúdo antigo.<br>
+          As decisões reais agora estão no RASCUNHO-V1 (Parte 16) e na Parte 11.
+        </p>
+      </div>
+    </li>
+
+    <li class="p-baixo">
+      <div class="icon">🔵</div>
+      <div>
+        <h4>Brandbooks-coletados na raiz do Cérebro Operacional</h4>
+        <p>
+          <code>Brandbooks-coletados/</code> tem 4 arquivos (3 PDFs + 1 PPTX) que parecem ser versões antigas/originais.<br>
+          Deveria ir para arquivo histórico dentro de ALPHA-CENTRAL ou ser descartado.
+        </p>
+      </div>
+    </li>
+
+  </ul>
+
+  <h2 style="font-size:1.1rem;font-weight:700;margin:28px 0 16px;color:var(--verde)">📂 Estado atual de cada sistema</h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <div class="card-head" style="background:#f0fdf4">
+        <span class="icon">🏛️</span>
+        <h3>ALPHA-CENTRAL</h3>
+        <span class="badge verde">PRINCIPAL</span>
+      </div>
+      <div class="card-body">
+        <ul class="file-list">
+          <li class="ok"><span class="fi">📁</span> 01-BRANDBOOKS-TEXTO <span style="margin-left:auto;font-size:0.75rem">5 arquivos</span></li>
+          <li class="ok"><span class="fi">📁</span> 02-ESTRATEGIA <span style="margin-left:auto;font-size:0.75rem">6 arquivos</span></li>
+          <li class="ok"><span class="fi">📁</span> 03-CRM <span style="margin-left:auto;font-size:0.75rem">2 arquivos</span></li>
+          <li class="ok"><span class="fi">📁</span> 04-IDENTIDADE-VISUAL <span style="margin-left:auto;font-size:0.75rem">1 arquivo</span></li>
+          <li class="ok"><span class="fi">📁</span> 05-HUNTERS <span style="margin-left:auto;font-size:0.75rem">3 arquivos</span></li>
+          <li class="ok"><span class="fi">📁</span> 06-CONTEUDO-SOCIAL <span style="margin-left:auto;font-size:0.75rem">1 arquivo</span></li>
+          <li class="ok"><span class="fi">📁</span> 07-FORMULARIOS-EQUIPE ✨ <span style="margin-left:auto;font-size:0.75rem">7 arquivos</span></li>
+          <li class="ok"><span class="fi">📁</span> 08-BRANDBOOKS-ESTRATEGICOS ✨ <span style="margin-left:auto;font-size:0.75rem">5 arquivos</span></li>
+          <li class="ok"><span class="fi">📁</span> COMUNIDADE-ALPHA-DIRETRIZES <span style="margin-left:auto;font-size:0.75rem">13+ arquivos</span></li>
+          <li class="warn"><span class="fi">📁</span> SINTESE-ESTRATEGICA <span style="margin-left:auto;font-size:0.75rem">5 htmls</span></li>
+          <li class="dup"><span class="fi">📄</span> COMUNIDADE-ALPHA-RASCUNHO-V1.docx ← duplicata</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head" style="background:#fdf4ff">
+        <span class="icon">⚡</span>
+        <h3>MATRIX_INTELLIGENCE_SYSTEM</h3>
+        <span class="badge roxo">40 PASTAS</span>
+      </div>
+      <div class="card-body">
+        <ul class="file-list">
+          <li class="ok"><span class="fi">📁</span> 00 Dashboard executivo</li>
+          <li class="ok"><span class="fi">📁</span> 01–03 Identidade · Storytelling · Diferenciais</li>
+          <li class="ok"><span class="fi">📁</span> 05–07 Mercado energia · livre · transição</li>
+          <li class="ok"><span class="fi">📁</span> 08 Plano de marketing Matrix360 ← principal</li>
+          <li class="ok"><span class="fi">📁</span> 11 Comparativo concorrência</li>
+          <li class="ok"><span class="fi">📁</span> 17 Objeções e respostas</li>
+          <li class="ok"><span class="fi">📁</span> 20 Argumentos financeiros</li>
+          <li class="ok"><span class="fi">📁</span> 39 Ecossistema Alpha + Matrix</li>
+          <li><span class="fi">📁</span> 40 Fontes originais (PDFs, TXTs)</li>
+          <li class="warn"><span class="fi">⚠️</span> ~20 pastas com só _PURPOSE.md (vazias)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head" style="background:#fffbeb">
+        <span class="icon">🖥️</span>
+        <h3>Desktop (raiz)</h3>
+        <span class="badge amarelo">DESORGANIZADO</span>
+      </div>
+      <div class="card-body">
+        <ul class="file-list">
+          <li class="ok"><span class="fi">📄</span> BASE-COMUNIDADE-ALPHA.docx ← ativo</li>
+          <li class="ok"><span class="fi">📄</span> COMUNIDADE-ALPHA-RASCUNHO-V1.docx ← ativo</li>
+          <li class="warn"><span class="fi">📄</span> ARSENAL_CLAUDE_CODE.txt</li>
+          <li><span class="fi">📄</span> Ferramentas dos Titãs.pdf</li>
+          <li class="warn"><span class="fi">🖼️</span> Captura de Tela 2026-05-18.png</li>
+          <li><span class="fi">📁</span> JEFERSON SKILS</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head" style="background:#fef2f2">
+        <span class="icon">📦</span>
+        <h3>Cérebro Operacional (raiz)</h3>
+        <span class="badge vermelho">PRECISA LIMPAR</span>
+      </div>
+      <div class="card-body">
+        <ul class="file-list">
+          <li class="dup"><span class="fi">📄</span> Briefing_Hunters_Resumo.docx ← duplicata</li>
+          <li class="dup"><span class="fi">📄</span> Briefing_Hunters_Resumo.md ← duplicata</li>
+          <li class="dup"><span class="fi">📄</span> crm.docx ← duplicata</li>
+          <li class="warn"><span class="fi">📄</span> Atalhos-Mac.docx</li>
+          <li class="warn"><span class="fi">📄</span> Entrega-Design-App-CRM.docx</li>
+          <li class="warn"><span class="fi">📄</span> Relatorio_Sessao_Noturna.docx</li>
+          <li class="warn"><span class="fi">📄</span> CLAUDE-GUIA-COMPLETO.txt</li>
+          <li class="warn"><span class="fi">🖼️</span> 5 capturas de tela</li>
+          <li class="warn"><span class="fi">📁</span> brandsbooks alpha ← fora do lugar</li>
+          <li class="warn"><span class="fi">📁</span> Brandbooks-coletados ← fora do lugar</li>
+          <li class="warn"><span class="fi">❓</span> Documentos/Negócios/Pessoal/Projetos (aliases?)</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- TAB 2: MAPA VISUAL -->
+<!-- ============================================================ -->
+<div id="mapa" class="page">
+
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background:var(--verde)"></div> Organizado/OK</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--ouro)"></div> Criado hoje (novo)</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#fcd34d"></div> Atenção/Revisar</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--vermelho)"></div> Problema/Duplicata</div>
+  </div>
+
+  <div class="map-container">
+    <div class="map-grid">
+
+      <div class="map-col">
+        <h3>🖥️ Desktop</h3>
+        <div class="map-node ativo">
+          <h4>📄 BASE-COMUNIDADE-ALPHA.docx</h4>
+          <p>Brain-dump verbatim · 15 blocos · fonte primária</p>
+        </div>
+        <div class="map-node ativo">
+          <h4>📄 RASCUNHO-V1.docx</h4>
+          <p>Documento organizado · 1260+ parágrafos</p>
+        </div>
+        <div class="map-node atencao">
+          <h4>📄 ARSENAL_CLAUDE_CODE.txt</h4>
+          <p>Guia de ferramentas Claude</p>
+        </div>
+        <div class="map-node atencao">
+          <h4>📄 Ferramentas dos Titãs.pdf</h4>
+          <p>Tim Ferriss · referência pessoal</p>
+        </div>
+        <div class="map-node atencao">
+          <h4>🖼️ Captura de Tela.png</h4>
+          <p>Arquivo solto · mover ou deletar</p>
+        </div>
+      </div>
+
+      <div class="map-col">
+        <h3>🏛️ ALPHA-CENTRAL</h3>
+        <div class="map-node ativo">
+          <h4>📁 01-BRANDBOOKS-TEXTO</h4>
+          <p>5 arquivos · brandbooks originais texto</p>
+        </div>
+        <div class="map-node ativo">
+          <h4>📁 02-ESTRATEGIA</h4>
+          <p>6 arquivos · aliança, briefing, planos</p>
+        </div>
+        <div class="map-node ativo">
+          <h4>📁 03-CRM</h4>
+          <p>2 arquivos · auditoria + CRM</p>
+        </div>
+        <div class="map-node ativo">
+          <h4>📁 04-IDENTIDADE-VISUAL</h4>
+          <p>1 arquivo · Hunter identidade</p>
+        </div>
+        <div class="map-node ativo">
+          <h4>📁 05-HUNTERS</h4>
+          <p>3 arquivos · metodologia + presets</p>
+        </div>
+        <div class="map-node ativo">
+          <h4>📁 06-CONTEUDO-SOCIAL</h4>
+          <p>1 arquivo · autorelato Instagram</p>
+        </div>
+        <div class="map-node novo">
+          <h4>📁 07-FORMULARIOS-EQUIPE ✨</h4>
+          <p>7 arquivos · criados hoje · onboarding, metas, feedbacks</p>
+        </div>
+        <div class="map-node novo">
+          <h4>📁 08-BRANDBOOKS-ESTRATEGICOS ✨</h4>
+          <p>5 arquivos · BB1 BB2 BB3 BB4 · por nível de acesso</p>
+        </div>
+        <div class="map-node problema">
+          <h4>📄 RASCUNHO-V1.docx ← DUPLICATA</h4>
+          <p>Cópia do Desktop · pode ficar desatualizada</p>
+        </div>
+      </div>
+
+      <div class="map-col">
+        <h3>📋 DIRETRIZES</h3>
+        <div class="map-node ativo">
+          <h4>📄 01-DIRETRIZES-CENTRAIS.md</h4>
+          <p>Big Idea, promessa, definição Alpha</p>
+        </div>
+        <div class="map-node ativo">
+          <h4>📄 02-ARQUITETURA-COMUNIDADE.md</h4>
+          <p>Subgrupos, hierarquia, Matrix</p>
+        </div>
+        <div class="map-node ativo">
+          <h4>📄 03-LINGUAGEM-E-NARRATIVA.md</h4>
+          <p>Tom de voz, frases, vocabulário</p>
+        </div>
+        <div class="map-node ativo">
+          <h4>📄 04-PRINCIPIOS-NAO-NEGOCIAVEIS.md</h4>
+          <p>20 princípios documentados</p>
+        </div>
+        <div class="map-node problema">
+          <h4>📁 FORMULARIOS-COMUNIDADE ← CONFLITO</h4>
+          <p>6 formulários · conflita com 07-FORMULARIOS-EQUIPE</p>
+        </div>
+        <div class="map-node ativo">
+          <h4>📁 MARATONA-EXPLOSIVA-30-DIAS</h4>
+          <p>4 arquivos · metodologia completa</p>
+        </div>
+        <div class="map-node atencao">
+          <h4>📁 INSTAGRAM-DA-COMUNIDADE-ALPHA</h4>
+          <p>Só README e pendências · vazio na prática</p>
+        </div>
+      </div>
+
+      <div class="map-col">
+        <h3>⚡ MATRIX INTEL</h3>
+        <div class="map-node ativo">
+          <h4>📄 00-DASHBOARD-OPERACIONAL.md</h4>
+          <p>Visão geral operacional</p>
+        </div>
+        <div class="map-node ativo">
+          <h4>📄 08-PLANO-MATRIX360.md</h4>
+          <p>Plano de marketing · 6 bônus · hierarquia kWh</p>
+        </div>
+        <div class="map-node ativo">
+          <h4>📄 17-OBJECOES-RESPOSTAS.md</h4>
+          <p>Scripts de objeções</p>
+        </div>
+        <div class="map-node ativo">
+          <h4>📄 39-COMO-ALPHA-USA-MATRIX.md</h4>
+          <p>Integração Comunidade + Matrix</p>
+        </div>
+        <div class="map-node atencao">
+          <h4>⚠️ ~20 pastas com _PURPOSE.md</h4>
+          <p>Estrutura criada mas conteúdo não preenchido ainda</p>
+        </div>
+      </div>
+
+      <div class="map-col">
+        <h3>📦 PARA ORGANIZAR</h3>
+        <div class="map-node problema">
+          <h4>📁 brandsbooks alpha ← MOVER</h4>
+          <p>8 DOCXs + PDFs + htmls originais · fora do ALPHA-CENTRAL</p>
+        </div>
+        <div class="map-node problema">
+          <h4>📁 Brandbooks-coletados ← ARQUIVAR</h4>
+          <p>4 arquivos originais · versões históricas</p>
+        </div>
+        <div class="map-node problema">
+          <h4>📄 Briefing_Hunters_Resumo ← DUPLICATA</h4>
+          <p>Existe na raiz E em 02-ESTRATEGIA</p>
+        </div>
+        <div class="map-node problema">
+          <h4>❓ Documentos/Negócios/etc ← VERIFICAR</h4>
+          <p>Aliases quebrados ou arquivos sem pasta?</p>
+        </div>
+        <div class="map-node atencao">
+          <h4>📄 Relatorio_Sessao_Noturna.docx</h4>
+          <p>Relatório de sessão Claude · arquivar</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- TAB 3: DECISÕES -->
+<!-- ============================================================ -->
+<div id="decisoes" class="page">
+
+  <div class="alert-bar">
+    💡 Clique nas opções para registrar sua decisão. Nada é executado automaticamente — apenas registrado.
+  </div>
+
+  <div class="decision-card" id="d1">
+    <h4>🔴 D1 · Qual é a pasta oficial de formulários?</h4>
+    <p>Existem duas pastas: <code>07-FORMULARIOS-EQUIPE/</code> (criada hoje, mais completa) e <code>FORMULARIOS-COMUNIDADE/</code> dentro de DIRETRIZES (sessão anterior, estrutura diferente).</p>
+    <div class="decision-options">
+      <button class="btn verde" onclick="decide('d1','07-FORMULARIOS-EQUIPE é o oficial · arquivar FORMULARIOS-COMUNIDADE')">07-FORMULARIOS-EQUIPE é o oficial</button>
+      <button class="btn ouro" onclick="decide('d1','Mesclar os dois · pegar o melhor de cada')">Mesclar os dois</button>
+      <button class="btn ghost" onclick="decide('d1','FORMULARIOS-COMUNIDADE é o oficial · atualizar com conteúdo novo')">FORMULARIOS-COMUNIDADE é o oficial</button>
+    </div>
+  </div>
+
+  <div class="decision-card" id="d2">
+    <h4>🔴 D2 · Onde fica o RASCUNHO-V1 e o BASE?</h4>
+    <p>Agora existem no Desktop. Quer mover para dentro de ALPHA-CENTRAL como fonte única?</p>
+    <div class="decision-options">
+      <button class="btn verde" onclick="decide('d2','Mover ambos para ALPHA-CENTRAL · Desktop como atalho')">Mover para ALPHA-CENTRAL</button>
+      <button class="btn ghost" onclick="decide('d2','Manter no Desktop · é mais fácil de acessar')">Manter no Desktop</button>
+      <button class="btn ouro" onclick="decide('d2','Desktop é ativo de trabalho · ALPHA-CENTRAL recebe cópia ao salvar')">Desktop = trabalho · ALPHA-CENTRAL = cópia</button>
+    </div>
+  </div>
+
+  <div class="decision-card" id="d3">
+    <h4>🟡 D3 · O que fazer com a pasta "brandsbooks alpha"?</h4>
+    <p>Está fora do ALPHA-CENTRAL. Contém brandbooks originais em vários formatos (docx, pdf, html, md). Material histórico.</p>
+    <div class="decision-options">
+      <button class="btn verde" onclick="decide('d3','Mover para ALPHA-CENTRAL/00-BRANDBOOKS-HISTORICOS/')">Mover para ALPHA-CENTRAL/00-BRANDBOOKS-HISTORICOS</button>
+      <button class="btn ouro" onclick="decide('d3','Arquivar fora do ALPHA-CENTRAL · é material legado, não operacional')">Arquivar como legado</button>
+      <button class="btn danger" onclick="decide('d3','Deletar · já foi consolidado no BRANDBOOKS_ALPHA_CONSOLIDADO.txt')">Deletar (já consolidado)</button>
+    </div>
+  </div>
+
+  <div class="decision-card" id="d4">
+    <h4>🟡 D4 · Arquivos soltos na raiz do Cérebro Operacional</h4>
+    <p>Relatorio_Sessao_Noturna · Entrega-Design-App-CRM · CLAUDE-GUIA-COMPLETO · Atalhos-Mac · 5 capturas de tela.</p>
+    <div class="decision-options">
+      <button class="btn verde" onclick="decide('d4','Criar pasta 00-ARQUIVO-HISTORICO/ para tudo isso')">Criar pasta 00-ARQUIVO-HISTORICO</button>
+      <button class="btn ouro" onclick="decide('d4','Criar pasta por tipo: SESSOES/ CAPTURAS/ REFERENCIAS/')">Criar pastas por tipo</button>
+      <button class="btn danger" onclick="decide('d4','Deletar as capturas de tela · arquivar os docs')">Deletar capturas · arquivar docs</button>
+    </div>
+  </div>
+
+  <div class="decision-card" id="d5">
+    <h4>🟡 D5 · O que fazer com o BRANDBOOKS_ALPHA_CONSOLIDADO.txt duplicado?</h4>
+    <p>Existe em <code>brandsbooks alpha/</code> E em <code>ALPHA-CENTRAL/01-BRANDBOOKS-TEXTO/</code>.</p>
+    <div class="decision-options">
+      <button class="btn verde" onclick="decide('d5','ALPHA-CENTRAL é o oficial · remover da pasta brandsbooks alpha')">ALPHA-CENTRAL é o oficial</button>
+      <button class="btn ghost" onclick="decide('d5','Manter os dois por segurança')">Manter os dois</button>
+    </div>
+  </div>
+
+  <div class="decision-card" id="d6">
+    <h4>🔵 D6 · A pasta INSTAGRAM-DA-COMUNIDADE-ALPHA está vazia</h4>
+    <p>Só tem README e DECISOES-PENDENTES. Não tem conteúdo real ainda. O conteúdo Instagram agora está na Parte 14E do RASCUNHO-V1.</p>
+    <div class="decision-options">
+      <button class="btn verde" onclick="decide('d6','Manter · será preenchida quando cores e identidade estiverem prontas')">Manter para o futuro</button>
+      <button class="btn ghost" onclick="decide('d6','Mover para lista de tarefas futuras · remover pasta por ora')">Remover por ora</button>
+    </div>
+  </div>
+
+  <div class="decision-card" id="d7">
+    <h4>🔵 D7 · Pasta 09-IDENTIDADE-VISUAL (ainda não existe)</h4>
+    <p>04-IDENTIDADE-VISUAL existe mas tem só 1 arquivo sobre Hunters. Quando decidir cores e logo, precisará de pasta dedicada para Comunidade Alpha.</p>
+    <div class="decision-options">
+      <button class="btn verde" onclick="decide('d7','Criar 09-IDENTIDADE-VISUAL-COMUNIDADE/ agora como placeholder')">Criar agora (placeholder)</button>
+      <button class="btn ghost" onclick="decide('d7','Criar só quando cores e logo forem definidos')">Criar depois da decisão visual</button>
+    </div>
+  </div>
+
+  <div class="decision-card" id="d8">
+    <h4>🔵 D8 · Sincronização automática do RASCUNHO-V1</h4>
+    <p>Atualmente copio manualmente para ALPHA-CENTRAL. Quer que eu configure um script que sincroniza automaticamente ao salvar?</p>
+    <div class="decision-options">
+      <button class="btn verde" onclick="decide('d8','Sim · criar script de sincronização')">Sim, criar script de sync</button>
+      <button class="btn ghost" onclick="decide('d8','Não · sincronia manual está ok por agora')">Não, manual está ok</button>
+    </div>
+  </div>
+
+  <div style="margin-top:24px;padding:16px;background:#f0fdf4;border-radius:10px;border:1px solid #86efac">
+    <strong style="color:var(--verde)">📋 Decisões registradas nesta sessão:</strong>
+    <div id="decisions-log" style="margin-top:8px;font-size:0.85rem;color:#166534;line-height:1.8">
+      <em style="color:var(--cinza)">Nenhuma decisão registrada ainda.</em>
+    </div>
+  </div>
+
+</div>
+
+<!-- ============================================================ -->
+<!-- TAB 4: PROPOSTA FINAL -->
+<!-- ============================================================ -->
+<div id="proposta" class="page">
+
+  <div class="alert-bar">
+    🏗️ Esta é a estrutura proposta após resolver todos os problemas. Eduardo decide quais mudanças aplicar.
+  </div>
+
+  <h2 style="font-size:1.1rem;font-weight:700;margin-bottom:16px;color:var(--verde)">Estrutura proposta · Cérebro Operacional</h2>
+
+  <div class="reorg-tree">
+<span class="folder">📂 Desktop/</span><br>
+<span class="folder"> ├── 📄 BASE-COMUNIDADE-ALPHA.docx</span> <span style="color:#9ca3af">← brain-dump verbatim · arquivo ativo</span><br>
+<span class="folder"> ├── 📄 COMUNIDADE-ALPHA-RASCUNHO-V1.docx</span> <span style="color:#9ca3af">← documento organizado · arquivo ativo</span><br>
+<span class="folder"> └── 📁 Cérebro Operacional/</span><br>
+<br>
+<span class="folder">📂 Cérebro Operacional/</span><br>
+<span class="folder"> ├── 📁 ALPHA-CENTRAL/</span> <span style="color:#9ca3af">← tudo sobre Comunidade Alpha</span><br>
+<span class="move"> │   ├── 📁 00-BRANDBOOKS-HISTORICOS/</span> <span style="color:var(--azul)">← mover brandsbooks alpha + Brandbooks-coletados aqui</span><br>
+<span class="folder"> │   ├── 📁 01-BRANDBOOKS-TEXTO/</span><br>
+<span class="folder"> │   ├── 📁 02-ESTRATEGIA/</span><br>
+<span class="folder"> │   ├── 📁 03-CRM/</span><br>
+<span class="folder"> │   ├── 📁 04-IDENTIDADE-VISUAL/</span><br>
+<span class="folder"> │   ├── 📁 05-HUNTERS/</span><br>
+<span class="folder"> │   ├── 📁 06-CONTEUDO-SOCIAL/</span><br>
+<span class="new"> │   ├── 📁 07-FORMULARIOS-EQUIPE/</span> <span style="color:var(--ouro)">← fonte única de verdade dos formulários ✨</span><br>
+<span class="new"> │   ├── 📁 08-BRANDBOOKS-ESTRATEGICOS/</span> <span style="color:var(--ouro)">← BB1 BB2 BB3 BB4 ✨</span><br>
+<span class="new"> │   ├── 📁 09-IDENTIDADE-VISUAL-COMUNIDADE/</span> <span style="color:var(--ouro)">← criar após definir cores e logo ✨</span><br>
+<span class="folder"> │   ├── 📁 COMUNIDADE-ALPHA-DIRETRIZES/</span><br>
+<span class="archive"> │   │   ├── 📁 FORMULARIOS-COMUNIDADE/</span> <span style="color:#9ca3af">← arquivar (substituída por 07-FORMULARIOS-EQUIPE)</span><br>
+<span class="folder"> │   │   ├── 📁 MARATONA-EXPLOSIVA-30-DIAS/</span><br>
+<span class="folder"> │   │   └── 📄 01 a 06 diretrizes + backlogs</span><br>
+<span class="folder"> │   ├── 📁 SINTESE-ESTRATEGICA/</span> <span style="color:#9ca3af">← servidor http:8787</span><br>
+<span class="folder"> │   ├── 📁 DECISOES-RECONHECIMENTOS-E-STATUS/</span><br>
+<span class="archive"> │   └── 📄 COMUNIDADE-ALPHA-RASCUNHO-V1.docx</span> <span style="color:#9ca3af">← remover daqui (original fica no Desktop)</span><br>
+<br>
+<span class="folder"> ├── 📁 MATRIX_INTELLIGENCE_SYSTEM/</span> <span style="color:#9ca3af">← bem organizado, manter como está</span><br>
+<br>
+<span class="new"> ├── 📁 00-ARQUIVO-HISTORICO/</span> <span style="color:var(--ouro)">← criar para receber arquivos soltos</span><br>
+<span class="move"> │   ├── 📄 Relatorio_Sessao_Noturna.docx</span><br>
+<span class="move"> │   ├── 📄 Entrega-Design-App-CRM.docx</span><br>
+<span class="move"> │   ├── 📄 CLAUDE-GUIA-COMPLETO.txt</span><br>
+<span class="move"> │   ├── 📄 Atalhos-Mac.docx</span><br>
+<span class="move"> │   └── 🖼️ Capturas de tela (5)</span><br>
+<br>
+<span class="warn"> ├── ❓ Documentos / Negócios / Pessoal / Projetos</span> <span style="color:#9ca3af">← verificar se são aliases quebrados</span><br>
+<span class="archive"> ├── 📄 Briefing_Hunters_Resumo.docx</span> <span style="color:#9ca3af">← remover (cópia em 02-ESTRATEGIA)</span><br>
+<span class="archive"> ├── 📄 Briefing_Hunters_Resumo.md</span> <span style="color:#9ca3af">← remover (cópia em 02-ESTRATEGIA)</span><br>
+<span class="archive"> └── 📄 crm.docx</span> <span style="color:#9ca3af">← remover (cópia em 03-CRM)</span>
+  </div>
+
+  <div style="background:white;border-radius:14px;border:1.5px solid var(--borda);padding:20px;margin-bottom:20px">
+    <h3 style="font-size:1rem;font-weight:700;margin-bottom:12px;color:var(--verde)">✅ O que não muda (já está certo)</h3>
+    <ul style="list-style:none;display:flex;flex-direction:column;gap:8px">
+      <li style="font-size:0.87rem;display:flex;gap:10px;align-items:center"><span>✅</span> MATRIX_INTELLIGENCE_SYSTEM — bem organizado, 40 pastas, manter como está</li>
+      <li style="font-size:0.87rem;display:flex;gap:10px;align-items:center"><span>✅</span> ALPHA-CENTRAL/01 a 08 — estrutura numerada funcionando</li>
+      <li style="font-size:0.87rem;display:flex;gap:10px;align-items:center"><span>✅</span> COMUNIDADE-ALPHA-DIRETRIZES com 6 arquivos canônicos</li>
+      <li style="font-size:0.87rem;display:flex;gap:10px;align-items:center"><span>✅</span> MARATONA-EXPLOSIVA-30-DIAS bem documentada</li>
+      <li style="font-size:0.87rem;display:flex;gap:10px;align-items:center"><span>✅</span> BASE e RASCUNHO-V1 no Desktop como arquivos de trabalho</li>
+    </ul>
+  </div>
+
+  <div style="background:#f0fdf4;border-radius:14px;border:1.5px solid #86efac;padding:20px">
+    <h3 style="font-size:1rem;font-weight:700;margin-bottom:12px;color:var(--verde)">🎯 3 ações de maior impacto (se fizer só 3)</h3>
+    <ol style="list-style:none;display:flex;flex-direction:column;gap:12px">
+      <li style="font-size:0.87rem;display:flex;gap:12px;align-items:flex-start">
+        <span style="background:var(--verde);color:white;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.8rem;flex-shrink:0">1</span>
+        <div><strong>Resolver o conflito dos formulários</strong> (D1) — decidir qual pasta é a fonte única de verdade e arquivar a outra. Elimina confusão imediata.</div>
+      </li>
+      <li style="font-size:0.87rem;display:flex;gap:12px;align-items:flex-start">
+        <span style="background:var(--verde);color:white;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.8rem;flex-shrink:0">2</span>
+        <div><strong>Mover brandsbooks alpha para 00-BRANDBOOKS-HISTORICOS</strong> (D3) — material legado organizado, sem poluir a raiz do Cérebro Operacional.</div>
+      </li>
+      <li style="font-size:0.87rem;display:flex;gap:12px;align-items:flex-start">
+        <span style="background:var(--verde);color:white;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.8rem;flex-shrink:0">3</span>
+        <div><strong>Criar 00-ARQUIVO-HISTORICO</strong> (D4) — arquivos soltos da raiz ganham um lar. Visualização fica limpa.</div>
+      </li>
+    </ol>
+  </div>
+
+</div>
+
+<div id="toast">✅ Decisão registrada</div>
+
+<script>
+function showTab(id) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+}
+
+const decisions = {};
+
+function decide(cardId, text) {
+  decisions[cardId] = text;
+  const card = document.getElementById(cardId);
+  card.classList.add('decided');
+
+  // Remove old buttons and show decided label
+  const opts = card.querySelector('.decision-options');
+  opts.innerHTML = `<span class="decided-label">✅ ${text}</span>`;
+
+  // Update log
+  const log = document.getElementById('decisions-log');
+  const count = Object.keys(decisions).length;
+  document.getElementById('decisions-count').textContent = count;
+
+  let html = '';
+  const map = {d1:'D1',d2:'D2',d3:'D3',d4:'D4',d5:'D5',d6:'D6',d7:'D7',d8:'D8'};
+  for (const [k, v] of Object.entries(decisions)) {
+    html += `<div>• <strong>${map[k]}:</strong> ${v}</div>`;
+  }
+  log.innerHTML = html;
+
+  // Toast
+  const toast = document.getElementById('toast');
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 2000);
+}
+</script>
+
+</body>
+</html>

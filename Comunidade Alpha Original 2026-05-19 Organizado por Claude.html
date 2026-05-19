@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Comunidade Alpha · Original · Verbatim · 2026-05-19</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,700;0,6..96,900;1,6..96,300;1,6..96,400;1,6..96,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#060E14; --c1:#0D1F2D; --c2:#152B3D; --c3:#1E3A50;
+  --gold:#C8A951; --gold-l:#E0C57A; --cream:#F5F0E6;
+  --white:#FFFFFF; --muted:rgba(245,240,230,.55);
+  --border:rgba(200,169,81,.18);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--white);font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;line-height:1.7}
+
+.nav{position:sticky;top:0;z-index:100;background:rgba(6,14,20,.97);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);padding:12px 6vw;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+.nav-brand{font-family:'Bebas Neue',sans-serif;font-size:12px;letter-spacing:.25em;color:var(--gold)}
+.nav-meta{font-size:10px;color:var(--muted);letter-spacing:.06em}
+
+.alert{background:linear-gradient(135deg,#1A2B0B 0%,var(--c1) 100%);border-left:3px solid var(--gold);padding:24px 32px;margin:0;font-size:.9rem;line-height:1.7;color:var(--cream)}
+.alert b{color:var(--gold-l);font-weight:700}
+
+.toc{background:var(--c1);padding:32px 6vw;border-bottom:1px solid var(--border)}
+.toc-title{font-family:'Bebas Neue',sans-serif;font-size:11px;letter-spacing:.28em;color:var(--gold);margin-bottom:18px}
+.toc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border)}
+.toc-item{background:var(--c1);padding:14px 16px;font-size:.82rem;color:var(--muted);text-decoration:none;transition:.2s;display:flex;gap:10px;align-items:baseline}
+.toc-item:hover{background:var(--c2);color:var(--gold-l)}
+.toc-num{font-family:'Bebas Neue',sans-serif;color:var(--gold);font-size:.85rem;letter-spacing:.1em;flex-shrink:0}
+
+.hero{padding:100px 6vw 80px;background:linear-gradient(180deg,var(--c1) 0%,var(--bg) 100%);position:relative;overflow:hidden;border-bottom:1px solid var(--border)}
+.hero::before{content:'α';position:absolute;right:-3vw;top:-2vw;font-family:'Bodoni Moda',serif;font-size:42vw;font-weight:900;color:rgba(200,169,81,.025);line-height:1;pointer-events:none}
+.hero-inner{position:relative;z-index:1;max-width:1000px}
+.hero-label{font-family:'Bebas Neue',sans-serif;font-size:12px;letter-spacing:.3em;color:var(--gold);margin-bottom:24px}
+.hero h1{font-family:'Bodoni Moda',serif;font-size:clamp(2.6rem,6vw,5.5rem);font-weight:900;line-height:.95;margin-bottom:14px;letter-spacing:-.01em}
+.hero-sub{font-family:'Bodoni Moda',serif;font-style:italic;font-size:clamp(1.3rem,2.4vw,2rem);color:var(--gold-l);margin-bottom:32px;line-height:1.3}
+.hero-rule{width:50px;height:2px;background:var(--gold);margin-bottom:28px;opacity:.7}
+.hero-body{font-size:clamp(.95rem,1.3vw,1.05rem);line-height:1.85;color:var(--muted);max-width:680px;margin-bottom:32px}
+
+.section{padding:72px 6vw;border-bottom:1px solid var(--border);position:relative}
+.section-num{font-family:'Bebas Neue',sans-serif;font-size:11px;letter-spacing:.3em;color:var(--gold);margin-bottom:12px;display:block}
+.section-title{font-family:'Bodoni Moda',serif;font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:900;line-height:1.05;margin-bottom:12px;color:var(--white)}
+.section-sub{font-family:'Bodoni Moda',serif;font-style:italic;font-size:clamp(1rem,1.5vw,1.3rem);color:var(--gold-l);margin-bottom:40px}
+
+.verbatim{background:var(--c1);border-left:3px solid var(--gold);padding:28px 32px;margin-bottom:24px;font-family:'Plus Jakarta Sans',sans-serif;font-size:.96rem;line-height:1.85;color:var(--cream)}
+.verbatim p{margin-bottom:14px}
+.verbatim p:last-child{margin-bottom:0}
+.verbatim em{color:var(--gold-l);font-style:italic}
+.verbatim strong{color:var(--white);font-weight:600}
+
+.quote-block{background:linear-gradient(135deg,var(--c2) 0%,var(--c1) 100%);border:1px solid var(--border);padding:32px 36px;margin:24px 0;position:relative}
+.quote-block::before{content:'"';font-family:'Bodoni Moda',serif;font-size:6rem;font-weight:900;color:rgba(200,169,81,.15);position:absolute;top:0;left:24px;line-height:1}
+.quote-block p{font-family:'Bodoni Moda',serif;font-style:italic;font-size:1.2rem;line-height:1.55;color:var(--cream);position:relative;z-index:1}
+
+.frase-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--border);margin-bottom:24px}
+.frase{background:var(--c1);padding:24px 28px;font-family:'Bodoni Moda',serif;font-style:italic;font-size:1.05rem;line-height:1.5;color:var(--cream);border-left:2px solid var(--gold)}
+
+.dichotomy{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);margin-bottom:24px}
+.dicho-side{padding:28px 30px}
+.dicho-is{background:linear-gradient(180deg,#0E1F18 0%,var(--c1) 100%)}
+.dicho-not{background:linear-gradient(180deg,#1A0B0B 0%,var(--c1) 100%)}
+.dicho-label{font-family:'Bebas Neue',sans-serif;font-size:11px;letter-spacing:.26em;margin-bottom:14px}
+.dicho-is .dicho-label{color:#5A8F5A}
+.dicho-not .dicho-label{color:#B85450}
+.dicho-side ul{list-style:none;padding:0}
+.dicho-side li{padding-left:22px;position:relative;margin-bottom:10px;font-size:.92rem;line-height:1.6;color:var(--cream)}
+.dicho-is li::before{content:'✓';position:absolute;left:0;color:#5A8F5A;font-weight:700}
+.dicho-not li::before{content:'✕';position:absolute;left:0;color:#B85450;font-weight:700}
+
+.list-block{background:var(--c1);padding:24px 28px;margin-bottom:24px}
+.list-block ul{list-style:none;padding:0}
+.list-block li{padding-left:22px;position:relative;margin-bottom:10px;font-size:.92rem;line-height:1.65;color:var(--cream)}
+.list-block li::before{content:'›';position:absolute;left:0;color:var(--gold);font-weight:700}
+.list-block li strong{color:var(--gold-l)}
+
+.tbl{width:100%;border-collapse:collapse;margin:8px 0 24px;background:var(--c1)}
+.tbl th{background:var(--c2);text-align:left;padding:12px 14px;font-family:'Bebas Neue',sans-serif;font-size:11px;letter-spacing:.18em;color:var(--gold);font-weight:400;border-bottom:1px solid var(--border)}
+.tbl td{padding:12px 14px;border-bottom:1px solid rgba(200,169,81,.08);font-size:.86rem;color:var(--cream);line-height:1.6;vertical-align:top}
+.tbl td strong{color:var(--white)}
+.tbl td.gold{color:var(--gold-l);font-weight:600}
+
+.h3{font-family:'Bodoni Moda',serif;font-size:1.3rem;font-weight:700;color:var(--white);margin:24px 0 14px;line-height:1.2}
+
+.cards-2{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);margin-bottom:24px}
+.cards-3{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);margin-bottom:24px}
+.mini-card{background:var(--c1);padding:22px 24px}
+.mini-label{font-family:'Bebas Neue',sans-serif;font-size:10px;letter-spacing:.25em;color:var(--gold);margin-bottom:6px}
+.mini-title{font-size:.98rem;font-weight:700;color:var(--white);margin-bottom:6px;line-height:1.3}
+.mini-text{font-size:.85rem;color:var(--cream);line-height:1.65}
+
+.footer{padding:48px 6vw;background:var(--bg);text-align:center;border-top:1px solid var(--border)}
+.footer-brand{font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:.28em;color:var(--gold);margin-bottom:8px}
+.footer p{font-size:.78rem;color:var(--muted);margin-bottom:4px}
+
+@media(max-width:880px){
+  .nav{flex-direction:column;align-items:flex-start;gap:6px;padding:10px 5vw}
+  .hero,.section,.toc,.footer{padding-left:5vw;padding-right:5vw}
+  .hero{padding-top:60px;padding-bottom:60px}
+  .toc-grid,.frase-grid,.dichotomy,.cards-2,.cards-3{grid-template-columns:1fr}
+  .tbl{font-size:.78rem}
+  .tbl th,.tbl td{padding:8px 6px}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-brand">COMUNIDADE ALPHA · ORIGINAL · VERBATIM</div>
+  <div class="nav-meta">2026-05-19 · 100% PALAVRAS DO EDUARDO</div>
+</nav>
+
+<div class="alert">
+  <b>⚠ Aviso de método.</b> Tudo neste documento foi extraído <b>exclusivamente</b> do brain dump verbatim do Eduardo (<code>BASE-COMUNIDADE-ALPHA.docx</code>, 15 blocos, 522 parágrafos). Nenhum framework, terminologia ou estrutura foi importado de brandbooks anteriores, agentes ou squads. A organização aqui é só de ordem visual — todas as ideias, listas e frases vêm das suas próprias palavras.
+</div>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-label">COMUNIDADE ALPHA · BRAIN DUMP VERBATIM · 2026-05-19</div>
+    <h1>COMUNIDADE<br>ALPHA.</h1>
+    <p class="hero-sub">Modernos no método. Ancestrais no caráter. As duas — ou nada.</p>
+    <div class="hero-rule"></div>
+    <p class="hero-body">"Audace Fortuna Sequitur" — a sorte acompanha os audazes. Comunidade nasceu há 10 anos e foi sendo moldada. Os valores e culturas da comunidade são maiores do que o fundador ou qualquer líder. Não tem líder no centro — a cultura é o centro, o propósito é o centro.</p>
+  </div>
+</section>
+
+<section class="toc">
+  <div class="toc-title">SUMÁRIO · 18 SEÇÕES VERBATIM</div>
+  <div class="toc-grid">
+    <a class="toc-item" href="#s1"><span class="toc-num">01</span><span>O Nome Alpha · Origem AMAN</span></a>
+    <a class="toc-item" href="#s2"><span class="toc-num">02</span><span>Quem é Eduardo</span></a>
+    <a class="toc-item" href="#s3"><span class="toc-num">03</span><span>Filosofia Biohacker</span></a>
+    <a class="toc-item" href="#s4"><span class="toc-num">04</span><span>O Que é Ser Alpha</span></a>
+    <a class="toc-item" href="#s5"><span class="toc-num">05</span><span>A Comunidade É · Não É</span></a>
+    <a class="toc-item" href="#s6"><span class="toc-num">06</span><span>Valores e Crenças</span></a>
+    <a class="toc-item" href="#s7"><span class="toc-num">07</span><span>Frases Âncora</span></a>
+    <a class="toc-item" href="#s8"><span class="toc-num">08</span><span>Modelo Alpha × Faculdade</span></a>
+    <a class="toc-item" href="#s9"><span class="toc-num">09</span><span>Governança Cultural · 7 Pilares</span></a>
+    <a class="toc-item" href="#s10"><span class="toc-num">10</span><span>Princípios Não-Negociáveis</span></a>
+    <a class="toc-item" href="#s11"><span class="toc-num">11</span><span>Status e Reconhecimentos</span></a>
+    <a class="toc-item" href="#s12"><span class="toc-num">12</span><span>Engenharia da Expansão</span></a>
+    <a class="toc-item" href="#s13"><span class="toc-num">13</span><span>3 Ambientes da Comunidade</span></a>
+    <a class="toc-item" href="#s14"><span class="toc-num">14</span><span>Rituais e Eventos</span></a>
+    <a class="toc-item" href="#s15"><span class="toc-num">15</span><span>Tecnologia que Hackeamos</span></a>
+    <a class="toc-item" href="#s16"><span class="toc-num">16</span><span>Inimigos</span></a>
+    <a class="toc-item" href="#s17"><span class="toc-num">17</span><span>Códigos Externos Adotados</span></a>
+    <a class="toc-item" href="#s18"><span class="toc-num">18</span><span>Decisões e Pendências</span></a>
+  </div>
+</section>
+
+<!-- 01 -->
+<section class="section" id="s1">
+  <span class="section-num">01 · ORIGEM DO NOME</span>
+  <h2 class="section-title">O nome Alpha vem da AMAN</h2>
+  <p class="section-sub">A origem é militar. A origem é real.</p>
+
+  <div class="verbatim">
+    <p>A origem do nome Alpha vem também da <strong>Academia Militar das Agulhas Negras</strong>. Em todos grupamentos as pessoas eram divididas em dois níveis: <strong>Grupamento Alpha e Grupamento Bravo</strong>. Grupamento Alpha no treinamento físico militar por exemplo era o grupamento que tinha o melhor condicionamento físico, portanto era mais exigido, tinham treinos mais difíceis, distâncias de corridas maiores, exigências maiores. Já o grupamento Bravo, por ter menos condicionamento, era exigido menos.</p>
+    <p>Engraçado que muitos do Bravo se esforçavam para que pudessem estar no Alpha e fazer parte desse grupamento, desejavam, se esforçavam para estar entre os que eram mais exigidos. Já outros tinham total capacidade para estar no Alpha, mas preferiram ficar no Bravo, pois ali eles não precisariam se esforçar tanto.</p>
+    <p>São mentalidades diferentes. <strong>Estar num grupo de elite tem suas vantagens</strong> — a satisfação de evoluir, a satisfação de estar com os melhores (naquela área), os mais dedicados, os com melhores resultados, padrões mais altos. A evolução é maior, mas dedicação também maior.</p>
+  </div>
+
+  <div class="quote-block">
+    <p>"Cadete, ides comandar — aprendei a obedecer."<br>(Frase canônica da Academia Militar das Agulhas Negras)</p>
+  </div>
+
+  <div class="verbatim">
+    <p>Na lógica da academia militar que tem os oficiais combatentes mais reconhecidos e respeitados do mundo é sobre comando. Para nós da comunidade, tem a ver com liderança. <strong>Antes de liderar você precisa aprender a ser liderado</strong>, seguir os conselhos de quem já chegou onde você chegou e que realmente se importa com seus resultados e sua vida. É a coisa mais inteligente a fazer.</p>
+    <p><em>"Aquele que não senta pra aprender, jamais ficará em pé pra ensinar."</em></p>
+  </div>
+</section>
+
+<!-- 02 -->
+<section class="section" id="s2">
+  <span class="section-num">02 · QUEM É EDUARDO</span>
+  <h2 class="section-title">Fundador, não centro</h2>
+  <p class="section-sub">A cultura é maior do que o fundador.</p>
+
+  <div class="verbatim">
+    <p>Eduardo é <strong>fundador, não o centro</strong>. Tem espaço para todos que merecerem. Terão vários líderes, especialistas em cada área. <em>Os valores e culturas da comunidade são maiores do que o fundador ou qualquer líder.</em></p>
+    <p>Em <strong>2016</strong>, tinha que colocar um nome na empresa, no CNPJ que abri. Não tinha outro nome que poderia vir na minha cabeça — não poderia ser um nome com mais significado pra mim. <strong>Alpha representa quem sou, representa o que tenho orgulho de ser.</strong> Aquele que assume a responsabilidade de dar o seu melhor e que usufrui de todos benefícios de não poupar a si mesmo, de se exigir mais e consequentemente ter realizações e resultados que a maioria jamais terá.</p>
+    <p>Fui <strong>atleta de judô, competidor por 14 anos</strong>. Fui atleta do Exército e competi representando o Exército e a AMAN. Também tínhamos o grupamento Alpha. Dentro da filosofia do judô, o judô da AMAN era conhecido como a modalidade de esporte mais sugada, que mais treinava. Éramos os primeiros a começar a treinar e quando voltávamos pro alojamento após o treino já não tinha mais água quente. Às vezes éramos os últimos a chegar no jantar, comida fria. Confesso que não era agradável, mas reconheço o quanto isso foi importante para o meu <strong>fortalecimento e forja</strong>.</p>
+    <p>A comunidade Alpha nasceu há 10 anos atrás e foi sendo moldada, reestruturada — passei por todas as religiões, crises existenciais, anos sabáticos, erros grotescos para conseguir encontrar o que realmente faz sentido.</p>
+  </div>
+
+  <div class="h3">Sobre minha intensidade (interno · não comunicar publicamente assim)</div>
+  <div class="verbatim">
+    <p>Tenho freezer de gelo para fazer imersões. Faço planos alimentares de alta performance. Busquei estudar sobre saúde integrativa e natural em <strong>5 países</strong>. Estudei biohackers. Investi <strong>quase 1 milhão de reais no meu desenvolvimento</strong>. Sou intenso, caio de cabeça, tenho muita coragem. Já peguei empréstimos para investir em negócios.</p>
+    <p>Bati 3 recordes em empresas bilionárias — <strong>Diamond mais rápido do mundo na DoTerra, Esmeralda Plus em 6 dias na Polishop, Diamante na Polishop em menos de 30 dias</strong>, mesmo empresa saturada. Capacidade altíssima, fora da curva. Shape extraordinário há décadas.</p>
+    <p>Tive esse ano <strong>diagnóstico de superdotação</strong>. Não é fácil estar na minha mente — mente inquieta, necessidade de sentido. Ninguém precisa ser igual a mim, eu não sou o pica das galáxias. Mas eu sou foda e não precisa estar escrito em lugar nenhum. A convivência comigo eles vão ver.</p>
+    <p>Fiz <strong>jejum de 4 dias na busca da visão</strong>, isolado numa montanha, sem água, sem comida, sem celular, sem papel, sem caneta. Conheci várias culturas, tenho amigos indígenas, fui em tribos, conheci pajés, conheci e busquei todas as religiões. Consagrei ayahuasca mais de 3 vezes por mês por 5 anos. Apliquei mais de 200 pontos de kambo em mim.</p>
+    <p>Larguei o Exército, carreira de oficial, para investir no sonho de ser um líder de marketing de relacionamento. Me apaixonei pela profissão. Fui inocente, me iludi.</p>
+    <p>Qualquer coisa sobre mim em material público tem que ser <strong>o menos egoica possível</strong>. Preciso falar quem sou e meus resultados, mas <strong>de forma sutil e humilde</strong>. Não sou melhor que ninguém.</p>
+  </div>
+</section>
+
+<!-- 03 -->
+<section class="section" id="s3">
+  <span class="section-num">03 · FILOSOFIA</span>
+  <h2 class="section-title">Biohackers da própria vida</h2>
+  <p class="section-sub">Bio (vida) + hack (talhar) = aquele que talha a própria vida.</p>
+
+  <div class="verbatim">
+    <p>Temos na identidade da nossa comunidade o conceito de <strong>biohacker</strong>. O conceito mistura <em>bio</em> = vida e <em>hacker</em>, que vem de hackear — hackear a vida, hackear os negócios.</p>
+    <p>Um biohacker aprende, testa, sente, vê os resultados, ajusta. Sempre busca compreender as coisas, para poder otimizar. Enquanto você não desenvolve isso, estamos desenvolvendo para você. Siga o que é ensinado, confie — temos muita experiência em negócios e em hackear muitas coisas, buscando otimizar, buscando que o esforço seja aplicado da forma que dê mais resultado.</p>
+  </div>
+
+  <div class="h3">Etimologia</div>
+  <div class="verbatim">
+    <p><strong>bio</strong> (grego <em>bíos</em>) = vida, modo de vida, curso da existência<br>
+    <strong>hack</strong> (inglês antigo <em>haccian</em>) = cortar, talhar com golpes<br>
+    Nos anos 60 (MIT), ganhou o sentido de abrir caminho em um sistema técnico de forma engenhosa.<br>
+    <strong>-er</strong> = aquele que faz.<br><br>
+    <strong>Biohacker = aquele que talha a própria vida — abre, manipula e reprograma a si mesmo.</strong></p>
+  </div>
+
+  <div class="h3">Sobre disciplina</div>
+  <div class="verbatim">
+    <p>A palavra disciplina, na nossa visão, é muito mal interpretada. <strong>Disciplina não é se forçar a fazer algo, disciplina é consequência de uma visão clara</strong> — ter clareza de que o esforço vai valer a pena. E para isso é preciso acreditar em si.</p>
+    <p>Aqui você vai desenvolver disciplina, pois acreditará cada vez mais em si — tanto pelos avanços e microvitórias que terá diariamente, tanto pelos nossos métodos, nosso apoio, inspiração dos pares, conhecimentos e habilidades adquiridas e <strong>convivência com pessoas que são fora da curva</strong>. É contagiante.</p>
+    <p>O ambiente molda comportamento. Amigos fazem o que amigos fazem. <strong>O sucesso do amigo do lado é o seu sucesso.</strong></p>
+  </div>
+
+  <div class="h3">Sobre ferramentas</div>
+  <div class="verbatim">
+    <p>As ferramentas transformam os resultados. Cortar uma árvore com uma faca de serra pode ser possível, com um serrote também, com machado também, com machado afiado melhor ainda. Com habilidade e prática, mais ainda. Mas usando uma <strong>motosserra</strong> é muito mais rápido.</p>
+    <p>O resultado pode ser rápido desde que você use as ferramentas certas e da forma certa. Porém é preferível que você use uma faca de serra se é isso que você tem do que não fazer nada. Preferível que cave um buraco de colher ou com as mãos do que ficar parado, mas com uma pá é bem mais fácil — se for afiada, mais ainda; se for usada por alguém que tem prática, mais ainda; se for com uma escavadeira, mais ainda.</p>
+  </div>
+
+  <div class="quote-block">
+    <p>"Fé. Faça o que pode, com o tempo que tem, da melhor maneira possível."</p>
+  </div>
+</section>
+
+<!-- 04 -->
+<section class="section" id="s4">
+  <span class="section-num">04 · O QUE É SER ALPHA</span>
+  <h2 class="section-title">Alpha é responsabilidade</h2>
+  <p class="section-sub">Ser Alpha é decidir se tornar melhor a cada dia. É ser proativo. É ser o capitão da própria vida.</p>
+
+  <div class="verbatim">
+    <p><strong>Alpha = responsabilidade, serviço, liderança pelo exemplo.</strong></p>
+    <p>Ser Alpha é decidir se tornar melhor a cada dia. Se responsabilizar, assumir controle da própria vida, ser autoresponsável, entender que <em>você é o capitão da sua vida</em>. É ser proativo.</p>
+  </div>
+
+  <div class="h3">✓ Alpha É</div>
+  <div class="list-block">
+    <ul>
+      <li><strong>Responsabilidade</strong> — pela própria vida primeiro, depois pela vida da comunidade</li>
+      <li><strong>Liderança pelo exemplo</strong> — não por título</li>
+      <li><strong>Disciplina</strong> — exercida em silêncio, antes de qualquer plateia</li>
+      <li><strong>Coragem</strong> — escolher o desconforto certo</li>
+      <li><strong>Crescimento contínuo</strong> — sem teto auto-imposto</li>
+      <li><strong>Prosperidade consciente</strong> — riqueza com propósito</li>
+      <li><strong>Força com humanidade</strong> — exigência amorosa</li>
+      <li><strong>Acolhimento</strong> — quem chega frágil é visto</li>
+      <li><strong>Inteligência prática</strong> — saber aplicado, não acumulado</li>
+      <li><strong>Construção coletiva</strong> — ninguém constrói legado sozinho</li>
+      <li><strong>Honra</strong> — palavra que vale mais que contrato</li>
+      <li><strong>Serviço</strong> — quanto maior o nível, maior a obrigação</li>
+      <li><strong>Transformação</strong> — virar quem precisa ser, não fingir</li>
+    </ul>
+  </div>
+
+  <div class="quote-block">
+    <p>"Alpha é quem assumiu a responsabilidade pela própria vida — e por isso legitimamente lidera."</p>
+  </div>
+
+  <div class="h3">Alpha como pessoa</div>
+  <div class="list-block">
+    <ul>
+      <li>Alpha é assumir o controle da própria vida antes de querer liderar qualquer pessoa. Viver de forma consciente, forte e útil.</li>
+      <li><strong>Alpha não é superioridade.</strong> É compromisso com evolução.</li>
+      <li>Alpha é crescimento individual colocado a serviço de algo maior — família, comunidade, tribo.</li>
+      <li>Alpha é alguém que inspira confiança porque vive aquilo que fala.</li>
+      <li>Alpha é uma identidade construída em verdade, não em personagem.</li>
+      <li>Alpha é equilíbrio entre ambição, consciência e execução.</li>
+    </ul>
+  </div>
+
+  <div class="h3">Alpha como comunidade</div>
+  <div class="list-block">
+    <ul>
+      <li>Alpha é uma comunidade onde pessoas comuns desenvolvem mentalidade, liderança e resultado acima da média.</li>
+      <li>Alpha é uma cultura de ação, conexão e transformação compartilhada.</li>
+      <li>Alpha é uma comunidade que transforma potencial em posicionamento, liderança e resultado.</li>
+    </ul>
+  </div>
+
+  <div class="h3">Critério de validação · 24 meses</div>
+  <div class="verbatim">
+    <p>Em 24 meses, a comunidade entrega transformação se a pessoa puder responder SIM para:</p>
+    <ul style="list-style:none;padding:0;margin-top:12px">
+      <li style="padding-left:22px;position:relative;margin-bottom:8px">✓ Tomo decisões diferentes das que tomava antes</li>
+      <li style="padding-left:22px;position:relative;margin-bottom:8px">✓ Tenho habilidades que não tinha</li>
+      <li style="padding-left:22px;position:relative;margin-bottom:8px">✓ Convivo com pessoas que não conheceria</li>
+      <li style="padding-left:22px;position:relative;margin-bottom:8px">✓ Minha rotina diária mudou estruturalmente</li>
+      <li style="padding-left:22px;position:relative;margin-bottom:8px">✓ Minha renda tem fontes que antes não existiam — mínimo R$10 mil residual</li>
+      <li style="padding-left:22px;position:relative;margin-bottom:8px">✓ Outras pessoas vêm a mim por autoridade</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 05 -->
+<section class="section" id="s5">
+  <span class="section-num">05 · É · NÃO É</span>
+  <h2 class="section-title">A Comunidade É · A Comunidade Não É</h2>
+  <p class="section-sub">Diferenciação por exclusão é diferenciação real.</p>
+
+  <div class="dichotomy">
+    <div class="dicho-side dicho-is">
+      <div class="dicho-label">✓ A COMUNIDADE É</div>
+      <ul>
+        <li>Comunidade <strong>moderna de crescimento humano</strong></li>
+        <li>Liderança</li>
+        <li>Prosperidade consciente</li>
+        <li>Evolução prática</li>
+        <li>Construção coletiva</li>
+        <li>Desenvolvimento acelerado</li>
+        <li>Múltiplas fontes de renda</li>
+        <li>Construção de patrimônio</li>
+        <li>Liberdade geográfica</li>
+        <li>Desenvolvimento emocional</li>
+        <li>Disciplina · autoconfiança · inteligência prática</li>
+        <li>Tecnologia + IA · marketing digital · vendas · comunicação</li>
+        <li>Liderança servidora · networking forte</li>
+        <li>Pertencimento · acolhimento · responsabilidade · evolução contínua</li>
+      </ul>
+    </div>
+    <div class="dicho-side dicho-not">
+      <div class="dicho-label">✕ A COMUNIDADE NÃO É</div>
+      <ul>
+        <li>Grupo de ego</li>
+        <li>Grupo de ostentação</li>
+        <li>Culto de personalidade</li>
+        <li>Masculinidade caricata</li>
+        <li>Comunidade só para homens</li>
+        <li>Restrita por idade</li>
+        <li>Grupo elitista superficial</li>
+        <li>"Vencedores superiores"</li>
+        <li>Grupo motivacional vazio</li>
+        <li>Hype financeiro</li>
+        <li>Promessa de dinheiro fácil</li>
+        <li>Religião / igreja / seita</li>
+        <li>Marca dependente de uma única empresa</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="verbatim">
+    <p>A comunidade Alpha <strong>não é uma comunidade de empreendedores de alta performance</strong>. É uma comunidade de pessoas que querem crescer, querem ser feliz, querem ter mais qualidade de vida, querem ganhar mais dinheiro, querem fazer parte de um grupo forte que os fortalece. <em>A alta performance é uma consequência para quem a quer.</em> Tem lugar para quem quer performar, logicamente.</p>
+    <p><strong>Espaço para:</strong> homens, mulheres, jovens, idosos, iniciantes, especialistas, líderes, empreendedores, pessoas em reconstrução, pessoas em busca de propósito.</p>
+  </div>
+</section>
+
+<!-- 06 -->
+<section class="section" id="s6">
+  <span class="section-num">06 · VALORES</span>
+  <h2 class="section-title">O que valorizamos</h2>
+  <p class="section-sub">Crenças centrais que fundam tudo.</p>
+
+  <div class="verbatim">
+    <p>Acreditamos que <strong>juntos somos mais fortes do que qualquer um de nós</strong> e que juntos podemos fazer coisas que jamais faríamos sozinhos. <em>Ninguém faz nada grande sozinho.</em></p>
+    <p>Uma comunidade de <strong>colaboração mútua</strong> onde o reconhecimento não é apenas do crescimento, mas da maturidade e generosidade de compartilhar.</p>
+    <p>Valorizamos o autoconhecimento, o desenvolvimento pessoal, uma vida consciente, a saúde física, a alimentação saudável, a longevidade, os exercícios físicos — e aqui você também será influenciado positivamente.</p>
+  </div>
+
+  <div class="h3">5 dimensões hackeáveis</div>
+  <div class="cards-3">
+    <div class="mini-card">
+      <div class="mini-label">DIMENSÃO 01</div>
+      <div class="mini-title">Cérebro</div>
+      <div class="mini-text">Aprendizado · habilidades · inteligência prática</div>
+    </div>
+    <div class="mini-card">
+      <div class="mini-label">DIMENSÃO 02</div>
+      <div class="mini-title">Renda · Dinheiro · Tempo</div>
+      <div class="mini-text">Liberdade financeira · gestão de energia</div>
+    </div>
+    <div class="mini-card">
+      <div class="mini-label">DIMENSÃO 03</div>
+      <div class="mini-title">Atenção · Trabalho</div>
+      <div class="mini-text">Foco · produtividade aplicada</div>
+    </div>
+    <div class="mini-card">
+      <div class="mini-label">DIMENSÃO 04</div>
+      <div class="mini-title">Relações · Emoções · Saúde</div>
+      <div class="mini-text">Inteligência emocional · liberdade · negócios</div>
+    </div>
+    <div class="mini-card">
+      <div class="mini-label">DIMENSÃO 05</div>
+      <div class="mini-title">Estratégia · Qualidade de Vida</div>
+      <div class="mini-text">Visão sistêmica · construção de longo prazo</div>
+    </div>
+    <div class="mini-card" style="background:var(--c2)">
+      <div class="mini-label">⚠ PRINCÍPIO</div>
+      <div class="mini-title">Tudo se hackea</div>
+      <div class="mini-text">Cada dimensão pode ser estudada, testada, otimizada.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 07 -->
+<section class="section" id="s7">
+  <span class="section-num">07 · FRASES ÂNCORA</span>
+  <h2 class="section-title">Linguagem da Comunidade</h2>
+  <p class="section-sub">Frases que estruturam o pensamento — verbatim do Eduardo.</p>
+
+  <div class="frase-grid">
+    <div class="frase">"A dor do arrependimento ou a dor da disciplina."</div>
+    <div class="frase">"Sucesso ama velocidade."</div>
+    <div class="frase">"A matilha avança junta — unida."</div>
+    <div class="frase">"Audace Fortuna Sequitur." <span style="font-size:.7em;color:var(--gold);font-style:normal;display:block;margin-top:4px;letter-spacing:.1em">— A SORTE ACOMPANHA OS AUDAZES</span></div>
+    <div class="frase">"Resultado é consequência."</div>
+    <div class="frase">"Quem não bate as metas de curto prazo, nunca bate as de longo prazo."</div>
+    <div class="frase">"Liberdade não é sorte. É engenharia."</div>
+    <div class="frase">"Liberdade não é sorte. É construção — e construção é mais leve em comunidade."</div>
+    <div class="frase">"O ambiente certo muda o destino."</div>
+    <div class="frase">"O ambiente certo faz a disciplina deixar de doer."</div>
+    <div class="frase">"Crescimento deixa de ser pesado quando você não cresce sozinho."</div>
+    <div class="frase">"Quando identidade, ambiente e direção se alinham, evolução se torna inevitável."</div>
+    <div class="frase">"Prosperidade é construída em conjunto."</div>
+    <div class="frase">"Você não precisa carregar tudo sozinho."</div>
+    <div class="frase">"A convivência certa acelera transformação."</div>
+    <div class="frase">"O ambiente molda o futuro das pessoas."</div>
+    <div class="frase">"Modernos no método. Ancestrais no caráter. As duas — ou nada."</div>
+    <div class="frase">"Direção antes da motivação. Ambiente antes da força de vontade."</div>
+    <div class="frase">"Aquele que não senta pra aprender, jamais ficará em pé pra ensinar."</div>
+    <div class="frase">"Exigência é desejo, nunca cobrança imposta."</div>
+  </div>
+
+  <div class="verbatim">
+    <p>"A matilha avança junta — e quem está no meio dela aprende a andar mais longe do que iria sozinho." <em>(Caso não faça sentido usar matilha, substituir por comunidade.)</em></p>
+  </div>
+</section>
+
+<!-- 08 -->
+<section class="section" id="s8">
+  <span class="section-num">08 · MODELO</span>
+  <h2 class="section-title">Modelo Alpha × Modelo Tradicional</h2>
+  <p class="section-sub">A Comunidade não compete com universidades. Compete com o modelo mental de "preciso de diploma para ter vida estável" — substituindo por "preciso de habilidades reais + ambiente + execução para ter vida construída".</p>
+
+  <table class="tbl">
+    <thead>
+      <tr>
+        <th style="width:50%">Modelo Tradicional (Faculdade)</th>
+        <th style="width:50%;color:var(--gold)">Modelo Alpha</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Formação baseada em teoria extensa e pouca aplicação prática</td>
+        <td class="gold">Formação orientada para execução prática desde o primeiro dia</td>
+      </tr>
+      <tr>
+        <td>Processo lento — 4 a 6 anos</td>
+        <td class="gold">Desenvolvimento acelerado com foco em aplicação real, missão real o tempo todo</td>
+      </tr>
+      <tr>
+        <td>Aluno consome conteúdo sem executar no mercado real</td>
+        <td class="gold">Aprendizado baseado em prática, experiência de mercado e construção de resultado</td>
+      </tr>
+      <tr>
+        <td>Estágios apenas na fase final</td>
+        <td class="gold">Participação constante em projetos, desafios e ambientes reais</td>
+      </tr>
+      <tr>
+        <td>Networking aleatório e superficial</td>
+        <td class="gold">Networking estratégico e intencional com pessoas em movimento e alta performance</td>
+      </tr>
+      <tr>
+        <td>Currículos desatualizados, desconectados da nova economia digital</td>
+        <td class="gold">Atualização contínua alinhada às mudanças da economia digital e da tecnologia</td>
+      </tr>
+      <tr>
+        <td>Liderança quase inexistente · oratória, vendas, persuasão, marketing, IA inexistentes</td>
+        <td class="gold">Formação estruturada em liderança, influência, tomada de decisão, produtividade, IA, autoliderança, vendas</td>
+      </tr>
+      <tr>
+        <td>Mentalidade de salário fixo · dependência de uma única fonte de renda</td>
+        <td class="gold">Múltiplas fontes de renda · crescimento exponencial · sem limitação de ganhos · meritocracia</td>
+      </tr>
+      <tr>
+        <td>Diploma sem garantia real de transformação · ubers formados</td>
+        <td class="gold">Transformação baseada em mecanismo, ambiente, execução e acompanhamento constante</td>
+      </tr>
+      <tr>
+        <td>Alto custo · mensalidades · sem ganhar dinheiro durante</td>
+        <td class="gold">Investimento direcionado para desenvolvimento prático focado em resultado</td>
+      </tr>
+      <tr>
+        <td>Identidade de "aluno" · não empreendedor</td>
+        <td class="gold">Identidade como empreendedor, líder e criador de oportunidades</td>
+      </tr>
+      <tr>
+        <td>Avaliação por provas e notas</td>
+        <td class="gold">Mentoria recorrente, cadência diária, acompanhamento próximo</td>
+      </tr>
+      <tr>
+        <td>Tecnologia como suporte básico</td>
+        <td class="gold">IA, automação, CRM, tráfego, sistemas integrados ao centro da operação</td>
+      </tr>
+      <tr>
+        <td>Sala de aula tradicional</td>
+        <td class="gold">Ambiente vivo de crescimento · comunidade ativa · colaboração contínua</td>
+      </tr>
+      <tr>
+        <td>Mercados saturados, competitivos</td>
+        <td class="gold">Autonomia, liberdade operacional, construção de rede</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- 09 -->
+<section class="section" id="s9">
+  <span class="section-num">09 · GOVERNANÇA CULTURAL</span>
+  <h2 class="section-title">A cultura é maior que indivíduos</h2>
+  <p class="section-sub">Pilares que precisam sobreviver ao fundador, aos líderes e às fases de mercado.</p>
+
+  <div class="cards-2">
+    <div class="mini-card">
+      <div class="mini-label">PILAR 01</div>
+      <div class="mini-title">Cultura &gt; Fundador</div>
+      <div class="mini-text">Eduardo é fundador, não dono da cultura. Princípios e valores estão acima dele. Se ele se afastar, a comunidade continua. <em>(Não precisa ficar claro publicamente — fica no manual pessoal e dos sócios.)</em></div>
+    </div>
+    <div class="mini-card">
+      <div class="mini-label">PILAR 02</div>
+      <div class="mini-title">Liderança distribuída</div>
+      <div class="mini-text">Líderes têm autoridade real. Múltiplas vozes ensinam. A marca não orbita uma figura única ou poucas. No começo será mais centralizado, mas a ideia é ir dando autonomia e responsabilidade.</div>
+    </div>
+    <div class="mini-card">
+      <div class="mini-label">PILAR 03</div>
+      <div class="mini-title">Documentação viva</div>
+      <div class="mini-text">Brandbook, manifesto, princípios, métodos, processos — tudo escrito. Cultura sobrevive a transição de pessoas.</div>
+    </div>
+    <div class="mini-card">
+      <div class="mini-label">PILAR 04</div>
+      <div class="mini-title">Independência de veículo</div>
+      <div class="mini-text">Comunidade não depende de uma única empresa (Matrix hoje). Identidade é maior que produto-âncora. <strong>Mas valorizamos muito Matrix, confiamos muito e é nosso foco total.</strong></div>
+    </div>
+    <div class="mini-card">
+      <div class="mini-label">PILAR 05</div>
+      <div class="mini-title">Antifragilidade</div>
+      <div class="mini-text">Crises fortalecem. Cada erro vira ensino. Cultura aprende, ajusta, melhora — sem perder essência.</div>
+    </div>
+    <div class="mini-card">
+      <div class="mini-label">PILAR 06</div>
+      <div class="mini-title">Renovação e atualização contínua</div>
+      <div class="mini-text">Novos líderes surgem aos antigos. Métodos evoluem. Tecnologia é incorporada. A comunidade não congela.</div>
+    </div>
+    <div class="mini-card" style="grid-column:span 2;background:var(--c2)">
+      <div class="mini-label">PILAR 07</div>
+      <div class="mini-title">Princípios não-negociáveis</div>
+      <div class="mini-text">Existem coisas que jamais mudam, mesmo se trouxerem mais dinheiro a curto prazo. <em>(Lista completa na seção 10.)</em></div>
+    </div>
+  </div>
+</section>
+
+<!-- 10 -->
+<section class="section" id="s10">
+  <span class="section-num">10 · PRINCÍPIOS NÃO-NEGOCIÁVEIS</span>
+  <h2 class="section-title">O que jamais muda</h2>
+  <p class="section-sub">Mesmo se trouxerem mais dinheiro a curto prazo — não fazemos.</p>
+
+  <div class="list-block">
+    <ul>
+      <li>Não vender hype</li>
+      <li>Não prometer dinheiro fácil</li>
+      <li>Não criar culto de personalidade</li>
+      <li>Não excluir por gênero/idade</li>
+      <li>Não excluir pessoas por baixo resultado ou baixa performance</li>
+      <li>Não fazer pessoas se sentirem inferior</li>
+      <li>Não diluir mecanismo de transformação</li>
+      <li>Não esconder falhas</li>
+      <li>Não separar performance de acolhimento</li>
+      <li>Não tornar a marca dependente de uma só empresa</li>
+      <li><strong>VERDADE ACIMA DE TUDO</strong></li>
+      <li><strong>CONSCIÊNCIA</strong></li>
+      <li><strong>COMPROMISSO COM FUTURO, SEM MATAR O PRESENTE</strong></li>
+      <li><strong>SAÚDE MENTAL, FAMÍLIA, DEUS</strong></li>
+    </ul>
+  </div>
+</section>
+
+<!-- 11 -->
+<section class="section" id="s11">
+  <span class="section-num">11 · STATUS E RECONHECIMENTOS</span>
+  <h2 class="section-title">Galgar espaço na comunidade</h2>
+  <p class="section-sub">"Aqui você não é obrigado a nada. Para galgar espaço, é necessário merecer — dentro do que realmente contribui para a comunidade."</p>
+
+  <div class="verbatim">
+    <p>Aqui você não é obrigado a nada. Todos são bem-vindos para fazer no seu ritmo. Mas <strong>para galgar espaço na nossa comunidade, não basta apenas crescer no plano de carreira da Matrix</strong> — é necessário merecer, dentro do que realmente contribui para nossa comunidade. Todos são membros, consultores e alunos. Mas para ir para as próximas fases é necessário cumprir alguns critérios.</p>
+  </div>
+
+  <div class="h3">Status reconhecidos (lista bruta — a aprovar)</div>
+  <div class="cards-2">
+    <div class="mini-card">
+      <div class="mini-label">FAIXA 01</div>
+      <div class="mini-title">Iniciado</div>
+      <div class="mini-text">5 cadastros de conta de luz · 3 empreendedores no time · ativo no dia 1 · presença em todos alinhamentos · preenche todos formulários.</div>
+    </div>
+    <div class="mini-card">
+      <div class="mini-label">FAIXA 02</div>
+      <div class="mini-title">Promoter</div>
+      <div class="mini-text">4 semanas seguidas com 20 convidados presentes em apresentações do sistema.</div>
+    </div>
+    <div class="mini-card">
+      <div class="mini-label">FAIXA 03</div>
+      <div class="mini-title">Guardiões</div>
+      <div class="mini-text">Auxilia comunidade.</div>
+    </div>
+    <div class="mini-card">
+      <div class="mini-label">FAIXA 04</div>
+      <div class="mini-title">Sentinela</div>
+      <div class="mini-text">Protege cultura, grupos, organização.</div>
+    </div>
+    <div class="mini-card">
+      <div class="mini-label">FAIXA 05</div>
+      <div class="mini-title">Embaixadores</div>
+      <div class="mini-text">A definir critério.</div>
+    </div>
+    <div class="mini-card">
+      <div class="mini-label">FAIXA 06</div>
+      <div class="mini-title">Construtores</div>
+      <div class="mini-text">A definir critério (também: 4 estrelas, 5 estrelas).</div>
+    </div>
+    <div class="mini-card">
+      <div class="mini-label">FAIXA 07</div>
+      <div class="mini-title">Conselheiro</div>
+      <div class="mini-text">Ajuda estrategicamente.</div>
+    </div>
+    <div class="mini-card">
+      <div class="mini-label">FAIXA 08</div>
+      <div class="mini-title">Centurião</div>
+      <div class="mini-text">Cadastra 10 diretos por mês, por 3 meses consecutivos (60 pessoas no time · 50% das pessoas do time).</div>
+    </div>
+    <div class="mini-card">
+      <div class="mini-label">FAIXA 09</div>
+      <div class="mini-title">Treinadores Oficiais</div>
+      <div class="mini-text">A definir critério.</div>
+    </div>
+    <div class="mini-card">
+      <div class="mini-label">FAIXA 10</div>
+      <div class="mini-title">Mentores</div>
+      <div class="mini-text">A definir critério.</div>
+    </div>
+    <div class="mini-card">
+      <div class="mini-label">FAIXA 11</div>
+      <div class="mini-title">Hunter ★ / Hunter ★★</div>
+      <div class="mini-text">★ 10 cadastros de contas por mês · ★★ 20 cadastros por mês.</div>
+    </div>
+    <div class="mini-card">
+      <div class="mini-label">FAIXA 12</div>
+      <div class="mini-title">Brasão de Consistência · Embaixador Elite</div>
+      <div class="mini-text">A definir critério.</div>
+    </div>
+    <div class="mini-card">
+      <div class="mini-label">FAIXA 13</div>
+      <div class="mini-title">Diplomata · Guardião · Guardião Sênior · Titã</div>
+      <div class="mini-text">Funções acumuláveis · precisa documento na plataforma.</div>
+    </div>
+    <div class="mini-card">
+      <div class="mini-label">EXTRAS</div>
+      <div class="mini-title">Outros nomes propostos</div>
+      <div class="mini-text">Legendário · Cônsul (faz parcerias) · Senado Alpha (participa das decisões) · Diplomata · Hoplita (guerreiro de linha de frente espartano) · FE (Forças Especiais) · PREC (primeiros 10) · Consultor Faixa Preta.</div>
+    </div>
+  </div>
+
+  <div class="h3">Sistema de pontos · gamificação</div>
+  <div class="verbatim">
+    <p>Cada conta cadastrada · 10 pts · cada novo consultor cadastrado · 10 pts · nível X da Matrix em X dias · 20 pts · cada convidado presente na aula · X pts · formar novos graduados · 10 pts · ajudar na estrutura e organização, pesquisas, colaboração · 10 pts · participar dos alinhamentos · X pts · bater tal nível em X dias · tal pontuação · mais de 10 cadastros de consultores em 1 mês · X pts · ativar no dia 1 · X pts · postar story marcando comunidade · X pts.</p>
+    <p>Esse sistema precisa ser organizado. Algumas pontuações valerão pra ser Guardião, outras pra Sentinela, outras pra Treinador. Alguns rankings zeram toda semana, alguns todo mês. Acumulado dá prêmio.</p>
+  </div>
+
+  <div class="h3">Benefícios e reconhecimentos</div>
+  <div class="list-block">
+    <ul>
+      <li>Mural de honra no site da comunidade Alpha</li>
+      <li>Brindes exclusivos · presente nos destaques da comunidade</li>
+      <li>Destaque para mentores · destaque do mês em cada área</li>
+      <li>Certificado digital · certificado físico assinado</li>
+      <li>Imersões com certificado</li>
+      <li>Post mensal no Instagram dos novos · possibilidade de colocar Centurião na bio do Instagram e marcar comunidade</li>
+      <li>Vídeo de depoimento pontua · vídeo de resultado pontua · compartilhar resultado no grupo pontua</li>
+      <li>Reconhecimento nos eventos · viagem de mentoria · pin · mentoria exclusiva · espaço para gravar treinamentos na plataforma</li>
+      <li>Materiais Alpha: agenda · moletom · camiseta com nomes · quadro personalizado · bracelete de borracha · anel exclusivo · jantar fechado com liderança · retiro · pin · medalha · troféu · participar de live e ser entrevistado</li>
+      <li>Banner com cada reconhecimento · foto e nome · compartilhado pela comunidade</li>
+      <li>Reconhecimento de pontos faturados (10 mil · 50 mil · 100 mil pts)</li>
+      <li>Entrega de cheque de faturamento total e cheque de bônus</li>
+      <li>Documentário exclusivo nas viagens feito por videomaker</li>
+    </ul>
+  </div>
+
+  <div class="h3">Listas de destaque</div>
+  <div class="cards-2">
+    <div class="mini-card">
+      <div class="mini-label">TOP 10</div>
+      <div class="mini-title">Recrutadores</div>
+      <div class="mini-text">Lista mensal dos top 10.</div>
+    </div>
+    <div class="mini-card">
+      <div class="mini-label">TOP 10</div>
+      <div class="mini-title">Formadores de líderes diretos</div>
+      <div class="mini-text">Lista mensal dos top 10.</div>
+    </div>
+    <div class="mini-card">
+      <div class="mini-label">TOP 10</div>
+      <div class="mini-title">Cadastros KW em contas de luz</div>
+      <div class="mini-text">Lista mensal dos top 10.</div>
+    </div>
+    <div class="mini-card">
+      <div class="mini-label">DESTAQUE</div>
+      <div class="mini-title">Maiores contratos</div>
+      <div class="mini-text">Lista dos que trouxeram os maiores contratos.</div>
+    </div>
+  </div>
+
+  <div class="h3">Templo dos Imortais</div>
+  <div class="verbatim">
+    <p>Mentoria somente com quem tem uma determinada pontuação. Um <strong>mastermind</strong> quando acaba o alinhamento. Anel personalizado, brasão, capa de slide oficial com pins e reconhecimentos dependendo do nível.</p>
+  </div>
+</section>
+
+<!-- 12 -->
+<section class="section" id="s12">
+  <span class="section-num">12 · ENGENHARIA DA EXPANSÃO</span>
+  <h2 class="section-title">A matemática da liberdade</h2>
+  <p class="section-sub">Sua liberdade financeira é proporcional ao número de líderes que você ajudou a se tornarem livres. Não há atalho fora dessa equação.</p>
+
+  <div class="verbatim">
+    <p>Não é fórmula de marketing de relacionamento — é <strong>mapa de quantas vidas precisam estar transformadas em cada patamar para sustentar a sua</strong>. A meta de 1M significa centenas de pessoas vivendo melhor.</p>
+  </div>
+
+  <table class="tbl">
+    <thead>
+      <tr>
+        <th style="width:25%">Meta mensal</th>
+        <th style="width:37%">Estrutura mínima</th>
+        <th style="width:38%">Estrutura híbrida</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="gold">R$ 5 mil</td><td>1 líder 5k OU rede inicial direta</td><td>10–20 indicações ativas</td></tr>
+      <tr><td class="gold">R$ 10 mil</td><td>1 líder 10k OU 2 líderes 5k</td><td>2 ramos com profundidade</td></tr>
+      <tr><td class="gold">R$ 30 mil</td><td>3 líderes 10k</td><td>1 líder 30k OU 1 líder 20k + 1 líder 10k</td></tr>
+      <tr><td class="gold">R$ 50 mil</td><td>5 líderes 10k</td><td>1 líder 30k + 2 líderes 10k</td></tr>
+      <tr><td class="gold">R$ 100 mil</td><td>10 líderes 10k</td><td>2 líderes 50k OU 1 líder 50k + 5 líderes 10k</td></tr>
+      <tr><td class="gold">R$ 150 mil</td><td>15 líderes 10k</td><td>3 líderes 50k OU 1 líder 100k + auxiliares</td></tr>
+      <tr><td class="gold">R$ 500 mil</td><td>~5 líderes 100k</td><td>10 líderes 50k OU mix de patamares</td></tr>
+      <tr><td class="gold">R$ 1M residual</td><td colspan="2">8–15 líderes 100k · 20–40 líderes 50k · 50–100 líderes 30k · 150–400 líderes 10k</td></tr>
+    </tbody>
+  </table>
+
+  <div class="h3">Estruturas detalhadas</div>
+  <table class="tbl">
+    <thead>
+      <tr>
+        <th style="width:25%">Sua meta</th>
+        <th style="width:25%">Pessoas ganhando R$ 2k</th>
+        <th style="width:25%">Pessoas ganhando R$ 5k</th>
+        <th style="width:25%">Pessoas ganhando R$ 10k</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="gold">R$ 20 mil</td><td>10 pessoas</td><td>4 pessoas</td><td>2 pessoas</td></tr>
+      <tr><td class="gold">R$ 30 mil</td><td>15 pessoas</td><td>6 pessoas</td><td>3 pessoas</td></tr>
+      <tr><td class="gold">R$ 50 mil</td><td>25 pessoas</td><td>10 pessoas</td><td>5 pessoas</td></tr>
+      <tr><td class="gold">R$ 100 mil</td><td>50 pessoas</td><td>20 pessoas</td><td>10 pessoas</td></tr>
+    </tbody>
+  </table>
+
+  <div class="quote-block">
+    <p>"Sua liberdade financeira é proporcional ao número de líderes que você ajudou a se tornarem livres. Não há atalho fora dessa equação. Não há liberdade individual em rede."</p>
+  </div>
+</section>
+
+<!-- 13 -->
+<section class="section" id="s13">
+  <span class="section-num">13 · 3 AMBIENTES</span>
+  <h2 class="section-title">Arquitetura da Comunidade</h2>
+  <p class="section-sub">Intensidades plurais. Nivelamento horizontal. Quem entra é por desejo, não cobrança.</p>
+
+  <div class="quote-block">
+    <p>"Exigência é desejo, nunca cobrança imposta. Quem deseja pode entrar num subgrupo intenso porque quer se desafiar — não porque é cobrado. Quem não entra (ou sai) não é julgado, rebaixado ou pressionado. Quem está dentro não é exaltado publicamente."</p>
+  </div>
+
+  <div class="h3">Ambiente 01 · Núcleo da Comunidade</div>
+  <div class="verbatim">
+    <p><strong>A casa principal.</strong> Todo membro está aqui por padrão. Crescimento no seu ritmo, sem pressão. Acolhe quem chega frágil, quem está em construção, quem está em fase de exploração.</p>
+    <p>Sem metas obrigatórias. Cadência leve: <strong>1 alinhamento por semana, toda segunda-feira 20h</strong>. Foco em pertencimento e direção. Saída e retorno sempre abertos (ou conforme levas).</p>
+  </div>
+
+  <div class="h3">Ambiente 02 · Maratona 90 Dias</div>
+  <div class="verbatim">
+    <p>Programa opcional com metas e tarefas estruturadas — executáveis em tempo parcial. <strong>Você entra porque quer se desafiar, não porque é cobrado.</strong> Se não cumprir, sai sem julgamento.</p>
+    <p>Entrada por inscrição voluntária (janelas trimestrais). Tarefas executáveis em ~2h/dia. Acompanhamento sem exposição pública. Saída a qualquer momento, sem perda de status no Núcleo. Conclusão é celebrada internamente, não usada como ranking.</p>
+  </div>
+
+  <div class="h3">Ambiente 03 · Maratona Explosiva 30 Dias</div>
+  <div class="verbatim">
+    <p>30 dias de <strong>imersão deliberada</strong> para quem quer se desafiar, ter aprendizado acelerado, desenvolver habilidades em ritmo de imersão e provocar crescimento exponencial.</p>
+    <p>Estrutura inspirada no método <strong>Recruit 20 in 30 days do Eric Worre</strong>, adaptada aos princípios Alpha.</p>
+  </div>
+
+  <div class="verbatim">
+    <p><strong>OBJETIVO:</strong> encontrar líderes que gerem identificação com vários perfis (homem mais velho, homem mais jovem, mãe de filho pequeno, etc.). Incentivamos as pessoas a darem seu melhor e reconhecemos os resultados — mas <em>sempre entendendo que cada pessoa tem sua realidade e suas possibilidades</em>.</p>
+  </div>
+</section>
+
+<!-- 14 -->
+<section class="section" id="s14">
+  <span class="section-num">14 · RITUAIS E EVENTOS</span>
+  <h2 class="section-title">A cadência viva</h2>
+  <p class="section-sub">A cultura é mantida pela presença constante dos líderes e fundador.</p>
+
+  <div class="cards-2">
+    <div class="mini-card">
+      <div class="mini-label">RITUAL</div>
+      <div class="mini-title">Plataforma · Ritual de Início</div>
+      <div class="mini-text">Logo na introdução · vela · prato · fogo nos maus hábitos · criar manifesto do sucesso e compromisso · divulgar redes sociais.</div>
+    </div>
+    <div class="mini-card">
+      <div class="mini-label">RITUAL</div>
+      <div class="mini-title">Onboarding Ao Vivo · Quinzenal</div>
+      <div class="mini-text">Treinamento quinzenal de onboard ao vivo para novos.</div>
+    </div>
+    <div class="mini-card">
+      <div class="mini-label">EVENTO</div>
+      <div class="mini-title">Imersão Mensal "Bicho Pega"</div>
+      <div class="mini-text">Para todos · Eduardo treinando + pessoas que se destacaram + linha ascendente + convidados especiais.</div>
+    </div>
+    <div class="mini-card">
+      <div class="mini-label">EVENTO</div>
+      <div class="mini-title">Treinamento Aberto Mensal</div>
+      <div class="mini-text">1 vez por mês · com certificado · para trazer convidados e bombar · assunto de interesse público.</div>
+    </div>
+    <div class="mini-card">
+      <div class="mini-label">EVENTO</div>
+      <div class="mini-title">GC nas Cidades</div>
+      <div class="mini-text">Opção de encontro mensal de mastermind nas cidades.</div>
+    </div>
+    <div class="mini-card">
+      <div class="mini-label">RETIRO</div>
+      <div class="mini-title">Retiro Sítio Ventura · 6/6 meses</div>
+      <div class="mini-text">Para membros · treinamento · práticas · banho de gelo · dinâmicas · quem sabe consagração de medicinas da floresta · conexão.</div>
+    </div>
+    <div class="mini-card">
+      <div class="mini-label">RITUAL</div>
+      <div class="mini-title">Carta de Eduardo</div>
+      <div class="mini-text">Todo novo membro recebe carta de Eduardo por email · toda nova graduação recebe carta por email e WhatsApp oficial.</div>
+    </div>
+    <div class="mini-card">
+      <div class="mini-label">DEPOIMENTO</div>
+      <div class="mini-title">Grupo de Compartilhamento</div>
+      <div class="mini-text">Grupo somente para postar depoimentos, números, frustrações.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 15 -->
+<section class="section" id="s15">
+  <span class="section-num">15 · TECNOLOGIA</span>
+  <h2 class="section-title">Ferramentas que a Comunidade hackeia</h2>
+  <p class="section-sub">Inclusive nós fazemos o tráfego para a pessoa. Fazemos muitas coisas para as pessoas. A pessoa não precisa aprender — nós proporcionamos de forma simplificada.</p>
+
+  <div class="h3">Tecnologia operacional</div>
+  <div class="list-block">
+    <ul>
+      <li>IA aplicada</li>
+      <li>Automação</li>
+      <li>CRM</li>
+      <li>Marketing digital</li>
+      <li>Dados · dashboards · métricas</li>
+      <li>Tráfego · scripts · protocolos</li>
+    </ul>
+  </div>
+
+  <div class="h3">Tecnologia interna (do humano)</div>
+  <div class="list-block">
+    <ul>
+      <li>Neurociência aplicada</li>
+      <li>Inteligência emocional</li>
+      <li>Protocolos de sono · foco · recuperação</li>
+      <li>Sistemas de aprendizado acelerado</li>
+      <li>Gestão de motivações · dores · limitações</li>
+    </ul>
+  </div>
+
+  <div class="verbatim">
+    <p>FOCO É CONSTRUÇÃO DE RESULTADOS NA MATRIX. Mas não tem como fugir de nada disso — saúde, espiritualidade, biohacking, fé em Deus, princípios cristãos, sabedoria de Salomão etc. impactam nos negócios. Saúde mental e física impactam nos negócios. A felicidade impacta nos negócios.</p>
+    <p>Na plataforma teremos materiais de saúde, emagrecimento, produtividade, shape, performance, saúde integrativa — <strong>não como foco ou obrigatoriedade, mas disponível</strong> caso queiram aprofundar.</p>
+    <p><em>"Não adianta ter sucesso profissional e estar doente."</em></p>
+  </div>
+</section>
+
+<!-- 16 -->
+<section class="section" id="s16">
+  <span class="section-num">16 · INIMIGOS</span>
+  <h2 class="section-title">Contra o que lutamos</h2>
+  <p class="section-sub">O inimigo é a alienação. A ilusão. A vida sem propósito.</p>
+
+  <div class="verbatim">
+    <p>O inimigo é a <strong>alienação</strong> — alienação de que a pessoa não pode aprender, que ela não pode prosperar, que ela tem que seguir o que todo mundo segue, de não acreditar em si.</p>
+    <p>Inimigo também são os lugares que <strong>alienam as pessoas, que iludem as pessoas, mantêm elas presas num ciclo de escassez, dependência</strong>. Numa vida sem sentido, sem propósito, fazendo dinheiro só por fazer, tendo que trabalhar no que não gosta, ganhando pouco, sem expectativa de futuro, sem possibilidade de liberdade.</p>
+    <p>Não é trabalhando duro que a pessoa muda a realidade financeira dela. Ela pode ficar capinando pátio, lavando prédio correndo risco de vida, pegando chuva, sol, prejudicando sua saúde — ou em ambientes tóxicos de vendas, com metas, pressão, liderança tóxica, onde a pessoa que não consegue se sente excluída.</p>
+    <p><strong>Aqui não excluímos ninguém</strong>, mas também não passamos a mão na cabeça de ninguém. <em>Damos condições para que as pessoas evoluam, cresçam, superem suas limitações.</em></p>
+  </div>
+
+  <div class="quote-block">
+    <p>"Eu prefiro muito mais esse estilo de vida onde faço dinheiro aprendendo, criando, ajudando pessoas, ajudando o planeta — rodeado de pessoas que têm os mesmos valores, cultura de ajudar, cultura de incentivar, cultura de ser positiva sem positivismo tóxico, sendo realista, sendo maduro, dando oportunidade para as pessoas."</p>
+  </div>
+</section>
+
+<!-- 17 -->
+<section class="section" id="s17">
+  <span class="section-num">17 · CÓDIGOS EXTERNOS ADOTADOS</span>
+  <h2 class="section-title">Bushidô e os 4 Compromissos Toltecas</h2>
+  <p class="section-sub">Sabedorias antigas que adotamos como pilares de conduta.</p>
+
+  <div class="h3">Os 4 Compromissos Toltecas (Don Miguel Ruiz)</div>
+  <div class="cards-2">
+    <div class="mini-card">
+      <div class="mini-label">COMPROMISSO 01</div>
+      <div class="mini-title">Seja impecável com sua palavra</div>
+      <div class="mini-text">Fale com integridade e diga apenas o que você quer dizer. Evite usar palavras para falar mal de si mesmo ou fofocar sobre os outros. Use o poder da sua energia na direção da verdade e do amor.</div>
+    </div>
+    <div class="mini-card">
+      <div class="mini-label">COMPROMISSO 02</div>
+      <div class="mini-title">Não leve nada para o lado pessoal</div>
+      <div class="mini-text">O que os outros dizem e fazem é uma projeção da realidade deles, não da sua. Quando você se torna imune às opiniões e ações dos outros, evita sofrimentos desnecessários.</div>
+    </div>
+    <div class="mini-card">
+      <div class="mini-label">COMPROMISSO 03</div>
+      <div class="mini-title">Não tire conclusões</div>
+      <div class="mini-text">Tenha coragem de fazer perguntas e expressar o que você realmente quer. Comunique-se com clareza para evitar mal-entendidos, tristeza e dramas.</div>
+    </div>
+    <div class="mini-card">
+      <div class="mini-label">COMPROMISSO 04</div>
+      <div class="mini-title">Sempre dê o melhor de si</div>
+      <div class="mini-text">O seu melhor mudará de momento para momento. Independentemente da circunstância, apenas dê o seu melhor, e você evitará o julgamento e o arrependimento.</div>
+    </div>
+  </div>
+
+  <div class="h3">Bushidô · As 7 Virtudes (Caminho do Guerreiro)</div>
+  <div class="cards-3">
+    <div class="mini-card">
+      <div class="mini-label">VIRTUDE 01 · GI</div>
+      <div class="mini-title">Retidão / Justiça</div>
+      <div class="mini-text">Tomar decisões corretas com base na razão e na verdade. Agir com justiça e retidão em todas as situações.</div>
+    </div>
+    <div class="mini-card">
+      <div class="mini-label">VIRTUDE 02 · YŪ</div>
+      <div class="mini-title">Coragem</div>
+      <div class="mini-text">Enfrentar o perigo, a dificuldade e o medo com bravura e atitude heroica, sem hesitar.</div>
+    </div>
+    <div class="mini-card">
+      <div class="mini-label">VIRTUDE 03 · JIN</div>
+      <div class="mini-title">Benevolência</div>
+      <div class="mini-text">Demonstrar compaixão e amor ao próximo. Usar a força e o poder para proteger, não para oprimir.</div>
+    </div>
+    <div class="mini-card">
+      <div class="mini-label">VIRTUDE 04 · REI</div>
+      <div class="mini-title">Respeito / Educação</div>
+      <div class="mini-text">Tratar todos com dignidade e educação, inclusive os adversários. A verdadeira força mostra-se na cortesia.</div>
+    </div>
+    <div class="mini-card">
+      <div class="mini-label">VIRTUDE 05 · MAKOTO</div>
+      <div class="mini-title">Honestidade / Sinceridade</div>
+      <div class="mini-text">Dizer a verdade acima de tudo. A palavra de um samurai era considerada tão valiosa quanto um contrato assinado.</div>
+    </div>
+    <div class="mini-card">
+      <div class="mini-label">VIRTUDE 06 · MEIYO</div>
+      <div class="mini-title">Honra</div>
+      <div class="mini-text">Viver e morrer com dignidade, mantendo a integridade pessoal em todas as ações.</div>
+    </div>
+    <div class="mini-card" style="grid-column:span 3">
+      <div class="mini-label">VIRTUDE 07 · CHŪGI</div>
+      <div class="mini-title">Lealdade</div>
+      <div class="mini-text">Ser absolutamente fiel àqueles sob sua proteção e aos seus mestres ou senhores. <em>Esse código de honra a Comunidade Alpha segue também — terá em PDF com identidade visual da comunidade para as pessoas baixarem.</em></div>
+    </div>
+  </div>
+</section>
+
+<!-- 18 -->
+<section class="section" id="s18">
+  <span class="section-num">18 · DECISÕES E PENDÊNCIAS</span>
+  <h2 class="section-title">O que falta decidir</h2>
+  <p class="section-sub">Decisões verbatim do brain dump — aguardando refinamento.</p>
+
+  <div class="cards-2">
+    <div class="mini-card">
+      <div class="mini-label">PENDÊNCIA 01</div>
+      <div class="mini-title">Símbolo da comunidade</div>
+      <div class="mini-text"><em>"Não necessariamente o símbolo da comunidade seja um lobo ou matilha — estou aberto depois a sugestão mais válida ao contexto. Mas confesso que me atrai muito."</em></div>
+    </div>
+    <div class="mini-card">
+      <div class="mini-label">PENDÊNCIA 02</div>
+      <div class="mini-title">4 Brandbooks (em modelos separados)</div>
+      <div class="mini-text">1) Guia pessoal só meu · 2) Para sócios · 3) Para equipe próxima · 4) Integrando 100% argumentos da Matrix, benefícios do produto, mercado de energia.</div>
+    </div>
+    <div class="mini-card">
+      <div class="mini-label">PENDÊNCIA 03</div>
+      <div class="mini-title">Cores e logo</div>
+      <div class="mini-text">"Quero sugestões de cores e por quê. Quero sugestão de logos e por quê — mesmo estando pré-decidido e inclinado com o lobo, matilha, vários lobos."</div>
+    </div>
+    <div class="mini-card">
+      <div class="mini-label">PENDÊNCIA 04</div>
+      <div class="mini-title">Vocabulário interno</div>
+      <div class="mini-text">"Sugestões de vocabulário interno dos membros — base de coisas que eu falo, frases nossas. Precisa ficar top."</div>
+    </div>
+    <div class="mini-card">
+      <div class="mini-label">PENDÊNCIA 05</div>
+      <div class="mini-title">Onde os membros conversam</div>
+      <div class="mini-text">"Talvez grupo no Facebook ou outro lugar — aceito sugestões. Para membros conversarem entre si."</div>
+    </div>
+    <div class="mini-card">
+      <div class="mini-label">PENDÊNCIA 06</div>
+      <div class="mini-title">Grupos de Foco (GC)</div>
+      <div class="mini-text">Grupos com líder, cobrados, relatórios — independente de equipe. Apenas para quem quer.</div>
+    </div>
+    <div class="mini-card">
+      <div class="mini-label">PENDÊNCIA 07</div>
+      <div class="mini-title">Treinamentos pelo time</div>
+      <div class="mini-text">Um dia do mês só com treinamentos de pessoas do time que estão tendo resultados específicos — gerar pertencimento.</div>
+    </div>
+    <div class="mini-card">
+      <div class="mini-label">PENDÊNCIA 08</div>
+      <div class="mini-title">Agente de IA</div>
+      <div class="mini-text">"Mais pra frente termos um agente de IA que interaja com os consultores e com os convidados."</div>
+    </div>
+    <div class="mini-card">
+      <div class="mini-label">PENDÊNCIA 09</div>
+      <div class="mini-title">Formulários de equipe</div>
+      <div class="mini-text">Onboard · metas mensais · feedbacks · feedbacks anônimos · formulários da agenda · consultor insere nome completo e WhatsApp dos convidados.</div>
+    </div>
+    <div class="mini-card">
+      <div class="mini-label">PENDÊNCIA 10</div>
+      <div class="mini-title">Onboarding completo</div>
+      <div class="mini-text">Boas-vindas calorosas · vídeo · dados (nome, WhatsApp, email, Instagram) · PDF com links · horário disponível · profissão · renda · expectativa · horas de dedicação · objetivos · comprometimento · data de aniversário.</div>
+    </div>
+    <div class="mini-card">
+      <div class="mini-label">PENDÊNCIA 11</div>
+      <div class="mini-title">Números da Matrix</div>
+      <div class="mini-text">Verificar com plano de marketing real: quantas pessoas, contas de luz em kW, líderes ganhando X para chegar a 1M residual. Não inventar números.</div>
+    </div>
+    <div class="mini-card">
+      <div class="mini-label">PENDÊNCIA 12</div>
+      <div class="mini-title">Instagram · banners</div>
+      <div class="mini-text">Banner de boas-vindas para cada novo membro · foto + nome + frase-âncora · consentimento coletado no onboarding · marcos viram post.</div>
+    </div>
+    <div class="mini-card">
+      <div class="mini-label">PENDÊNCIA 13</div>
+      <div class="mini-title">Manifesto na plataforma</div>
+      <div class="mini-text">A pessoa faz o manifesto. Planner com valores, metas diárias de estudo, filosofia. Cada decisão fundamentada por princípios. Alinhados com Jesus Cristo, mas sem falar muito disso.</div>
+    </div>
+    <div class="mini-card">
+      <div class="mini-label">PENDÊNCIA 14</div>
+      <div class="mini-title">Projeto social</div>
+      <div class="mini-text">"Projeto social na Comunidade Alpha." (Ideia em aberto.)</div>
+    </div>
+  </div>
+
+  <div class="quote-block">
+    <p>"Tudo que citei exige aprovação. Quero sugestões de mais nomes, sugestões do que pontua, por quanto tempo, prêmios etc. Registrar em pasta de decisões — somente sobre reconhecimentos e status da Comunidade Alpha — pode criar uma pasta só pra isso com arquivo HTTP interativo que vai ser atualizado e precisa de aprovação."</p>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-brand">COMUNIDADE ALPHA · ORIGINAL · VERBATIM</div>
+  <p>Documento 100% extraído do brain dump de Eduardo Ferreira</p>
+  <p>Fonte primária: <code>BASE-COMUNIDADE-ALPHA.docx</code> · 15 blocos · 522 parágrafos · 2026-05-18</p>
+  <p>Audace Fortuna Sequitur</p>
+</footer>
+
+</body>
+</html>

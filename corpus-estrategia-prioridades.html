@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Corpus Eduardo · Estratégia Brutalmente Honesta · Comunidade Alpha</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,700;0,6..96,900;1,6..96,400;1,6..96,700&family=Inter:wght@300;400;500;600;700;800&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg: #060E14;
+  --c1: #0D1F2D;
+  --c2: #152B3D;
+  --c3: #1E3A50;
+  --gold: #C8A951;
+  --gold-l: #E0C57A;
+  --cream: #F5F0E6;
+  --white: #FFFFFF;
+  --red: #B85450;
+  --green: #5A8F5A;
+  --muted: rgba(245,240,230,.55);
+  --border: rgba(200,169,81,.18);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--white);font-family:'Inter',sans-serif;font-size:15px;line-height:1.65}
+
+/* ── NAV ──────────────────────────────────────────────── */
+.nav{
+  position:sticky;top:0;z-index:100;
+  background:rgba(6,14,20,.96);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+  padding:14px 8vw;display:flex;justify-content:space-between;align-items:center;gap:24px;
+}
+.nav-brand{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:13px;letter-spacing:.22em;color:var(--gold);
+}
+.nav-links{display:flex;gap:24px;flex-wrap:wrap}
+.nav-links a{
+  font-size:11px;font-weight:600;color:var(--muted);text-decoration:none;
+  letter-spacing:.05em;transition:.2s;
+}
+.nav-links a:hover{color:var(--gold)}
+
+/* ── HERO ──────────────────────────────────────────────── */
+.hero{
+  padding:100px 8vw 80px;
+  background:linear-gradient(180deg,var(--c1) 0%,var(--bg) 100%);
+  position:relative;overflow:hidden;
+  border-bottom:1px solid var(--border);
+}
+.hero::before{
+  content:'α';
+  position:absolute;right:-3vw;top:-2vw;
+  font-family:'Bodoni Moda',serif;font-size:38vw;font-weight:900;
+  color:rgba(200,169,81,.03);line-height:1;
+  pointer-events:none;
+}
+.hero-inner{position:relative;z-index:1;max-width:900px}
+.hero-label{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:12px;letter-spacing:.3em;color:var(--gold);
+  margin-bottom:24px;
+}
+.hero h1{
+  font-family:'Bodoni Moda',serif;
+  font-size:clamp(2.4rem,5.5vw,4.6rem);
+  font-weight:900;line-height:.98;
+  margin-bottom:20px;letter-spacing:-.01em;
+}
+.hero-sub{
+  font-family:'Bodoni Moda',serif;
+  font-style:italic;
+  font-size:clamp(1.2rem,2.2vw,1.7rem);
+  color:var(--gold-l);margin-bottom:32px;line-height:1.3;
+}
+.hero-rule{width:50px;height:2px;background:var(--gold);margin-bottom:28px;opacity:.7}
+.hero-body{
+  font-size:clamp(.95rem,1.3vw,1.05rem);
+  line-height:1.85;color:var(--muted);max-width:660px;
+}
+.hero-body strong{color:var(--white);font-weight:600}
+
+/* ── SECTION ───────────────────────────────────────────── */
+.section{padding:72px 8vw;border-bottom:1px solid var(--border)}
+.section-num{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:11px;letter-spacing:.28em;color:var(--gold);
+  margin-bottom:12px;display:block;
+}
+.section-title{
+  font-family:'Bodoni Moda',serif;
+  font-size:clamp(1.7rem,3vw,2.4rem);
+  font-weight:900;line-height:1.1;margin-bottom:14px;
+  color:var(--white);
+}
+.section-sub{
+  font-family:'Bodoni Moda',serif;
+  font-style:italic;
+  font-size:clamp(1rem,1.4vw,1.2rem);
+  color:var(--gold-l);margin-bottom:36px;
+}
+
+/* ── CARDS ─────────────────────────────────────────────── */
+.cards{display:grid;gap:1px;background:var(--border)}
+.card{background:var(--c1);padding:26px 28px}
+.card-label{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:10px;letter-spacing:.25em;color:var(--gold);
+  margin-bottom:6px;
+}
+.card-title{font-size:1rem;font-weight:700;color:var(--white);margin-bottom:8px;line-height:1.3}
+.card-text{font-size:.88rem;color:var(--muted);line-height:1.7}
+.card-text strong{color:var(--gold-l);font-weight:600}
+
+.grid-4{grid-template-columns:repeat(4,1fr)}
+.grid-3{grid-template-columns:repeat(3,1fr)}
+.grid-2{grid-template-columns:1fr 1fr}
+.grid-1{grid-template-columns:1fr}
+
+/* ── TABLE ─────────────────────────────────────────────── */
+.tbl{width:100%;border-collapse:collapse;margin-top:8px}
+.tbl th{
+  background:var(--c2);text-align:left;padding:14px 16px;
+  font-family:'Bebas Neue',sans-serif;font-size:11px;letter-spacing:.18em;
+  color:var(--gold);font-weight:400;border-bottom:1px solid var(--border);
+}
+.tbl td{padding:14px 16px;border-bottom:1px solid rgba(200,169,81,.08);font-size:.88rem;vertical-align:top;color:var(--muted);line-height:1.6}
+.tbl td strong{color:var(--white)}
+.tbl td.gold{color:var(--gold-l);font-weight:600}
+.tbl tr:last-child td{border-bottom:none}
+
+/* ── BRUTAL BLOCK ──────────────────────────────────────── */
+.brutal{
+  background:linear-gradient(135deg,#1A0B0B 0%,#0D1F2D 100%);
+  border:1px solid rgba(184,84,80,.35);
+  padding:36px 36px;margin:24px 0;
+  position:relative;
+}
+.brutal::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;
+  width:3px;background:var(--red);
+}
+.brutal-label{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:10px;letter-spacing:.28em;color:var(--red);
+  margin-bottom:10px;
+}
+.brutal p{font-size:1rem;line-height:1.75;color:var(--cream)}
+.brutal p strong{color:var(--white);font-weight:700}
+.brutal p+p{margin-top:14px}
+
+/* ── PRIORITY BLOCK ────────────────────────────────────── */
+.prio{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);margin-top:24px}
+.prio-col{background:var(--c1);padding:28px 26px}
+.prio-col h3{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:14px;letter-spacing:.18em;color:var(--gold);
+  margin-bottom:6px;
+}
+.prio-col .col-tag{
+  font-family:'Bodoni Moda',serif;font-style:italic;
+  font-size:.95rem;color:var(--gold-l);margin-bottom:24px;
+}
+.prio-item{
+  padding:16px 0;border-bottom:1px solid rgba(200,169,81,.1);
+  display:grid;grid-template-columns:32px 1fr;gap:14px;
+}
+.prio-item:last-child{border-bottom:none;padding-bottom:0}
+.prio-item:first-child{padding-top:0}
+.prio-num{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:1.7rem;color:var(--gold);line-height:1;
+}
+.prio-text h4{font-size:.95rem;font-weight:700;color:var(--white);margin-bottom:4px;line-height:1.3}
+.prio-text p{font-size:.8rem;color:var(--muted);line-height:1.6}
+
+/* ── PHASE TIMELINE ────────────────────────────────────── */
+.timeline{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);margin-top:8px}
+.phase{background:var(--c1);padding:32px 28px;position:relative}
+.phase-num{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:2.6rem;color:var(--gold);line-height:1;margin-bottom:4px;
+}
+.phase-label{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:10px;letter-spacing:.22em;color:var(--gold-l);margin-bottom:14px;
+}
+.phase-title{font-size:1rem;font-weight:700;color:var(--white);margin-bottom:14px;letter-spacing:.02em}
+.phase ul{list-style:none;padding:0}
+.phase li{
+  font-size:.85rem;color:var(--muted);padding-left:14px;position:relative;
+  margin-bottom:8px;line-height:1.6;
+}
+.phase li::before{content:'›';position:absolute;left:0;top:0;color:var(--gold);font-weight:700}
+.phase-out{
+  margin-top:18px;padding:12px 14px;
+  background:rgba(200,169,81,.08);border-left:2px solid var(--gold);
+  font-size:.82rem;color:var(--gold-l);line-height:1.5;
+}
+.phase-out strong{color:var(--white)}
+
+/* ── COMPARE ───────────────────────────────────────────── */
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);margin-top:24px}
+.comp-side{padding:32px 28px}
+.comp-lose{background:linear-gradient(180deg,#1A0B0B 0%,var(--c1) 100%)}
+.comp-win{background:linear-gradient(180deg,#0E1F18 0%,var(--c1) 100%)}
+.comp-label{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:10px;letter-spacing:.26em;margin-bottom:6px;
+}
+.comp-lose .comp-label{color:var(--red)}
+.comp-win .comp-label{color:var(--green)}
+.comp-title{font-family:'Bodoni Moda',serif;font-size:1.4rem;font-weight:900;color:var(--white);margin-bottom:20px;line-height:1.15}
+.comp-side ul{list-style:none;padding:0}
+.comp-side li{
+  font-size:.88rem;color:var(--muted);padding-left:20px;position:relative;
+  margin-bottom:12px;line-height:1.6;
+}
+.comp-lose li::before{content:'✕';position:absolute;left:0;top:0;color:var(--red);font-weight:700}
+.comp-win li::before{content:'✓';position:absolute;left:0;top:0;color:var(--green);font-weight:700}
+
+/* ── DECISION BLOCK ────────────────────────────────────── */
+.decisions{display:flex;flex-direction:column;gap:1px;background:var(--border);margin-top:8px}
+.dec{background:var(--c1);padding:24px 28px;display:grid;grid-template-columns:40px 1fr;gap:18px;align-items:start}
+.dec-num{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:var(--gold);line-height:1}
+.dec-text h4{font-size:1rem;font-weight:700;color:var(--white);margin-bottom:6px}
+.dec-text p{font-size:.88rem;color:var(--muted);line-height:1.6}
+
+/* ── FOOTER ────────────────────────────────────────────── */
+.footer{padding:36px 8vw;background:var(--bg);text-align:center}
+.footer-brand{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:14px;letter-spacing:.25em;color:var(--gold);margin-bottom:6px;
+}
+.footer p{font-size:.78rem;color:var(--muted)}
+
+/* ── RESPONSIVE ────────────────────────────────────────── */
+@media(max-width:880px){
+  .nav{flex-direction:column;align-items:flex-start;gap:8px;padding:12px 5vw}
+  .nav-links{gap:12px}
+  .hero,.section,.footer{padding-left:5vw;padding-right:5vw}
+  .hero{padding-top:60px;padding-bottom:60px}
+  .grid-4,.grid-3,.grid-2,.prio,.timeline,.compare{grid-template-columns:1fr}
+  .tbl{font-size:.78rem}
+  .tbl th,.tbl td{padding:10px 8px}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-brand">CORPUS · ESTRATÉGIA ALPHA</div>
+  <div class="nav-links">
+    <a href="#verdade">A Verdade</a>
+    <a href="#ativo">O Ativo</a>
+    <a href="#gargalo">Gargalo</a>
+    <a href="#objetivos">3 Objetivos</a>
+    <a href="#prioridades">Prioridades</a>
+    <a href="#plano">90 Dias</a>
+    <a href="#trade">Perde × Ganha</a>
+    <a href="#nao">Não Faça</a>
+    <a href="#decisoes">Decisões</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="verdade">
+  <div class="hero-inner">
+    <div class="hero-label">COMUNIDADE ALPHA · ESTRATÉGIA BRUTALMENTE HONESTA · 2026-05-19</div>
+    <h1>VOCÊ TEM<br>600 HORAS DE OURO.<br>E ZERO MINERAÇÃO.</h1>
+    <p class="hero-sub">10 anos de IP autoral parados num pendrive não geram autoridade, não constroem Matrix, não sustentam Alpha.</p>
+    <div class="hero-rule"></div>
+    <p class="hero-body">Este documento é o que você precisa ouvir, não o que é confortável. Cruza as <strong>duas análises anteriores</strong> com seus três objetivos reais (<strong>Comunidade Alpha · Matrix · Autoridade em redes</strong>) e remove tudo que não destrava nada. Sem cronograma fofo, sem listas de 50 ideias. Só o que importa, na ordem certa.</p>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════
+     SECTION 1 · O ATIVO
+═════════════════════════════════════════════════════════════════ -->
+<section class="section" id="ativo">
+  <span class="section-num">01 · O ATIVO</span>
+  <h2 class="section-title">O que você tem que ninguém pode copiar</h2>
+  <p class="section-sub">Vamos quantificar antes de qualificar.</p>
+
+  <div class="cards grid-4">
+    <div class="card">
+      <div class="card-label">VOLUME</div>
+      <div class="card-title">600 horas de conteúdo</div>
+      <div class="card-text">350 vídeos já transcritos · 250 em saúde/performance ainda não transcritos · 10 anos de produção contínua.</div>
+    </div>
+    <div class="card">
+      <div class="card-label">PROPRIEDADE INTELECTUAL</div>
+      <div class="card-title">6 frameworks nomeados</div>
+      <div class="card-text">5 Vetores · 3 Pilares · 7 Princípios · 4 Níveis da Matilha · 5 Sistemas Vivos · 3 Arquétipos. <strong>Maior parte dos players tem 1 ou 2.</strong></div>
+    </div>
+    <div class="card">
+      <div class="card-label">CAPITAL SIMBÓLICO</div>
+      <div class="card-title">Biografia não-fabricável</div>
+      <div class="card-text">AMAN (5 anos internato) + 10 anos de judô em alta performance + biohacker + R$500k+ em educação documentada.</div>
+    </div>
+    <div class="card">
+      <div class="card-label">POSICIONAMENTO</div>
+      <div class="card-title">Território único</div>
+      <div class="card-text">Cruzamento "ancestral + digital + militar + biohacker" — <strong>ninguém ocupa esse espaço no Brasil.</strong></div>
+    </div>
+  </div>
+
+  <div class="cards grid-3" style="margin-top:1px">
+    <div class="card">
+      <div class="card-label">BRANDBOOK</div>
+      <div class="card-title">28 páginas canônicas</div>
+      <div class="card-text">Identidade · princípios · hierarquia já formalizadas. Falta o "carne" tático (os 350 .txt resolvem).</div>
+    </div>
+    <div class="card">
+      <div class="card-label">REDE ATIVA</div>
+      <div class="card-title">Aliança + Sócios</div>
+      <div class="card-text">Eduardo × Lucas Araújo + Matrix em formação + sócios da Alpha — alavancagem pronta para usar.</div>
+    </div>
+    <div class="card">
+      <div class="card-label">COMUNIDADE</div>
+      <div class="card-title">Alpha em construção</div>
+      <div class="card-text">Modelo definido (4 níveis, 5 sistemas), avatar mapeado, fundação ideológica clara. Falta operação.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════
+     SECTION 2 · A VERDADE NUA
+═════════════════════════════════════════════════════════════════ -->
+<section class="section" id="gargalo">
+  <span class="section-num">02 · A VERDADE NUA</span>
+  <h2 class="section-title">O gargalo único que trava tudo</h2>
+  <p class="section-sub">Você não tem problema de IP. Você tem problema de estrutura sobre o IP.</p>
+
+  <div class="brutal">
+    <div class="brutal-label">⚠ DIAGNÓSTICO BRUTAL</div>
+    <p><strong>Você produziu por 10 anos sem nunca construir o sistema para alavancar essa produção.</strong> Cada post hoje toma seu tempo. Cada curso é começado do zero. Cada aluno faz a mesma pergunta. O Matrix está sendo desenhado sem o ativo que ele precisa. As redes sociais dependem de você gravar mais — quando você já tem 600 horas paradas.</p>
+    <p>O ativo está aqui. <strong>O sistema para extrair valor dele, não.</strong></p>
+    <p>Sem indexar os 350 .txt: nenhum livro sai sólido. Nenhum currículo Alpha vai além do brandbook. Matrix vira ChatGPT genérico. Redes sociais continuam erráticas dependendo do seu humor. Os 10 anos continuam empoeirando enquanto você produz mais.</p>
+    <p style="margin-top:18px;color:var(--gold-l);font-style:italic;font-family:'Bodoni Moda',serif;font-size:1.1rem">Produzir mais sem extrair o que existe é multiplicar caos. Esse é o erro silencioso que custa anos.</p>
+  </div>
+
+  <div class="cards grid-2" style="margin-top:32px">
+    <div class="card">
+      <div class="card-label">SITUAÇÃO ATUAL</div>
+      <div class="card-title">Você é o gargalo</div>
+      <div class="card-text">Tudo passa por você. Cada conteúdo. Cada resposta. Cada decisão. Sua escala é seu tempo — que é finito.</div>
+    </div>
+    <div class="card">
+      <div class="card-label">SITUAÇÃO COM CORPUS INDEXADO</div>
+      <div class="card-title">Você é a fonte, o sistema entrega</div>
+      <div class="card-text">Você grava porque quer, não porque precisa. O corpus alimenta posts, cursos, Matrix, líderes, IA. Seu tempo vira escolha, não obrigação.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════
+     SECTION 3 · 3 OBJETIVOS × CORPUS
+═════════════════════════════════════════════════════════════════ -->
+<section class="section" id="objetivos">
+  <span class="section-num">03 · 3 OBJETIVOS × O CORPUS</span>
+  <h2 class="section-title">Como o corpus resolve seus 3 objetivos reais</h2>
+  <p class="section-sub">Comunidade Alpha · Matrix · Autoridade em redes. Cada um precisa do mesmo ativo, de forma diferente.</p>
+
+  <table class="tbl">
+    <thead>
+      <tr>
+        <th style="width:18%">Objetivo</th>
+        <th style="width:36%">O que o corpus destrava</th>
+        <th style="width:32%">Sem o corpus indexado</th>
+        <th style="width:14%">Prioridade</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>COMUNIDADE ALPHA</strong><br><span style="color:var(--gold-l)">"a casa"</span></td>
+        <td>Currículo extraído (não inventado) · Biblioteca interna buscável · Material para Líderes ministrarem · Onboarding sólido · Cápsulas de 5min para reuniões · Justifica mensalidade</td>
+        <td>Comunidade vira grupo. Líderes não têm material. Onboarding fica raso. Retenção cai.</td>
+        <td class="gold">ALTA</td>
+      </tr>
+      <tr>
+        <td><strong>MATRIX</strong><br><span style="color:var(--gold-l)">"o veículo digital"</span></td>
+        <td>Eduardo AI (RAG do corpus) · Agentes especializados por área · Busca semântica · Defensibilidade real · Justifica ticket alto · Diferencia de ChatGPT</td>
+        <td>Matrix nasce raso. Vira "mais uma plataforma de IA". Sem defensibilidade. Concorrente copia em 90 dias.</td>
+        <td class="gold">MÁXIMA</td>
+      </tr>
+      <tr>
+        <td><strong>AUTORIDADE EM REDES</strong><br><span style="color:var(--gold-l)">"a vitrine"</span></td>
+        <td>200+ citações prontas · Banco de histórias · Roteiros extraídos (transcrição vira post) · Conteúdo evergreen · Voz mapeada (ghostwriter mantém identidade)</td>
+        <td>Você é o gargalo. Posts dependem do seu tempo. Sem consistência. Concorrentes te imitam superficialmente porque o que rouba está em redes públicas.</td>
+        <td class="gold">ALTA</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="brutal" style="margin-top:36px">
+    <div class="brutal-label">⚠ INSIGHT CHAVE</div>
+    <p>Os 3 objetivos parecem separados. <strong>Não são.</strong> O corpus indexado serve aos 3 simultaneamente. Construir 3 sistemas separados é desperdício. Um único projeto técnico (indexação + RAG) entrega os 3 ao mesmo tempo.</p>
+    <p style="color:var(--gold-l)">Por isso a Matrix não é um projeto à parte. <strong>Matrix é o output natural do mesmo trabalho que serve Alpha e suas redes.</strong></p>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════
+     SECTION 4 · PRIORIDADES BRUTAIS
+═════════════════════════════════════════════════════════════════ -->
+<section class="section" id="prioridades">
+  <span class="section-num">04 · PRIORIDADES BRUTAIS</span>
+  <h2 class="section-title">3 prioridades por objetivo · 9 ações no total</h2>
+  <p class="section-sub">Tudo que sobra dessa lista é distração — fica para depois.</p>
+
+  <div class="prio">
+    <div class="prio-col">
+      <h3>ALPHA</h3>
+      <div class="col-tag">A casa que precisa funcionar.</div>
+      <div class="prio-item">
+        <div class="prio-num">01</div>
+        <div class="prio-text">
+          <h4>Currículo extraído do corpus</h4>
+          <p>Aulas para os 4 níveis (Iniciante → Caçador → Líder → Alpha) vêm dos seus melhores treinamentos, organizadas.</p>
+        </div>
+      </div>
+      <div class="prio-item">
+        <div class="prio-num">02</div>
+        <div class="prio-text">
+          <h4>Biblioteca interna buscável</h4>
+          <p>Sócios e Líderes encontram qualquer conteúdo seu em segundos. Vira parte do produto que justifica mensalidade.</p>
+        </div>
+      </div>
+      <div class="prio-item">
+        <div class="prio-num">03</div>
+        <div class="prio-text">
+          <h4>Material para Líderes ministrarem</h4>
+          <p>Pacotes prontos para cada Líder dar aulas baseadas no seu conhecimento. Multiplica você sem clonar.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="prio-col">
+      <h3>MATRIX</h3>
+      <div class="col-tag">O veículo que precisa ter alma.</div>
+      <div class="prio-item">
+        <div class="prio-num">01</div>
+        <div class="prio-text">
+          <h4>Indexação completa dos 350 .txt</h4>
+          <p>Embeddings, base vetorial, busca semântica. <strong>É o gargalo único de tudo.</strong></p>
+        </div>
+      </div>
+      <div class="prio-item">
+        <div class="prio-num">02</div>
+        <div class="prio-text">
+          <h4>Eduardo AI v1 (RAG sobre o corpus)</h4>
+          <p>Agente que responde no seu tom, ancorado nos seus conteúdos. Defensibilidade permanente.</p>
+        </div>
+      </div>
+      <div class="prio-item">
+        <div class="prio-num">03</div>
+        <div class="prio-text">
+          <h4>Agentes especializados</h4>
+          <p>Estrategista · Performance · Mentalidade · Comunidade · Execução. Cada um com pedaço do corpus.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="prio-col">
+      <h3>REDES</h3>
+      <div class="col-tag">A vitrine que precisa funcionar sem você.</div>
+      <div class="prio-item">
+        <div class="prio-num">01</div>
+        <div class="prio-text">
+          <h4>Banco de 200+ citações com contexto</h4>
+          <p>Cada citação atribuída a tema, ano, vídeo de origem. Posts diários por 1+ ano sem repetir.</p>
+        </div>
+      </div>
+      <div class="prio-item">
+        <div class="prio-num">02</div>
+        <div class="prio-text">
+          <h4>Guia de voz para ghostwriters</h4>
+          <p>Ninguém vai te confundir com IA ou copywriter mediano. Voz mapeada = produção delegável.</p>
+        </div>
+      </div>
+      <div class="prio-item">
+        <div class="prio-num">03</div>
+        <div class="prio-text">
+          <h4>Esqueletos de carrossel/Reel prontos</h4>
+          <p>Transcrição vira roteiro. Roteiro vira post. Você grava porque quer, não porque precisa estar lá.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="brutal" style="margin-top:36px">
+    <div class="brutal-label">⚠ ATENÇÃO</div>
+    <p>As <strong>9 prioridades acima dependem todas do mesmo pré-requisito</strong>: os 350 .txt indexados e categorizados. Sem isso, nenhuma delas avança de verdade.</p>
+    <p style="color:var(--gold-l)"><strong>1 ação destrava 9.</strong> Esse é o tipo de alavancagem que muda jogo.</p>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════
+     SECTION 5 · PLANO DE 90 DIAS
+═════════════════════════════════════════════════════════════════ -->
+<section class="section" id="plano">
+  <span class="section-num">05 · PLANO DE 90 DIAS</span>
+  <h2 class="section-title">A sequência que respeita o gargalo</h2>
+  <p class="section-sub">Fase 1 destrava Fase 2 e Fase 3. Pular ordem é começar do zero depois.</p>
+
+  <div class="timeline">
+
+    <div class="phase">
+      <div class="phase-num">01</div>
+      <div class="phase-label">DIAS 1–30 · FUNDAÇÃO</div>
+      <div class="phase-title">Indexar e estruturar</div>
+      <ul>
+        <li>Receber + organizar os 350 .txt em pasta estruturada</li>
+        <li>Categorizar por tema, ano, formato, duração</li>
+        <li>Construir base vetorial (embeddings)</li>
+        <li>Identificar os top 30 vídeos de mais alta densidade</li>
+        <li>Eliminar duplicatas e redundâncias</li>
+      </ul>
+      <div class="phase-out"><strong>Saída concreta:</strong><br>Biblioteca interna buscável funcionando. Você pesquisa "disciplina como privilégio" e em 2 segundos tem todos os trechos.</div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-num">02</div>
+      <div class="phase-label">DIAS 31–60 · EXTRAÇÃO</div>
+      <div class="phase-title">Tirar o ouro do bruto</div>
+      <ul>
+        <li>Frameworks ocultos (além dos 6 já nomeados)</li>
+        <li>Voz mapeada (50–100 expressões assinatura)</li>
+        <li>Esqueleto de "O Método Eduardo Ferreira"</li>
+        <li>200+ citações com contexto e tema</li>
+        <li>Banco de histórias e casos reais</li>
+      </ul>
+      <div class="phase-out"><strong>Saída concreta:</strong><br>Documento canônico v1 · Guia de voz · Banco de citações pronto para redes e Eduardo AI.</div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-num">03</div>
+      <div class="phase-label">DIAS 61–90 · APLICAÇÃO</div>
+      <div class="phase-title">Os 3 objetivos começam a respirar</div>
+      <ul>
+        <li>Eduardo AI v1 funcional (interno, sócios e líderes)</li>
+        <li>Esqueleto do primeiro livro pronto para você revisar</li>
+        <li>Sistema de busca interna Alpha implementado</li>
+        <li>Primeiro currículo Alpha extraído do corpus</li>
+        <li>Posts diários começam a sair sem você gravar</li>
+      </ul>
+      <div class="phase-out"><strong>Saída concreta:</strong><br>Prova de conceito do Matrix · Livro em revisão · 100 sócios Alpha pagando · Autoridade pública crescente.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════
+     SECTION 6 · PERDE × GANHA
+═════════════════════════════════════════════════════════════════ -->
+<section class="section" id="trade">
+  <span class="section-num">06 · O TRADE-OFF</span>
+  <h2 class="section-title">O que você perde por NÃO fazer vs. ganha por fazer</h2>
+  <p class="section-sub">Não fazer também é uma decisão. Vamos ver o custo dela.</p>
+
+  <div class="compare">
+    <div class="comp-side comp-lose">
+      <div class="comp-label">SE VOCÊ NÃO FIZER</div>
+      <div class="comp-title">O custo silencioso de mais 12 meses</div>
+      <ul>
+        <li>Continua sendo o gargalo único de todo conteúdo</li>
+        <li>Cada produto novo começa do zero</li>
+        <li>Matrix nasce raso (sem corpus = ChatGPT genérico)</li>
+        <li>Alpha cresce sem material para Líderes ministrarem</li>
+        <li>Redes erráticas — depende do seu humor para postar</li>
+        <li>Os 10 anos de IP continuam empoeirando</li>
+        <li>Concorrente copia o que está em redes públicas, sem profundidade — e você não consegue mostrar profundidade rápido</li>
+        <li>Você grava mais 100 horas que vão para a mesma pilha</li>
+        <li>O ativo envelhece e perde relevância contextual</li>
+        <li>Esgotamento — produção depende sempre de você</li>
+      </ul>
+    </div>
+    <div class="comp-side comp-win">
+      <div class="comp-label">SE VOCÊ FIZER</div>
+      <div class="comp-title">O que muda em 90 dias</div>
+      <ul>
+        <li>Tempo de volta — corpus produz conteúdo, não você</li>
+        <li>Defensibilidade real — concorrente não copia 10 anos</li>
+        <li>Matrix nasce com produto único e justifica ticket</li>
+        <li>Alpha com fundação operacional (currículo, biblioteca)</li>
+        <li>Autoridade pública crescente sem trabalho ativo</li>
+        <li>Patrimônio que valoriza com o tempo (oposto da maioria de software)</li>
+        <li>Líderes da matilha multiplicam você sem clonar</li>
+        <li>Você grava porque quer, não porque precisa</li>
+        <li>Cada nova gravação cresce o ativo automaticamente</li>
+        <li>Lança livros, cursos, eventos do mesmo poço</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════
+     SECTION 7 · O QUE NÃO FAZER
+═════════════════════════════════════════════════════════════════ -->
+<section class="section" id="nao">
+  <span class="section-num">07 · O QUE NÃO FAZER AGORA</span>
+  <h2 class="section-title">As armadilhas que vão te seduzir</h2>
+  <p class="section-sub">Cada item abaixo parece "produtivo" e é dispersão. Recuse.</p>
+
+  <div class="cards grid-2">
+    <div class="card">
+      <div class="card-label">ARMADILHA 01</div>
+      <div class="card-title">Lançar livro antes de extrair</div>
+      <div class="card-text">Sai raso porque vai sair do que você lembra, não do que você ensinou. <strong>Custo:</strong> autoridade pública mediana.</div>
+    </div>
+    <div class="card">
+      <div class="card-label">ARMADILHA 02</div>
+      <div class="card-title">Construir Matrix sem corpus</div>
+      <div class="card-text">Vira ChatGPT genérico. Concorrente lança igual em 90 dias. <strong>Custo:</strong> Matrix perde sua única defensibilidade real.</div>
+    </div>
+    <div class="card">
+      <div class="card-label">ARMADILHA 03</div>
+      <div class="card-title">Anunciar Eduardo AI sem voz refinada</div>
+      <div class="card-text">Queima percepção pública. Lançar IA que "soa genérica como qualquer chatbot" é tiro no pé. <strong>Custo:</strong> permanente.</div>
+    </div>
+    <div class="card">
+      <div class="card-label">ARMADILHA 04</div>
+      <div class="card-title">Criar 5 produtos em paralelo</div>
+      <div class="card-text">Foco perdido. Nenhum sai bem. <strong>Custo:</strong> 12 meses sem entregar nada terminado.</div>
+    </div>
+    <div class="card">
+      <div class="card-label">ARMADILHA 05</div>
+      <div class="card-title">Transcrever os 250 de saúde agora</div>
+      <div class="card-text">Vertical paralelo. Importante, mas não destrava os 3 objetivos atuais. <strong>Custo:</strong> diluição de foco.</div>
+    </div>
+    <div class="card">
+      <div class="card-label">ARMADILHA 06</div>
+      <div class="card-title">Começar pelo marketing antes da fundação</div>
+      <div class="card-text">Promover Matrix/Alpha sem corpus dentro = vender fumaça. <strong>Custo:</strong> reputação que custou 10 anos.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════
+     SECTION 8 · DECISÕES
+═════════════════════════════════════════════════════════════════ -->
+<section class="section" id="decisoes">
+  <span class="section-num">08 · PRÓXIMAS DECISÕES</span>
+  <h2 class="section-title">3 perguntas que destravam o início</h2>
+  <p class="section-sub">Sem suas respostas, eu não posso começar a Fase 1.</p>
+
+  <div class="decisions">
+
+    <div class="dec">
+      <div class="dec-num">01</div>
+      <div class="dec-text">
+        <h4>Onde estão fisicamente os 350 .txt?</h4>
+        <p>Pasta local · Drive · Pendrive · Notion · Outro? Preciso receber em formato que eu consiga ler aqui (preferência: pasta organizada por ano/tema, ou um único zip).</p>
+      </div>
+    </div>
+
+    <div class="dec">
+      <div class="dec-num">02</div>
+      <div class="dec-text">
+        <h4>Qual é o nome e local do projeto?</h4>
+        <p>Sugestão: pasta <strong>DOUTRINA</strong> no topo do Cérebro Operacional (ao lado de ALPHA-CENTRAL e MATRIX_INTELLIGENCE_SYSTEM), porque o corpus alimenta os dois. Alternativas: LEGADO · ACERVO · CÂNONE.</p>
+      </div>
+    </div>
+
+    <div class="dec">
+      <div class="dec-num">03</div>
+      <div class="dec-text">
+        <h4>Confirma a ordem de execução?</h4>
+        <p>Fase 1 (indexação) → Fase 2 (extração) → Fase 3 (aplicação). <strong>Pular ordem = começar do zero depois.</strong> Se confirmado, eu já começo pela Fase 1 assim que receber os arquivos.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="brutal" style="margin-top:36px">
+    <div class="brutal-label">⚠ ÚLTIMA PALAVRA</div>
+    <p>Você não precisa de mais ideias. Já tem 600 horas delas.</p>
+    <p>Você precisa de <strong>um sistema que extraia, organize e devolva</strong> o que já existe.</p>
+    <p style="color:var(--gold-l)">A diferença entre ter 10 anos de conteúdo e <strong>ter um patrimônio de 10 anos de conteúdo</strong> é o sistema. E o sistema começa com a Fase 1.</p>
+  </div>
+
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-brand">COMUNIDADE ALPHA · CORPUS · 2026</div>
+  <p>Documento estratégico · síntese das duas análises de profundidade · Audace Fortuna Sequitur</p>
+</footer>
+
+</body>
+</html>
