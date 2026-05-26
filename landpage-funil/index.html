@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Landpage Alpha Hunters · Briefing pra revisão</title>
+<meta name="robots" content="noindex,nofollow,noarchive,nosnippet">
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,500;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --azul-militar: #0D1F2D;
+    --azul-profundo: #050D14;
+    --dourado: #C8A951;
+    --dourado-claro: #E5C97A;
+    --creme: #F5F0E6;
+    --linha: rgba(245, 240, 230, 0.12);
+    --verde: #6FA372;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { background: var(--azul-profundo); color: var(--creme); font-family: 'Plus Jakarta Sans', system-ui, sans-serif; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  .container { max-width: 880px; margin: 0 auto; padding: 60px 32px 100px; }
+
+  .topo {
+    text-align: center;
+    border-bottom: 1px solid var(--linha);
+    padding-bottom: 40px;
+    margin-bottom: 60px;
+  }
+  .selo {
+    display: inline-block;
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--dourado);
+    font-weight: 700;
+    padding: 6px 14px;
+    border: 1px solid var(--dourado);
+    border-radius: 100px;
+    margin-bottom: 24px;
+  }
+  h1 {
+    font-family: 'Bodoni Moda', serif;
+    font-size: clamp(36px, 5.5vw, 58px);
+    font-weight: 500;
+    line-height: 1.1;
+    margin-bottom: 18px;
+  }
+  h1 em {
+    font-style: italic;
+    color: var(--dourado);
+  }
+  .subtitulo {
+    font-size: 18px;
+    color: rgba(245, 240, 230, 0.7);
+    max-width: 580px;
+    margin: 0 auto;
+  }
+
+  .saudacao {
+    background: linear-gradient(135deg, rgba(200, 169, 81, 0.06), rgba(200, 169, 81, 0));
+    border: 1px solid rgba(200, 169, 81, 0.25);
+    border-left: 3px solid var(--dourado);
+    padding: 28px 32px;
+    border-radius: 4px;
+    margin-bottom: 48px;
+    font-size: 17px;
+  }
+  .saudacao strong { color: var(--dourado-claro); }
+
+  .secao-titulo {
+    font-family: 'Bodoni Moda', serif;
+    font-size: 28px;
+    font-weight: 500;
+    color: var(--dourado);
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--linha);
+  }
+
+  .cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 48px;
+  }
+  @media (max-width: 720px) {
+    .cards { grid-template-columns: 1fr; }
+    .container { padding: 40px 20px 80px; }
+  }
+
+  .card {
+    background: rgba(245, 240, 230, 0.03);
+    border: 1px solid rgba(200, 169, 81, 0.25);
+    border-radius: 12px;
+    padding: 32px 28px;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    transition: all .25s cubic-bezier(0.22, 1, 0.36, 1);
+    position: relative;
+    overflow: hidden;
+  }
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--dourado);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform .3s ease;
+  }
+  .card:hover {
+    border-color: var(--dourado);
+    background: rgba(200, 169, 81, 0.06);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  }
+  .card:hover::before { transform: scaleX(1); }
+  .card-tag {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(200, 169, 81, 0.7);
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  .card-titulo {
+    font-family: 'Bodoni Moda', serif;
+    font-size: 26px;
+    font-weight: 500;
+    line-height: 1.2;
+    margin-bottom: 12px;
+    color: var(--creme);
+  }
+  .card-desc {
+    font-size: 14px;
+    line-height: 1.55;
+    color: rgba(245, 240, 230, 0.65);
+    flex: 1;
+    margin-bottom: 18px;
+  }
+  .card-cta {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--dourado);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .card-cta::after {
+    content: '→';
+    transition: transform .2s;
+  }
+  .card:hover .card-cta::after { transform: translateX(4px); }
+
+  .regras {
+    background: rgba(13, 31, 45, 0.7);
+    border: 1px solid var(--linha);
+    border-radius: 12px;
+    padding: 32px;
+    margin-bottom: 48px;
+  }
+  .regra {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 18px;
+  }
+  .regra:last-child { margin-bottom: 0; }
+  .regra-num {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    background: var(--dourado);
+    color: var(--azul-militar);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 13px;
+  }
+  .regra-texto { padding-top: 2px; font-size: 15px; }
+  .regra-texto strong { color: var(--dourado-claro); }
+
+  .info-tecnica {
+    font-size: 13px;
+    color: rgba(245, 240, 230, 0.45);
+    line-height: 1.7;
+    border-top: 1px solid var(--linha);
+    padding-top: 32px;
+  }
+  .info-tecnica strong { color: rgba(245, 240, 230, 0.75); font-weight: 600; }
+  .info-tecnica code {
+    background: rgba(200, 169, 81, 0.12);
+    color: var(--dourado-claro);
+    padding: 2px 7px;
+    border-radius: 4px;
+    font-family: 'JetBrains Mono', 'Menlo', monospace;
+    font-size: 12px;
+  }
+
+  .footer {
+    margin-top: 60px;
+    text-align: center;
+    font-size: 12px;
+    color: rgba(245, 240, 230, 0.35);
+    letter-spacing: 0.1em;
+  }
+  .footer strong { color: var(--dourado); }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="topo">
+    <div class="selo">Briefing · Revisão da Landpage</div>
+    <h1>Alpha Hunters<br><em>landpage de recrutamento</em></h1>
+    <p class="subtitulo">Versão atual pra você refinar e levar pra acabamento final.</p>
+  </div>
+
+  <div class="saudacao">
+    Esta é a versão da landpage depois das minhas edições e anotações iniciais.
+    Tem <strong>duas formas de abrir</strong>: a versão final (limpa, pra você ver o resultado) e a versão com notas editáveis (caso queira anotar sugestões antes de mexer no código). Use a que fizer mais sentido pro seu fluxo.
+  </div>
+
+  <h2 class="secao-titulo">Escolha como abrir</h2>
+
+  <div class="cards">
+    <a href="final.html" class="card" target="_blank" rel="noopener">
+      <div class="card-tag">Opção 1 · Limpa</div>
+      <div class="card-titulo">Versão final</div>
+      <div class="card-desc">
+        A landpage como ela ficou após minhas edições. Sem ferramentas no canto da tela. É essa que vai pro ar — use como referência do estado atual.
+      </div>
+      <div class="card-cta">abrir versão final</div>
+    </a>
+
+    <a href="editavel.html" class="card" target="_blank" rel="noopener">
+      <div class="card-tag">Opção 2 · Editável</div>
+      <div class="card-titulo">Versão com notas</div>
+      <div class="card-desc">
+        Mesma landpage, mas com toolbar no canto pra você marcar trechos, deixar comentários e até editar textos inline. Suas anotações ficam salvas no seu navegador.
+      </div>
+      <div class="card-cta">abrir versão editável</div>
+    </a>
+  </div>
+
+  <h2 class="secao-titulo">3 regras críticas (importantes)</h2>
+
+  <div class="regras">
+    <div class="regra">
+      <div class="regra-num">1</div>
+      <div class="regra-texto">
+        <strong>Não substitui a Apresentação Master</strong> — a apresentação É o conteúdo dos vídeos dentro da landpage (Páginas 7 e 10). A landpage faz a qualificação progressiva, a apresentação ensina o método.
+      </div>
+    </div>
+    <div class="regra">
+      <div class="regra-num">2</div>
+      <div class="regra-texto">
+        <strong>Multiuso</strong> — não é só pra tráfego pago. Vai servir pra envio 1:1 do Eduardo e pra duplicação pela equipe Hunter (cada Hunter terá a SUA com dados próprios).
+      </div>
+    </div>
+    <div class="regra">
+      <div class="regra-num">3</div>
+      <div class="regra-texto">
+        <strong>NÃO falar de MMN de primeira</strong> — só profissão Hunter no primeiro contato. Marketing de relacionamento entra depois, nunca como porta de entrada.
+      </div>
+    </div>
+  </div>
+
+  <h2 class="secao-titulo">Como usar a versão editável</h2>
+
+  <div class="info-tecnica">
+    <p style="margin-bottom: 14px;"><strong>Toolbar no canto superior direito:</strong></p>
+    <p>• <code>✏️ Modo edição</code> — clica em qualquer texto pra editar inline (ou <code>Ctrl/Cmd+E</code>)</p>
+    <p>• <code>📝 Notas e refs</code> — abre o painel lateral com 3 abas: refs no texto, nota geral, briefing</p>
+    <p>• <code>🔖 Marcar trecho</code> — selecione um trecho de texto e clique pra criar uma referência ancorada com nota</p>
+    <p>• <code>⬇ Exportar HTML</code> — baixa o HTML editado com todas suas notas embutidas no final como comentário (manda pro Eduardo)</p>
+    <p>• <code>↺ Resetar</code> — apaga suas edições e notas locais</p>
+    <p style="margin-top: 20px;"><strong>Onde fica salvo:</strong> tudo no localStorage do seu navegador (não envia nada pra lugar nenhum automaticamente). Pra mandar de volta pro Eduardo: use <code>⬇ Exportar HTML</code> ou <code>📄 Só notas (.md)</code>.</p>
+    <p style="margin-top: 16px;"><strong>Não vai apagar suas anotações</strong> mesmo fechando o navegador — só limpa se você clicar em "↺ Resetar" ou limpar o cache do site.</p>
+  </div>
+
+  <div class="footer">
+    <p><strong>Comunidade Alpha</strong> · Landpage Funil de Recrutamento · v2.0 Premium</p>
+    <p style="margin-top: 6px;">Briefing oficial: <code>/ALPHA-CENTRAL/METODOS-ALPHA/METODO-ALPHA-HUNTERS/Landpage-Funil-Recrutamento/00-ESTRUTURA.md</code></p>
+  </div>
+
+</div>
+</body>
+</html>
