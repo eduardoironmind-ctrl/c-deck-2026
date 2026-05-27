@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Entrega Landpage Alpha Hunters · Pacote do Programador</title>
+<meta name="robots" content="noindex,nofollow">
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --azul:#0D1F2D; --dourado:#C8A951; --creme:#F5F0E6;
+    --azul-2:#152F45;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    font-family:'Plus Jakarta Sans', sans-serif;
+    background:linear-gradient(135deg, var(--azul) 0%, var(--azul-2) 100%);
+    color:var(--creme);
+    min-height:100vh;
+    padding:40px 20px;
+    line-height:1.6;
+  }
+  .container{max-width:780px; margin:0 auto;}
+  .tag{
+    font-family:'Bebas Neue';
+    letter-spacing:0.3em;
+    color:var(--dourado);
+    font-size:12px;
+    margin-bottom:14px;
+  }
+  h1{
+    font-family:'Bodoni Moda', serif;
+    font-size:42px;
+    font-weight:500;
+    line-height:1.1;
+    margin-bottom:14px;
+  }
+  h1 span{color:var(--dourado);}
+  p.lead{font-size:17px; opacity:0.9; margin-bottom:32px;}
+  .download-box{
+    background:rgba(200,169,81,0.1);
+    border:2px solid var(--dourado);
+    padding:30px;
+    border-radius:14px;
+    text-align:center;
+    margin:24px 0;
+  }
+  .download-btn{
+    display:inline-block;
+    background:var(--dourado);
+    color:var(--azul);
+    padding:18px 36px;
+    border-radius:10px;
+    font-family:'Bebas Neue';
+    letter-spacing:0.2em;
+    font-size:16px;
+    text-decoration:none;
+    margin:10px 0;
+    transition:all 0.2s;
+  }
+  .download-btn:hover{
+    background:#E5C97A;
+    transform:scale(1.04);
+  }
+  .meta{
+    font-size:13px; opacity:0.7;
+    margin-top:10px;
+  }
+  .meta strong{color:var(--dourado);}
+  h2{
+    font-family:'Bodoni Moda', serif;
+    font-size:22px;
+    margin:30px 0 12px;
+    color:var(--dourado);
+  }
+  ul{margin-left:22px; margin-bottom:16px;}
+  li{margin-bottom:6px; font-size:14.5px;}
+  code{
+    background:rgba(255,255,255,0.08);
+    padding:2px 8px;
+    border-radius:4px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:13px;
+    color:var(--dourado);
+  }
+  .card{
+    background:rgba(255,255,255,0.04);
+    padding:20px 24px;
+    border-radius:10px;
+    border-left:4px solid var(--dourado);
+    margin:14px 0;
+    font-size:14.5px;
+  }
+  .card strong{display:block; color:var(--dourado); font-family:'Bebas Neue'; letter-spacing:0.15em; font-size:11px; margin-bottom:4px;}
+  hr{border:none; border-top:1px solid rgba(245,240,230,0.15); margin:32px 0;}
+  .footer{text-align:center; margin-top:40px; opacity:0.6; font-size:12px;}
+  .footer .alpha{font-family:'Bebas Neue'; letter-spacing:0.3em; color:var(--dourado); font-size:18px;}
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="tag">ENTREGA · ALPHA HUNTERS LANDPAGE</div>
+  <h1>Pacote pronto pra <span>deploy</span></h1>
+  <p class="lead">Tudo que você precisa pra colocar a landpage Alpha Hunters em produção via Cloudflare Pages. Inclui código, documentação completa e checklist de validação.</p>
+
+  <div class="download-box">
+    <a href="alpha-hunters-landpage.zip" class="download-btn" download>📦 BAIXAR PACOTE COMPLETO (.zip)</a>
+    <div class="meta">~2 MB · <strong>14 arquivos</strong> · HTML + assets + 6 documentos</div>
+  </div>
+
+  <h2>O que tem dentro</h2>
+  <div class="card">
+    <strong>CÓDIGO</strong>
+    <code>public/index.html</code> + 3 imagens em <code>public/assets/</code>. Landpage single page, HTML/CSS puro, zero build step.
+  </div>
+  <div class="card">
+    <strong>DOCUMENTAÇÃO</strong>
+    <ul style="margin-bottom:0;">
+      <li><code>README.md</code> — visão geral (leia primeiro)</li>
+      <li><code>DEPLOY.md</code> — passo a passo Cloudflare Pages (15 min)</li>
+      <li><code>CUSTOMIZACAO.md</code> — onde editar textos, cores, links, tracking</li>
+      <li><code>CHECKLIST-PRE-DEPLOY.md</code> — validações obrigatórias</li>
+      <li><code>docs/identidade-visual.md</code> — brand guidelines Alpha</li>
+      <li><code>docs/estrutura-paginas.md</code> — estrutura técnica</li>
+    </ul>
+  </div>
+
+  <h2>Stack técnico</h2>
+  <ul>
+    <li><strong>Tipo:</strong> Landing page estática single page</li>
+    <li><strong>Tecnologia:</strong> HTML5 + CSS3 puro (sem JS framework)</li>
+    <li><strong>Tamanho:</strong> ~2 MB total</li>
+    <li><strong>Build step:</strong> nenhum (zero dependências)</li>
+    <li><strong>Deploy recomendado:</strong> Cloudflare Pages (grátis, HTTPS automático, CDN global)</li>
+    <li><strong>Performance esperada:</strong> Lighthouse 95+</li>
+  </ul>
+
+  <h2>Antes de publicar</h2>
+  <div class="card">
+    <strong>⚠ BLOQUEANTES</strong>
+    <ul style="margin-bottom:0;">
+      <li>Remover meta <code>noindex,nofollow</code></li>
+      <li>Substituir todos <code>href="#"</code> e WhatsApp placeholders</li>
+      <li>Instalar Google Analytics + Meta Pixel</li>
+      <li>Otimizar imagens (target: &lt;300KB cada)</li>
+    </ul>
+  </div>
+  <div class="card">
+    <strong>★ REGRA DE MARCA</strong>
+    Não recriar logos/símbolos em SVG ou código. Arquivos PNG em <code>public/assets/</code> são oficiais — pode usar, mas não modificar.
+  </div>
+
+  <hr>
+
+  <h2>Como vai funcionar o deploy</h2>
+  <ol style="margin-left:22px; font-size:14.5px;">
+    <li>Criar repo Git com a pasta <code>public/</code></li>
+    <li>Conectar no Cloudflare Pages (dash.cloudflare.com)</li>
+    <li>Apontar domínio (Eduardo vai confirmar qual)</li>
+    <li>Cloudflare configura HTTPS automaticamente</li>
+    <li>Atualizações futuras = git push → deploy em 30s</li>
+  </ol>
+
+  <p style="margin-top:24px; font-size:14px; opacity:0.85;">Detalhes completos no <code>DEPLOY.md</code> dentro do zip.</p>
+
+  <hr>
+
+  <div class="footer">
+    <div class="alpha">ALPHA</div>
+    <p style="margin-top:6px;">Eduardo Ferreira · Entrega 2026-05-27</p>
+  </div>
+
+</div>
+</body>
+</html>
