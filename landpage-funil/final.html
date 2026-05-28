@@ -2556,6 +2556,20 @@ h1.pagina-titulo strong {
   };
 
   function carregar() {
+    // Reset forçado via URL: ?reset=1, ?fresh=1, ?demo=1, ?teste=1, ou hash #reset
+    const params = new URLSearchParams(window.location.search);
+    const resetForcado = params.has('reset') || params.has('fresh') || params.has('demo') || params.has('teste') || window.location.hash === '#reset';
+
+    if (resetForcado) {
+      localStorage.removeItem('alpha-funnel-state-v2');
+      // Limpa URL para visual limpo (sem perder o reset)
+      if (window.history && window.history.replaceState) {
+        window.history.replaceState({}, document.title, window.location.pathname);
+      }
+      irPara(0, false);
+      return;
+    }
+
     const salvo = localStorage.getItem('alpha-funnel-state-v2');
     if (salvo) {
       try {
