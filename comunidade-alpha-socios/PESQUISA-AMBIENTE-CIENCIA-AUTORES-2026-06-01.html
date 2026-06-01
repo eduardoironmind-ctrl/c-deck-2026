@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Comunidade Alpha · Ciência do Ambiente, Hábitos e Prosperidade</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,700;0,6..96,900;1,6..96,300;1,6..96,400;1,6..96,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#060E14; --c1:#0D1F2D; --c2:#152B3D; --c3:#1E3A50;
+  --gold:#C8A951; --gold-l:#E0C57A; --cream:#F5F0E6;
+  --white:#FFFFFF; --muted:rgba(245,240,230,.55);
+  --border:rgba(200,169,81,.18);
+  --green:#5A8F5A; --red:#B85450;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--white);font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;line-height:1.7}
+
+.nav{position:sticky;top:0;z-index:100;background:rgba(6,14,20,.97);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);padding:12px 6vw;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.nav-brand{font-family:'Bebas Neue',sans-serif;font-size:11px;letter-spacing:.26em;color:var(--gold)}
+.nav-back{font-family:'Bebas Neue',sans-serif;font-size:11px;letter-spacing:.18em;color:var(--muted);text-decoration:none;transition:.2s}
+.nav-back:hover{color:var(--gold-l)}
+
+/* HERO */
+.hero{padding:90px 6vw 72px;background:linear-gradient(180deg,var(--c1) 0%,var(--bg) 100%);border-bottom:1px solid var(--border);position:relative;overflow:hidden}
+.hero::before{content:'α';position:absolute;right:-3vw;top:-2vw;font-family:'Bodoni Moda',serif;font-size:40vw;font-weight:900;color:rgba(200,169,81,.025);line-height:1;pointer-events:none}
+.hero-inner{position:relative;z-index:1;max-width:900px}
+.hero-tag{font-family:'Bebas Neue',sans-serif;font-size:11px;letter-spacing:.3em;color:var(--gold);margin-bottom:20px}
+.hero h1{font-family:'Bodoni Moda',serif;font-size:clamp(2.4rem,5.5vw,5rem);font-weight:900;line-height:.96;letter-spacing:-.01em;margin-bottom:14px}
+.hero-sub{font-family:'Bodoni Moda',serif;font-style:italic;font-size:clamp(1.1rem,2vw,1.7rem);color:var(--gold-l);margin-bottom:28px;line-height:1.35}
+.hero-rule{width:48px;height:2px;background:var(--gold);margin-bottom:24px;opacity:.7}
+.hero-body{font-size:clamp(.93rem,1.2vw,1rem);line-height:1.85;color:var(--muted);max-width:660px}
+
+/* SUMÁRIO */
+.toc-bar{background:var(--c1);padding:28px 6vw;border-bottom:1px solid var(--border)}
+.toc-label{font-family:'Bebas Neue',sans-serif;font-size:10.5px;letter-spacing:.28em;color:var(--gold);margin-bottom:14px}
+.toc-list{display:flex;flex-wrap:wrap;gap:8px}
+.toc-link{font-size:.8rem;color:var(--muted);text-decoration:none;border:1px solid var(--border);padding:5px 14px;font-family:'Bebas Neue',sans-serif;letter-spacing:.14em;transition:.2s}
+.toc-link:hover{background:var(--c2);color:var(--gold-l);border-color:var(--gold)}
+
+/* SEÇÃO */
+.section{padding:68px 6vw;border-bottom:1px solid var(--border)}
+.sec-tag{font-family:'Bebas Neue',sans-serif;font-size:10.5px;letter-spacing:.3em;color:var(--gold);margin-bottom:10px;display:block}
+.sec-title{font-family:'Bodoni Moda',serif;font-size:clamp(1.7rem,3.2vw,2.6rem);font-weight:900;line-height:1.05;margin-bottom:10px}
+.sec-sub{font-family:'Bodoni Moda',serif;font-style:italic;font-size:clamp(.95rem,1.4vw,1.2rem);color:var(--gold-l);margin-bottom:36px}
+
+/* ESTUDO CARD */
+.study-block{background:var(--c1);border:1px solid var(--border);margin-bottom:24px;position:relative}
+.study-header{padding:20px 26px 16px;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;gap:18px}
+.study-num{font-family:'Bebas Neue',sans-serif;font-size:11px;letter-spacing:.22em;color:rgba(200,169,81,.5);flex-shrink:0;margin-top:2px}
+.study-head-inner{flex:1}
+.study-title{font-family:'Bodoni Moda',serif;font-weight:700;font-size:1.08rem;color:var(--white);line-height:1.3;margin-bottom:5px}
+.study-cite{font-size:.77rem;color:var(--gold);font-family:'Plus Jakarta Sans',sans-serif;letter-spacing:.04em;font-style:italic}
+.study-body{padding:20px 26px}
+.study-finding{font-size:.91rem;line-height:1.8;color:var(--cream);margin-bottom:14px}
+.study-finding strong{color:var(--white);font-weight:600}
+.study-alpha{background:linear-gradient(135deg,rgba(13,31,45,.8) 0%,rgba(6,14,20,.8) 100%);border-left:3px solid var(--gold);padding:16px 20px;margin-top:14px}
+.study-alpha-label{font-family:'Bebas Neue',sans-serif;font-size:9px;letter-spacing:.28em;color:var(--gold);margin-bottom:7px}
+.study-alpha-text{font-size:.88rem;line-height:1.75;color:var(--muted)}
+.study-alpha-text strong{color:var(--gold-l)}
+
+/* STAT BAR */
+.stat-bar{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:1px;background:var(--border);margin-bottom:32px}
+.stat{background:var(--c1);padding:22px 20px;text-align:center}
+.stat-num{font-family:'Bodoni Moda',serif;font-size:clamp(2rem,3.5vw,2.8rem);font-weight:900;color:var(--gold-l);line-height:.95;margin-bottom:6px}
+.stat-label{font-family:'Bebas Neue',sans-serif;font-size:.68rem;letter-spacing:.18em;color:var(--cream);line-height:1.4}
+
+/* QUOTE */
+.pull-quote{border-left:3px solid var(--gold);padding:22px 28px;background:var(--c2);margin:28px 0;position:relative}
+.pull-quote::before{content:'"';font-family:'Bodoni Moda',serif;font-size:5rem;font-weight:900;color:rgba(200,169,81,.12);position:absolute;top:-8px;left:18px;line-height:1}
+.pull-quote p{font-family:'Bodoni Moda',serif;font-style:italic;font-size:1.15rem;line-height:1.55;color:var(--cream);position:relative;z-index:1}
+.pull-quote-attr{font-size:.78rem;color:var(--gold);font-family:'Plus Jakarta Sans',sans-serif;margin-top:10px;letter-spacing:.04em}
+
+/* SÍNTESE FINAL */
+.synthesis{background:linear-gradient(180deg,#020608 0%,var(--c1) 60%,#020608 100%);border:1px solid rgba(200,169,81,.25);padding:52px 6vw;position:relative;overflow:hidden}
+.synthesis::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(200,169,81,.06) 0%,transparent 65%);pointer-events:none}
+.syn-inner{position:relative;z-index:1;max-width:860px;margin:0 auto;text-align:center}
+.syn-label{font-family:'Bebas Neue',sans-serif;font-size:11px;letter-spacing:.32em;color:var(--gold);margin-bottom:18px}
+.syn-title{font-family:'Bodoni Moda',serif;font-size:clamp(1.8rem,3.5vw,3rem);font-weight:900;line-height:1.05;margin-bottom:16px}
+.syn-body{font-size:clamp(.93rem,1.2vw,1rem);line-height:1.9;color:var(--muted);max-width:720px;margin:0 auto 36px}
+.syn-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1px;background:var(--border);text-align:left;margin-top:32px}
+.syn-item{background:var(--c1);padding:20px 22px}
+.syn-item-icon{font-size:1.4rem;margin-bottom:10px}
+.syn-item-title{font-family:'Bebas Neue',sans-serif;font-size:11px;letter-spacing:.18em;color:var(--gold);margin-bottom:7px}
+.syn-item-body{font-size:.82rem;line-height:1.65;color:var(--muted)}
+
+/* FOOTER */
+.footer{padding:40px 6vw;text-align:center;border-top:1px solid var(--border)}
+.footer-brand{font-family:'Bebas Neue',sans-serif;font-size:11px;letter-spacing:.26em;color:var(--gold);margin-bottom:8px}
+.footer p{font-size:.8rem;color:var(--muted)}
+
+@media(max-width:880px){
+  .hero,.section,.toc-bar{padding-left:5vw;padding-right:5vw}
+  .hero{padding-top:52px;padding-bottom:52px}
+  .stat-bar{grid-template-columns:repeat(2,1fr)}
+  .synthesis{padding:40px 5vw}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-brand">COMUNIDADE ALPHA · PESQUISA CIENTÍFICA</div>
+  <a href="index.html" class="nav-back">← Voltar ao Documento Parceiros</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-tag">PESQUISA · CIÊNCIA · AUTORES · 2026-06-01</div>
+    <h1>A Ciência<br>por Trás da<br>Comunidade.</h1>
+    <p class="hero-sub">Neurociência, psicologia social e economia comportamental — o que os estudos provam sobre o poder do ambiente.</p>
+    <div class="hero-rule"></div>
+    <p class="hero-body">Não é opinião. Não é motivação. São estudos peer-reviewed, dados de décadas e nomes que mudaram a forma como a ciência entende o ser humano. Este documento cruza essa evidência com o que a Comunidade Alpha pratica há 10 anos.</p>
+  </div>
+</section>
+
+<div class="toc-bar">
+  <div class="toc-label">TEMAS DESTA PESQUISA</div>
+  <div class="toc-list">
+    <a class="toc-link" href="#s1">01 · O Poder do Ambiente Social</a>
+    <a class="toc-link" href="#s2">02 · Neurociência da Mudança de Hábitos</a>
+    <a class="toc-link" href="#s3">03 · Superação de Crenças Limitantes</a>
+    <a class="toc-link" href="#s4">04 · A Neurociência da Prosperidade</a>
+    <a class="toc-link" href="#s5">05 · Síntese · O que isso prova sobre a Alpha</a>
+  </div>
+</div>
+
+
+<!-- ========================================================
+     SEÇÃO 1 · O PODER DO AMBIENTE SOCIAL
+     ======================================================== -->
+<section class="section" id="s1">
+  <span class="sec-tag">01 · AMBIENTE SOCIAL</span>
+  <h2 class="sec-title">Você não escolhe seus hábitos.<br>Você escolhe seu ambiente.</h2>
+  <p class="sec-sub">E o ambiente escolhe o resto por você.</p>
+
+  <div class="stat-bar">
+    <div class="stat">
+      <div class="stat-num">3°</div>
+      <div class="stat-label">GRAUS DE SEPARAÇÃO<br>onde comportamentos<br>se propagam socialmente</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">57%</div>
+      <div class="stat-label">MAIOR CHANCE<br>de obesidade se um<br>amigo próximo for obeso</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">25%</div>
+      <div class="stat-label">MAIOR CHANCE<br>de ser feliz se uma<br>pessoa próxima é feliz</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">150</div>
+      <div class="stat-label">NÚMERO DE DUNBAR<br>limite de relações sociais<br>significativas do cérebro</div>
+    </div>
+  </div>
+
+  <div class="study-block">
+    <div class="study-header">
+      <span class="study-num">ESTUDO 01</span>
+      <div class="study-head-inner">
+        <div class="study-title">Contágio Social — Comportamentos se Propagam Como Vírus</div>
+        <div class="study-cite">Christakis & Fowler · "Connected" · New England Journal of Medicine · 2007–2009 · n=12.067 pessoas / 32 anos de dados</div>
+      </div>
+    </div>
+    <div class="study-body">
+      <p class="study-finding">Os pesquisadores Nicholas Christakis (Harvard) e James Fowler (UC San Diego) acompanharam mais de 12 mil pessoas por três décadas no Framingham Heart Study. A descoberta foi contundente: <strong>comportamentos como obesidade, tabagismo, felicidade e até solidão se propagam por redes sociais com a mesma dinâmica de um vírus</strong> — atingindo até o terceiro grau de separação (amigos de amigos de amigos).</p>
+      <p class="study-finding">Ter um amigo obeso aumenta em <strong>57% sua chance de se tornar obeso</strong> — independente de localização geográfica. O mesmo padrão se aplica para parar de fumar (+36% de chance se um amigo para), para felicidade (+25%), e para comportamentos financeiros. O mecanismo não é consciente: acontece por imitação de normas, mudança de percepção do que é "normal" e espelhamento emocional.</p>
+      <div class="study-alpha">
+        <div class="study-alpha-label">APLICAÇÃO NA COMUNIDADE ALPHA</div>
+        <p class="study-alpha-text">Se a ciência prova que um único amigo obeso aumenta 57% sua chance de obesidade, o que acontece quando você convive sistematicamente com pessoas que <strong>correm de manhã, estudam investimentos, se cobram nos resultados e se recusam a ser mediocres?</strong> A Alpha não é motivação — é um ambiente calibrado para que o comportamento de alta performance se torne o contágio dominante.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="study-block">
+    <div class="study-header">
+      <span class="study-num">ESTUDO 02</span>
+      <div class="study-head-inner">
+        <div class="study-title">O Número de Dunbar — Por Que Seu Círculo Tem um Limite Biológico</div>
+        <div class="study-cite">Robin Dunbar · University of Oxford · Behavioral & Brain Sciences · 1992 · Replicado em 21 culturas diferentes</div>
+      </div>
+    </div>
+    <div class="study-body">
+      <p class="study-finding">O antropólogo Robin Dunbar descobriu que o neocórtex humano — a parte do cérebro responsável por cognição social — tem uma capacidade biologicamente limitada para <strong>manter relações sociais genuínas</strong>. O número máximo é ~150 relações significativas. Dentro desse grupo, existem camadas: 5 pessoas íntimas, 15 de confiança próxima, 50 de contato regular, e 150 de vínculo social ativo.</p>
+      <p class="study-finding">Estudos subsequentes mostraram que <strong>as 5 pessoas do círculo mais íntimo exercem influência desproporcional nos valores, comportamentos e decisões</strong> — elas moldam o que você considera possível, aceitável e normal. A famosa frase de Jim Rohn ("você é a média das 5 pessoas com quem convive") tem base neurocientífica: é literalmente como o cérebro social funciona.</p>
+      <div class="study-alpha">
+        <div class="study-alpha-label">APLICAÇÃO NA COMUNIDADE ALPHA</div>
+        <p class="study-alpha-text">Seu cérebro só consegue manter 150 relações ativas. A questão não é <em>quantas</em> pessoas você conhece — é <strong>quem ocupa as suas 5, 15 e 50 posições</strong>. A Alpha opera como um ambiente onde as 15 pessoas de confiança próxima são, por padrão, pessoas que se exigem, que constroem, que não se conformam. Isso não é ideologia — é engenharia social baseada em biologia.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="pull-quote">
+    <p>"Você não sobe ao nível das suas expectativas. Você cai ao nível dos seus sistemas — e os sistemas são moldados pelo ambiente ao redor."</p>
+    <div class="pull-quote-attr">James Clear · Atomic Habits · 2018</div>
+  </div>
+
+  <div class="study-block">
+    <div class="study-header">
+      <span class="study-num">ESTUDO 03</span>
+      <div class="study-head-inner">
+        <div class="study-title">Efeito Pigmalião — As Expectativas do Ambiente Mudam Resultados Reais</div>
+        <div class="study-cite">Rosenthal & Jacobson · "Pygmalion in the Classroom" · Harvard Educational Review · 1968</div>
+      </div>
+    </div>
+    <div class="study-body">
+      <p class="study-finding">Em um experimento clássico, professores foram informados (falsamente) de que certos alunos escolhidos aleatoriamente eram "alunos com alto potencial intelectual". Ao final do ano, esses alunos — selecionados sem critério — apresentaram <strong>ganhos de QI significativamente maiores</strong> do que os demais. O único fator diferencial foi a expectativa do professor.</p>
+      <p class="study-finding">O mecanismo funciona através de micro-comportamentos: o ambiente com expectativas altas oferece mais feedback, mais desafio, mais atenção. O indivíduo internaliza o standard que os outros têm sobre ele. <strong>Um ambiente que te trata como alguém capaz literalmente altera sua performance cognitiva e comportamental.</strong></p>
+      <div class="study-alpha">
+        <div class="study-alpha-label">APLICAÇÃO NA COMUNIDADE ALPHA</div>
+        <p class="study-alpha-text">A Alpha é um ambiente onde o padrão implícito é alto. Não há espaço para "mais ou menos" como norma cultural. Quando você é rodeado por pessoas que esperem o seu melhor — não por pressão, mas por convivência e exemplo — <strong>seu cérebro recalibra o que "normal" significa para você</strong>. O Efeito Pigmalião não exige discurso motivacional. Exige ambiente calibrado.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ========================================================
+     SEÇÃO 2 · NEUROCIÊNCIA DA MUDANÇA DE HÁBITOS
+     ======================================================== -->
+<section class="section" id="s2">
+  <span class="sec-tag">02 · NEUROCIÊNCIA DOS HÁBITOS</span>
+  <h2 class="sec-title">Hábitos não são disciplina.<br>São neurobiologia.</h2>
+  <p class="sec-sub">O cérebro não muda por força de vontade — muda por repetição, contexto e reforço social.</p>
+
+  <div class="study-block">
+    <div class="study-header">
+      <span class="study-num">ESTUDO 04</span>
+      <div class="study-head-inner">
+        <div class="study-title">Lei de Hebb — "Neurônios que Disparam Juntos, Se Conectam"</div>
+        <div class="study-cite">Donald Hebb · "The Organization of Behavior" · 1949 · Base da neuroplastidade moderna</div>
+      </div>
+    </div>
+    <div class="study-body">
+      <p class="study-finding">Em 1949, o neuropsicólogo Donald Hebb publicou o princípio que fundou a neurociência moderna dos hábitos: <strong>"Cells that fire together, wire together"</strong> (neurônios que disparam juntos, se conectam). Cada vez que você repete um comportamento, as sinapses envolvidas ficam mais fortes, mais rápidas, mais automáticas. Com repetição suficiente, o comportamento deixa de ser consciente — passa a ser automático.</p>
+      <p class="study-finding">Norman Doidge, em "The Brain That Changes Itself" (2007), documentou centenas de casos de neuroplasticidade: o cérebro adulto <strong>literalmente se recabia em resposta a novos comportamentos, ambientes e relacionamentos</strong>. Não é metáfora — é estrutura sináptica alterada que pode ser observada em neuroimagem.</p>
+      <div class="study-alpha">
+        <div class="study-alpha-label">APLICAÇÃO NA COMUNIDADE ALPHA</div>
+        <p class="study-alpha-text">Cada treino às 5h da manhã, cada leitura, cada conversa de alta qualidade dentro da Alpha <strong>literalmente recabia o cérebro do membro</strong>. Não é motivação que dura uma semana — é estrutura neural que se reconstrói. A consistência não é virtude: é o mecanismo pelo qual a biologia opera. A Alpha cria o contexto para que a repetição aconteça.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="study-block">
+    <div class="study-header">
+      <span class="study-num">ESTUDO 05</span>
+      <div class="study-head-inner">
+        <div class="study-title">Quanto Tempo Leva para Formar um Hábito? (O mito dos 21 dias)</div>
+        <div class="study-cite">Phillippa Lally et al. · University College London · European Journal of Social Psychology · 2010 · n=96 participantes</div>
+      </div>
+    </div>
+    <div class="study-body">
+      <p class="study-finding">O mito de que hábitos se formam em 21 dias foi derrubado por Phillippa Lally e sua equipe no UCL. O estudo real acompanhou 96 pessoas por 12 semanas monitorando quando comportamentos novos se tornavam automáticos. O resultado: <strong>a formação de um hábito leva entre 18 e 254 dias, com média de 66 dias</strong> — dependendo da complexidade do comportamento, da pessoa e — criticamente — do ambiente.</p>
+      <p class="study-finding">A descoberta mais importante: <strong>falhar uma vez não quebra o hábito</strong>. O que quebra é a ausência de contexto e reforço externo. Ambientes sociais que normalizam o comportamento desejado reduzem drasticamente o tempo de formação e aumentam a resiliência do hábito diante de falhas.</p>
+      <div class="study-alpha">
+        <div class="study-alpha-label">APLICAÇÃO NA COMUNIDADE ALPHA</div>
+        <p class="study-alpha-text">Hábitos não se formam em 21 dias — e a vontade individual isolada raramente basta. O que a ciência prova é que <strong>o ambiente é o substrato sobre o qual o hábito cresce ou morre</strong>. Uma comunidade que normaliza disciplina, accountability e resultado cria o contexto onde 66 dias acontecem naturalmente — e onde a falha ocasional não destrói o padrão.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="study-block">
+    <div class="study-header">
+      <span class="study-num">ESTUDO 06</span>
+      <div class="study-head-inner">
+        <div class="study-title">O Loop do Hábito — Gatilho, Rotina e Recompensa</div>
+        <div class="study-cite">Ann Graybiel · MIT McGovern Institute for Brain Research · 1998–2012 · Estudos com basal ganglia</div>
+      </div>
+    </div>
+    <div class="study-body">
+      <p class="study-finding">A neurocientista Ann Graybiel do MIT identificou que os gânglios basais — estrutura cerebral evolutivamente antiga — são o "armazenamento" dos hábitos. O loop é: <strong>Gatilho (cue) → Rotina → Recompensa</strong>. Quando o loop é repetido, o comportamento deixa o córtex pré-frontal (consciente) e migra para os gânglios basais (automático), liberando o cérebro consciente para outras tarefas.</p>
+      <p class="study-finding">Crítico: <strong>o ambiente é o maior fornecedor de gatilhos</strong>. Mudar um hábito sem mudar o ambiente significa lutar contra os próprios gatilhos neurais toda vez. É por isso que recaídas acontecem quando se volta ao mesmo ambiente — e por isso que novos ambientes facilitam novos hábitos.</p>
+      <div class="study-alpha">
+        <div class="study-alpha-label">APLICAÇÃO NA COMUNIDADE ALPHA</div>
+        <p class="study-alpha-text">Os rituais da Alpha — treino, leitura, grupos de foco, accountability — não são eventos. São <strong>gatilhos programados que ativam loops de hábito positivo</strong>. Participar da comunidade cria uma densidade de gatilhos que o ambiente fora da Alpha raramente oferece. A ciência chama de "rich environment". A Alpha chama de convivência.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ========================================================
+     SEÇÃO 3 · SUPERAÇÃO DE CRENÇAS LIMITANTES
+     ======================================================== -->
+<section class="section" id="s3">
+  <span class="sec-tag">03 · CRENÇAS LIMITANTES</span>
+  <h2 class="sec-title">O inimigo não está fora.<br>Está na arquitetura do cérebro.</h2>
+  <p class="sec-sub">Mas arquiteturas mudam. A ciência prova — e explica como.</p>
+
+  <div class="study-block">
+    <div class="study-header">
+      <span class="study-num">ESTUDO 07</span>
+      <div class="study-head-inner">
+        <div class="study-title">Mentalidade Fixa vs. Mentalidade de Crescimento</div>
+        <div class="study-cite">Carol Dweck · Stanford University · "Mindset: The New Psychology of Success" · 2006 · Mais de 30 anos de pesquisa</div>
+      </div>
+    </div>
+    <div class="study-body">
+      <p class="study-finding">Carol Dweck identificou dois padrões fundamentais de crença sobre capacidade humana. <strong>Mentalidade Fixa:</strong> inteligência e talento são traços imutáveis — "eu sou assim". <strong>Mentalidade de Crescimento:</strong> capacidades se desenvolvem com esforço e aprendizado — "eu ainda não aprendi".</p>
+      <p class="study-finding">Os estudos mostraram que pessoas com mentalidade de crescimento: persistem mais diante de fracassos, buscam mais feedback, alcançam maior desempenho a longo prazo e têm maior bem-estar psicológico. O mais importante: <strong>a mentalidade pode ser alterada por intervenções de ambiente e linguagem</strong>. Uma simples frase — "ainda" — muda o circuito neural de resposta ao fracasso.</p>
+      <div class="study-alpha">
+        <div class="study-alpha-label">APLICAÇÃO NA COMUNIDADE ALPHA</div>
+        <p class="study-alpha-text">A crença limitante mais comum não é "não consigo" — é <strong>"eu sou assim"</strong>. A Alpha opera como um ambiente de mentalidade de crescimento: resultados são atribuídos a esforço e método, não a talento inato. Conviver com pessoas que já superaram os mesmos obstáculos que você enfrenta é a intervenção de ambiente mais eficaz que a ciência conhece para mudar essa arquitetura.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="study-block">
+    <div class="study-header">
+      <span class="study-num">ESTUDO 08</span>
+      <div class="study-head-inner">
+        <div class="study-title">Conformidade Social e a Coragem de Pensar Diferente</div>
+        <div class="study-cite">Solomon Asch · Swarthmore College · Journal of Abnormal and Social Psychology · 1951–1956</div>
+      </div>
+    </div>
+    <div class="study-body">
+      <p class="study-finding">O experimento de conformidade de Solomon Asch revelou algo perturbador: quando colocadas em grupo, <strong>75% das pessoas dão uma resposta que sabem estar errada para se conformar à maioria</strong>. A resposta correta era óbvia — linhas de tamanhos diferentes — mas a pressão social silenciosa do grupo alterava o comportamento da maioria.</p>
+      <p class="study-finding">O reverso também é verdadeiro: quando apenas <strong>uma pessoa no grupo discordava da maioria errada</strong>, a taxa de conformidade caía de 75% para menos de 10%. Ter um aliado que pensa diferente dá ao indivíduo permissão para pensar por si mesmo. Isso é o que Asch chamou de "social scaffolding" — estrutura social que liberta o pensamento crítico.</p>
+      <div class="study-alpha">
+        <div class="study-alpha-label">APLICAÇÃO NA COMUNIDADE ALPHA</div>
+        <p class="study-alpha-text">A maioria das crenças limitantes não são suas — são <strong>conformidade ao ambiente que te cercou por anos</strong>. "Dinheiro não dá felicidade", "quem tem sucesso pisou em alguém", "aqui onde moro não tem oportunidade". A Alpha quebra essa conformidade ao oferecer um grupo onde a norma é diferente. Não por discurso — por convivência. O Efeito Asch trabalha dos dois lados: o ambiente errado limita; o ambiente certo liberta.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="pull-quote">
+    <p>"A crença não é uma conclusão lógica. É uma inferência do ambiente. Mude o ambiente — mude a crença."</p>
+    <div class="pull-quote-attr">Robert Cialdini · Influence: The Psychology of Persuasion · 1984</div>
+  </div>
+
+  <div class="study-block">
+    <div class="study-header">
+      <span class="study-num">ESTUDO 09</span>
+      <div class="study-head-inner">
+        <div class="study-title">Terapia Cognitivo-Comportamental e Reestruturação de Crenças</div>
+        <div class="study-cite">Aaron Beck · University of Pennsylvania · Cognitive Therapy of Depression · 1979 · Meta-análise: 332 estudos / 9.138 pacientes</div>
+      </div>
+    </div>
+    <div class="study-body">
+      <p class="study-finding">Aaron Beck, fundador da Terapia Cognitivo-Comportamental, demonstrou que <strong>crenças distorcidas sobre si mesmo são aprendidas</strong> — não inatas. O cérebro cria "esquemas cognitivos": atalhos que interpretam a realidade através do filtro de experiências passadas. Esses esquemas se tornam automáticos, criando o que popularmente chamamos de "crença limitante".</p>
+      <p class="study-finding">A meta-análise de 332 estudos (Butler et al., 2006) mostrou que <strong>intervenções cognitivo-comportamentais têm eficácia superior a 80% na reestruturação de crenças</strong>. O mecanismo: exposição repetida a evidências contrárias ao esquema limitante, em ambiente seguro e com feedback honesto. Exatamente o que comunidades de alta performance fazem naturalmente.</p>
+      <div class="study-alpha">
+        <div class="study-alpha-label">APLICAÇÃO NA COMUNIDADE ALPHA</div>
+        <p class="study-alpha-text">Cada história de transformação de um membro Alpha é uma <strong>evidência contrária à crença limitante de quem ainda não acredita que pode</strong>. A ciência chama de "disconfirming evidence" — a exposição repetida ao que nega o esquema limitante. Ver um membro com perfil similar ao seu conquistar resultados concretos não é inspiração superficial: é o mecanismo exato que a neurociência prescreve para mudar crenças profundas.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ========================================================
+     SEÇÃO 4 · A NEUROCIÊNCIA DA PROSPERIDADE
+     ======================================================== -->
+<section class="section" id="s4">
+  <span class="sec-tag">04 · NEUROCIÊNCIA DA PROSPERIDADE</span>
+  <h2 class="sec-title">Prosperidade não é sorte.<br>É um padrão de comportamento repetível.</h2>
+  <p class="sec-sub">E padrões de comportamento são moldados pelo ambiente — não pelo DNA.</p>
+
+  <div class="study-block">
+    <div class="study-header">
+      <span class="study-num">ESTUDO 10</span>
+      <div class="study-head-inner">
+        <div class="study-title">Rich Habits — Os Hábitos Diários que Separam Rico de Pobre</div>
+        <div class="study-cite">Thomas Corley · Research Institute of America · "Rich Habits" · 2010 · 5 anos de pesquisa / 233 milionários e 128 pessoas em dificuldade financeira</div>
+      </div>
+    </div>
+    <div class="study-body">
+      <p class="study-finding">Thomas Corley passou 5 anos entrevistando 233 milionários self-made e 128 pessoas em dificuldade financeira, identificando diferenças comportamentais diárias. Os dados foram contundentes: <strong>os hábitos diários explicam a diferença de resultado financeiro</strong> — não herança, não sorte, não QI.</p>
+      <p class="study-finding">Hábitos dos milionários vs. pessoas em dificuldade: <strong>88% vs. 2%</strong> leem 30+ min/dia para aprendizado. <strong>86% vs. 35%</strong> praticam exercício cardiovascular 4+ dias/semana. <strong>76% vs. 9%</strong> fazem rede ativa com pessoas de sucesso. <strong>67% vs. 6%</strong> escrevem metas claras. O padrão revela que <strong>prosperidade é a soma de comportamentos diários praticados em ambiente certo</strong>.</p>
+      <div class="study-alpha">
+        <div class="study-alpha-label">APLICAÇÃO NA COMUNIDADE ALPHA</div>
+        <p class="study-alpha-text">Os hábitos que a pesquisa de Corley identifica nos milionários são exatamente <strong>os comportamentos que a Alpha normaliza no ambiente</strong>: leitura diária, exercício, networking com pessoas de alto resultado, clareza de metas. A Alpha não ensina hábitos — ela os torna a norma social do grupo. E quando a norma do grupo muda, o comportamento individual muda naturalmente.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="study-block">
+    <div class="study-header">
+      <span class="study-num">ESTUDO 11</span>
+      <div class="study-head-inner">
+        <div class="study-title">Peer Effects na Renda — Vizinhos Ricos Tornam Você Rico?</div>
+        <div class="study-cite">Raj Chetty et al. · Harvard & Stanford · "The Opportunity Atlas" · 2018 · Dados de 20 milhões de americanos</div>
+      </div>
+    </div>
+    <div class="study-body">
+      <p class="study-finding">O economista Raj Chetty e sua equipe analisaram dados de mobilidade econômica de 20 milhões de americanos e descobriram algo que contraria o senso comum: <strong>o código postal onde você cresce prediz seu resultado econômico adulto com mais precisão do que sua escolaridade</strong>. O mecanismo não é a localização em si — é o grupo social que o ambiente cria.</p>
+      <p class="study-finding">Um estudo subsequente (Chetty et al., 2022, Science) identificou que o fator mais poderoso para mobilidade econômica é o que chamaram de <strong>"cross-class social capital"</strong> — exposição a pessoas de classe econômica superior. Cada ponto percentual de aumento nessa exposição correlaciona com <strong>20% maior renda na vida adulta</strong>.</p>
+      <div class="study-alpha">
+        <div class="study-alpha-label">APLICAÇÃO NA COMUNIDADE ALPHA</div>
+        <p class="study-alpha-text">A pesquisa de Chetty prova que <strong>acesso a pessoas de resultado superior é o maior preditor de prosperidade</strong> — acima de escola, habilidade técnica e esforço individual. A Alpha é, por definição, um ambiente de cross-class social capital: conecta pessoas em diferentes estágios de resultado, permitindo que os padrões, conexões e mentalidade dos mais avançados contaminem os que estão chegando.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="study-block">
+    <div class="study-header">
+      <span class="study-num">ESTUDO 12</span>
+      <div class="study-head-inner">
+        <div class="study-title">Dopamina, Antecipação e a Neurociência da Ambição</div>
+        <div class="study-cite">Wolfram Schultz · University of Cambridge · Science · 1997 · Prêmio Nobel de Medicina (compartilhado) · 2024</div>
+      </div>
+    </div>
+    <div class="study-body">
+      <p class="study-finding">O neurocientista Wolfram Schultz descobriu que o sistema dopaminérgico — o centro de recompensa do cérebro — não dispara na recompensa em si, mas <strong>na antecipação de recompensa</strong>. Isso explica por que objetivos claros, próximos e visualmente presentes aumentam motivação: eles ativam o sistema dopaminérgico antes da recompensa existir.</p>
+      <p class="study-finding">O corolário: <strong>conviver com pessoas que já alcançaram o que você deseja ativa dopamina antecipatória</strong>. O cérebro processa o que vê como possível — e a possibilidade é dopaminergicamente motivadora. Ver o resultado alheio não é inveja: é o sistema de recompensa calibrando o que é biologicamente acessível para você.</p>
+      <div class="study-alpha">
+        <div class="study-alpha-label">APLICAÇÃO NA COMUNIDADE ALPHA</div>
+        <p class="study-alpha-text">Cada resultado compartilhado por um membro Alpha é um <strong>estímulo dopaminérgico antecipatório</strong> para todos que leem. O cérebro do leitor processa: "isso é possível para alguém como eu". Esse processamento não é emocional — é neurobiológico. A Alpha não vende sonho: ela cria o ambiente onde o sistema dopaminérgico dos membros é calibrado para metas maiores, de forma sistemática e contínua.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="pull-quote">
+    <p>"O ambiente não apenas influencia o comportamento — ele literalmente altera a expressão genética. Biologia não é destino. É o ponto de partida."</p>
+    <div class="pull-quote-attr">Robert Sapolsky · Stanford University · "Determined: A Science of Life Without Free Will" · 2023</div>
+  </div>
+</section>
+
+
+<!-- ========================================================
+     SEÇÃO 5 · SÍNTESE — O QUE A CIÊNCIA PROVA SOBRE A ALPHA
+     ======================================================== -->
+<section class="synthesis" id="s5">
+  <div class="syn-inner">
+    <div class="syn-label">05 · SÍNTESE · O VEREDICTO DA CIÊNCIA</div>
+    <h2 class="syn-title">12 estudos.<br>Uma conclusão.</h2>
+    <p class="syn-body">A Comunidade Alpha não opera por motivação — opera por mecanismos que a neurociência, a psicologia social e a economia comportamental estudam há décadas. O que a ciência chama de "contágio social", "neuroplasticidade", "mentalidade de crescimento" e "cross-class social capital", a Alpha chama de convivência. A lógica é a mesma. Os resultados também.</p>
+
+    <div class="syn-grid">
+      <div class="syn-item">
+        <div class="syn-item-icon">🧠</div>
+        <div class="syn-item-title">Neuroplasticidade</div>
+        <div class="syn-item-body">O cérebro se recabia com repetição. A Alpha cria o contexto onde a repetição de comportamentos de alta performance se torna natural.</div>
+      </div>
+      <div class="syn-item">
+        <div class="syn-item-icon">🦠</div>
+        <div class="syn-item-title">Contágio Social</div>
+        <div class="syn-item-body">Comportamentos se propagam como vírus. Estar na Alpha significa estar exposto ao contágio certo — não ao errado.</div>
+      </div>
+      <div class="syn-item">
+        <div class="syn-item-icon">🔗</div>
+        <div class="syn-item-title">Número de Dunbar</div>
+        <div class="syn-item-body">Seu cérebro mantém 150 relações. A questão é quem ocupa esse espaço — e a Alpha garante que parte dessas 150 pessoas sejam catalisadores.</div>
+      </div>
+      <div class="syn-item">
+        <div class="syn-item-icon">📈</div>
+        <div class="syn-item-title">Peer Effects</div>
+        <div class="syn-item-body">Exposição a pessoas de resultado superior é o maior preditor de mobilidade econômica — acima de escola e esforço isolado.</div>
+      </div>
+      <div class="syn-item">
+        <div class="syn-item-icon">🔄</div>
+        <div class="syn-item-title">Loop do Hábito</div>
+        <div class="syn-item-body">O ambiente é o maior fornecedor de gatilhos. Rituais da Alpha criam uma densidade de gatilhos positivos que o mundo exterior raramente oferece.</div>
+      </div>
+      <div class="syn-item">
+        <div class="syn-item-icon">🌱</div>
+        <div class="syn-item-title">Growth Mindset</div>
+        <div class="syn-item-body">Mentalidade de crescimento se forma por exposição a modelos de esforço recompensado. A Alpha é um repositório vivo desses modelos.</div>
+      </div>
+      <div class="syn-item">
+        <div class="syn-item-icon">⚡</div>
+        <div class="syn-item-title">Dopamina Antecipatória</div>
+        <div class="syn-item-body">Ver o resultado de quem já chegou onde você quer ativa motivação neurobiológica real — não inspiração passageira.</div>
+      </div>
+      <div class="syn-item">
+        <div class="syn-item-icon">🎯</div>
+        <div class="syn-item-title">Efeito Pigmalião</div>
+        <div class="syn-item-body">Um ambiente que espera o seu melhor altera sua performance real. A Alpha não tolera "mais ou menos" como norma — e isso tem efeito mensurável.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-brand">COMUNIDADE ALPHA · PESQUISA CIENTÍFICA</div>
+  <p>Documento de fundamentação científica para parceiros e parceiros · 2026-06-01</p>
+  <p style="margin-top:6px;font-size:.75rem;opacity:.6">Referências: Christakis & Fowler (2007) · Dunbar (1992) · Rosenthal & Jacobson (1968) · Hebb (1949) · Doidge (2007) · Lally et al. (2010) · Graybiel (1998) · Dweck (2006) · Asch (1951) · Beck (1979) · Corley (2010) · Chetty et al. (2018, 2022) · Schultz (1997) · Sapolsky (2023)</p>
+</footer>
+
+</body>
+</html>
