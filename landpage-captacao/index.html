@@ -366,6 +366,18 @@
       padding-right: 36px;
     }
     .quiz-field select option { background: #122436; color: var(--creme); }
+    .quiz-field-conditional {
+      overflow: hidden;
+      max-height: 0;
+      opacity: 0;
+      transition: max-height 0.35s ease, opacity 0.3s ease, margin-top 0.3s ease;
+      margin-top: 0;
+    }
+    .quiz-field-conditional.visible {
+      max-height: 120px;
+      opacity: 1;
+      margin-top: 0;
+    }
 
     /* CTA button */
     .cta-btn {
@@ -1110,6 +1122,14 @@
                 <option value="mais6h">Mais de 6 horas</option>
               </select>
             </div>
+            <div class="quiz-field">
+              <label for="qMembroNome">Você conhece algum membro da Alpha? Se sim, qual o nome?</label>
+              <input type="text" id="qMembroNome" placeholder="Nome do membro (opcional)">
+            </div>
+            <div class="quiz-field quiz-field-conditional" id="qMembroContatoField">
+              <label for="qMembroContato">Instagram ou WhatsApp desse membro</label>
+              <input type="text" id="qMembroContato" placeholder="@instagram ou (00) 00000-0000">
+            </div>
           </div>
           <button class="cta-btn" id="qSubmit" type="button">Solicitar minha entrada →</button>
           <p class="cta-micro">Alguém do time entra em contato via WhatsApp em até 24h.</p>
@@ -1155,6 +1175,14 @@
         });
 
       } else if (s === 7) {
+        /* Membro condicional — exibe campo de contato ao digitar nome */
+        const membroNome = document.getElementById('qMembroNome');
+        const membroContatoField = document.getElementById('qMembroContatoField');
+        membroNome.addEventListener('input', () => {
+          if (membroNome.value.trim().length > 0) membroContatoField.classList.add('visible');
+          else membroContatoField.classList.remove('visible');
+        });
+
         /* Phone mask */
         const tel = document.getElementById('qTel');
         tel.addEventListener('input', () => {
@@ -1166,14 +1194,16 @@
         });
 
         document.getElementById('qSubmit').addEventListener('click', async () => {
-          const nome      = document.getElementById('qNome').value.trim();
-          const whatsapp  = document.getElementById('qTel').value.trim();
-          const instagram = document.getElementById('qInsta').value.trim();
-          const profissao = document.getElementById('qProfissao').value.trim();
-          const ganho     = document.getElementById('qGanho').value;
-          const comunidade= document.getElementById('qComunidade').value;
-          const vendas    = document.getElementById('qVendas').value;
-          const horas     = document.getElementById('qHoras').value;
+          const nome          = document.getElementById('qNome').value.trim();
+          const whatsapp      = document.getElementById('qTel').value.trim();
+          const instagram     = document.getElementById('qInsta').value.trim();
+          const profissao     = document.getElementById('qProfissao').value.trim();
+          const ganho         = document.getElementById('qGanho').value;
+          const comunidade    = document.getElementById('qComunidade').value;
+          const vendas        = document.getElementById('qVendas').value;
+          const horas         = document.getElementById('qHoras').value;
+          const membroNomeVal = document.getElementById('qMembroNome').value.trim();
+          const membroContato = document.getElementById('qMembroContato').value.trim();
 
           let ok = true;
           const required = [
@@ -1199,7 +1229,9 @@
                headers: { 'Content-Type': 'application/json' },
                body: JSON.stringify({
                  nome, whatsapp, instagram, profissao, ganho,
-                 comunidade, vendas, horas, score, openAnswer,
+                 comunidade, vendas, horas,
+                 indicadoPor: membroNomeVal, contatoIndicador: membroContato,
+                 score, openAnswer,
                  origem: 'quiz-captacao-alpha',
                  data: new Date().toISOString()
                })
