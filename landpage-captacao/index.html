@@ -344,8 +344,28 @@
       width: 100%;
     }
     .quiz-field input::placeholder { color: var(--creme-45); }
-    .quiz-field input:focus { outline: none; border-color: var(--ouro); box-shadow: 0 0 0 3px rgba(200,169,81,0.1); }
-    .quiz-field input.error { border-color: rgba(230,100,100,0.6); }
+    .quiz-field input:focus,
+    .quiz-field select:focus { outline: none; border-color: var(--ouro); box-shadow: 0 0 0 3px rgba(200,169,81,0.1); }
+    .quiz-field input.error,
+    .quiz-field select.error { border-color: rgba(230,100,100,0.6); }
+    .quiz-field select {
+      background: rgba(0,0,0,0.3);
+      border: 1px solid rgba(200,169,81,0.2);
+      border-radius: 8px;
+      color: var(--creme);
+      font-family: var(--sans);
+      font-size: 0.9rem;
+      padding: 12px 14px;
+      width: 100%;
+      cursor: pointer;
+      transition: border-color 0.18s;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23C8A951' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 36px;
+    }
+    .quiz-field select option { background: #122436; color: var(--creme); }
 
     /* CTA button */
     .cta-btn {
@@ -1031,7 +1051,7 @@
             <h3 class="quiz-result-title">${rd.title}</h3>
             <p class="quiz-result-text">${rd.text}</p>
           </div>
-          <p class="quiz-contact-intro">Para darmos o próximo passo, preciso de 2 informações:</p>
+          <p class="quiz-contact-intro">Para darmos o próximo passo, preciso de algumas informações:</p>
           <div class="quiz-fields">
             <div class="quiz-field">
               <label for="qNome">Nome completo<span class="req">*</span></label>
@@ -1040,6 +1060,55 @@
             <div class="quiz-field">
               <label for="qTel">WhatsApp com DDD<span class="req">*</span></label>
               <input type="tel" id="qTel" placeholder="(00) 00000-0000" autocomplete="tel">
+            </div>
+            <div class="quiz-field">
+              <label for="qInsta">Instagram</label>
+              <input type="text" id="qInsta" placeholder="@seuperfil">
+            </div>
+            <div class="quiz-field">
+              <label for="qProfissao">Profissão atual<span class="req">*</span></label>
+              <input type="text" id="qProfissao" placeholder="Ex: vendedor, empresário, professor...">
+            </div>
+            <div class="quiz-field">
+              <label for="qGanho">Renda mensal aproximada<span class="req">*</span></label>
+              <select id="qGanho">
+                <option value="" disabled selected>Selecione uma faixa</option>
+                <option value="ate2k">Até R$ 2.000</option>
+                <option value="2k-5k">R$ 2.000 a R$ 5.000</option>
+                <option value="5k-10k">R$ 5.000 a R$ 10.000</option>
+                <option value="10k-20k">R$ 10.000 a R$ 20.000</option>
+                <option value="acima20k">Acima de R$ 20.000</option>
+              </select>
+            </div>
+            <div class="quiz-field">
+              <label for="qComunidade">Já participou de alguma comunidade paga?<span class="req">*</span></label>
+              <select id="qComunidade">
+                <option value="" disabled selected>Selecione</option>
+                <option value="nao">Não, seria a primeira vez</option>
+                <option value="sim-ativa">Sim, e ainda estou ativo em alguma</option>
+                <option value="sim-saiu">Sim, participei mas saí</option>
+              </select>
+            </div>
+            <div class="quiz-field">
+              <label for="qVendas">Já trabalhou com vendas online?<span class="req">*</span></label>
+              <select id="qVendas">
+                <option value="" disabled selected>Selecione</option>
+                <option value="nao">Não tenho experiência</option>
+                <option value="tentei">Tentei, mas não avancei</option>
+                <option value="sim-basico">Sim, tenho experiência básica</option>
+                <option value="sim-experiente">Sim, tenho experiência sólida</option>
+              </select>
+            </div>
+            <div class="quiz-field">
+              <label for="qHoras">Horas por dia para construir este negócio<span class="req">*</span></label>
+              <select id="qHoras">
+                <option value="" disabled selected>Selecione</option>
+                <option value="menos1h">Menos de 1 hora</option>
+                <option value="1-2h">1 a 2 horas</option>
+                <option value="2-4h">2 a 4 horas</option>
+                <option value="4-6h">4 a 6 horas</option>
+                <option value="mais6h">Mais de 6 horas</option>
+              </select>
             </div>
           </div>
           <button class="cta-btn" id="qSubmit" type="button">Solicitar minha entrada →</button>
@@ -1097,11 +1166,25 @@
         });
 
         document.getElementById('qSubmit').addEventListener('click', async () => {
-          const nome     = document.getElementById('qNome').value.trim();
-          const whatsapp = document.getElementById('qTel').value.trim();
+          const nome      = document.getElementById('qNome').value.trim();
+          const whatsapp  = document.getElementById('qTel').value.trim();
+          const instagram = document.getElementById('qInsta').value.trim();
+          const profissao = document.getElementById('qProfissao').value.trim();
+          const ganho     = document.getElementById('qGanho').value;
+          const comunidade= document.getElementById('qComunidade').value;
+          const vendas    = document.getElementById('qVendas').value;
+          const horas     = document.getElementById('qHoras').value;
+
           let ok = true;
-          if (!nome)     { document.getElementById('qNome').classList.add('error'); ok = false; }
-          if (!whatsapp) { document.getElementById('qTel').classList.add('error'); ok = false; }
+          const required = [
+            ['qNome', nome], ['qTel', whatsapp], ['qProfissao', profissao],
+            ['qGanho', ganho], ['qComunidade', comunidade],
+            ['qVendas', vendas], ['qHoras', horas]
+          ];
+          required.forEach(([id, val]) => {
+            if (!val) { document.getElementById(id).classList.add('error'); ok = false; }
+            else document.getElementById(id).classList.remove('error');
+          });
           if (!ok) return;
 
           const btn = document.getElementById('qSubmit');
@@ -1115,7 +1198,8 @@
                method: 'POST',
                headers: { 'Content-Type': 'application/json' },
                body: JSON.stringify({
-                 nome, whatsapp, score, openAnswer,
+                 nome, whatsapp, instagram, profissao, ganho,
+                 comunidade, vendas, horas, score, openAnswer,
                  origem: 'quiz-captacao-alpha',
                  data: new Date().toISOString()
                })
