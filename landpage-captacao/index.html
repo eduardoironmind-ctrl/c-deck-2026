@@ -1,0 +1,1136 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Comunidade Alpha — ambiente calibrado para alta performance e transformação financeira com método.">
+  <title>Comunidade Alpha · O ambiente determina o resultado</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,700;1,6..96,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ── TOKENS ─────────────────────────────────────────── */
+    :root {
+      --azul:    #0D1F2D;
+      --azul-m:  #122436;
+      --azul-l:  #1a3147;
+      --ouro:    #C8A951;
+      --ouro-l:  #d9bc74;
+      --ouro-dim: rgba(200,169,81,0.15);
+      --ouro-dim2: rgba(200,169,81,0.07);
+      --creme:   #F5F0E6;
+      --creme-70: rgba(245,240,230,0.70);
+      --creme-45: rgba(245,240,230,0.45);
+      --creme-20: rgba(245,240,230,0.12);
+      --line:    rgba(200,169,81,0.18);
+      --serif: 'Bodoni Moda', Georgia, serif;
+      --sans:  'Plus Jakarta Sans', system-ui, sans-serif;
+      --r-sm: 8px;
+      --r-md: 12px;
+      --r-lg: 18px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--sans);
+      background: var(--azul);
+      color: var(--creme);
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    img { max-width: 100%; display: block; }
+    a { color: var(--ouro); text-decoration: none; }
+
+    .wrap { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+    .wrap-wide { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+    .section { padding: 80px 0; }
+    .section-sm { padding: 56px 0; }
+    .divider { border: none; border-top: 1px solid var(--line); }
+    .label { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--ouro); font-weight: 600; margin-bottom: 14px; display: block; }
+    .serif { font-family: var(--serif); }
+    .gold { color: var(--ouro); }
+
+    /* ── HERO ───────────────────────────────────────────── */
+    .hero {
+      min-height: 100svh;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 0 24px 72px;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 70% 50% at 50% 0%, rgba(200,169,81,0.06) 0%, transparent 70%),
+        linear-gradient(180deg, var(--azul) 0%, #0a1820 100%);
+      z-index: 0;
+    }
+    .hero-ornament {
+      position: absolute; top: 48px; left: 50%; transform: translateX(-50%);
+      width: 1px; height: 80px;
+      background: linear-gradient(to bottom, transparent, var(--ouro), transparent);
+      opacity: 0.5; z-index: 1;
+    }
+    .hero-logo-area {
+      position: absolute; top: 40px; left: 50%; transform: translateX(-50%);
+      z-index: 2; text-align: center; padding-top: 100px;
+    }
+    .hero-logo-text { font-family: var(--serif); font-size: 13px; letter-spacing: 6px; text-transform: uppercase; color: var(--ouro); opacity: 0.7; }
+    .hero-content { position: relative; z-index: 2; max-width: 760px; }
+    .hero-eyebrow { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--ouro); opacity: 0.8; margin-bottom: 28px; }
+    .hero-headline { font-family: var(--serif); font-size: clamp(2.2rem, 6vw, 4rem); font-weight: 700; line-height: 1.12; color: var(--creme); margin-bottom: 28px; }
+    .hero-headline em { font-style: italic; color: var(--ouro); }
+    .hero-sub { font-size: clamp(1rem, 2vw, 1.15rem); color: var(--creme-70); line-height: 1.8; max-width: 580px; margin-bottom: 48px; }
+    .hero-rule { display: flex; align-items: center; gap: 16px; font-family: var(--serif); font-style: italic; font-size: 0.95rem; color: var(--creme-45); }
+    .hero-rule::before, .hero-rule::after { content: ''; flex: 1; height: 1px; background: var(--line); }
+    .hero-scroll { position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%); z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 8px; color: var(--creme-45); font-size: 10px; letter-spacing: 2px; text-transform: uppercase; }
+    .hero-scroll-line { width: 1px; height: 40px; background: linear-gradient(to bottom, var(--ouro), transparent); opacity: 0.4; animation: scrollpulse 2s ease-in-out infinite; }
+    @keyframes scrollpulse { 0%, 100% { opacity: 0.4; transform: scaleY(1); } 50% { opacity: 0.8; transform: scaleY(1.1); } }
+
+    /* ── SECTION HEADERS ────────────────────────────────── */
+    .sh { margin-bottom: 48px; }
+    .sh-label { font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: var(--ouro); opacity: 0.7; margin-bottom: 10px; }
+    .sh-title { font-family: var(--serif); font-size: clamp(1.6rem, 4vw, 2.4rem); font-weight: 700; line-height: 1.2; color: var(--creme); }
+    .sh-title em { font-style: italic; color: var(--ouro); }
+
+    /* ── PROBLEMA ───────────────────────────────────────── */
+    .problema { background: var(--azul); }
+    .problema-text p { font-size: 1.05rem; color: var(--creme-70); margin-bottom: 20px; line-height: 1.85; }
+    .problema-text p.strong-line { font-size: 1.15rem; color: var(--creme); font-weight: 500; }
+    .problema-text p.conclusion { font-size: 1.2rem; color: var(--creme); font-family: var(--serif); font-style: italic; padding: 24px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); margin: 32px 0; }
+
+    /* ── CIÊNCIA ────────────────────────────────────────── */
+    .ciencia { background: var(--azul-m); }
+    .stat-cards { display: grid; gap: 20px; margin-bottom: 40px; }
+    .stat-card { background: var(--ouro-dim2); border: 1px solid var(--line); border-radius: var(--r-md); padding: 28px 28px 24px; position: relative; overflow: hidden; }
+    .stat-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(to right, transparent, var(--ouro), transparent); opacity: 0.5; }
+    .stat-number { font-family: var(--serif); font-size: 2.6rem; font-weight: 700; color: var(--ouro); line-height: 1; margin-bottom: 10px; }
+    .stat-label { font-size: 0.95rem; color: var(--creme); font-weight: 600; margin-bottom: 6px; }
+    .stat-desc { font-size: 0.85rem; color: var(--creme-70); line-height: 1.6; margin-bottom: 12px; }
+    .stat-source { font-size: 0.75rem; color: var(--creme-45); letter-spacing: 0.5px; }
+    .pull-quote { background: var(--ouro-dim); border-left: 3px solid var(--ouro); border-radius: 0 var(--r-md) var(--r-md) 0; padding: 28px 32px; margin: 40px 0; }
+    .pull-quote blockquote { font-family: var(--serif); font-style: italic; font-size: clamp(1.1rem, 2.5vw, 1.3rem); color: var(--creme); line-height: 1.65; margin-bottom: 14px; }
+    .pull-quote cite { font-size: 0.82rem; color: var(--ouro); font-style: normal; }
+    .ciencia-close { font-size: 1.1rem; color: var(--creme); line-height: 1.8; text-align: center; padding: 32px; border: 1px solid var(--line); border-radius: var(--r-md); background: var(--ouro-dim2); }
+    .ciencia-close strong { color: var(--ouro); }
+
+    /* ── O QUE É A ALPHA ────────────────────────────────── */
+    .alpha-def { background: var(--azul); }
+    .alpha-intro { font-size: 1.05rem; color: var(--creme-70); margin-bottom: 8px; line-height: 1.85; }
+    .alpha-distinction { font-size: 1.15rem; color: var(--creme); font-family: var(--serif); font-style: italic; margin: 28px 0 32px; padding: 20px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .pilares { display: grid; gap: 14px; margin-top: 36px; }
+    .pilar { display: flex; gap: 16px; align-items: flex-start; padding: 20px; border-radius: var(--r-sm); background: var(--ouro-dim2); border: 1px solid var(--line); transition: border-color 0.2s; }
+    .pilar:hover { border-color: rgba(200,169,81,0.4); }
+    .pilar-icon { width: 36px; height: 36px; border-radius: 6px; background: var(--ouro-dim); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+    .pilar-body h4 { color: var(--creme); font-size: 0.95rem; font-weight: 700; margin-bottom: 4px; }
+    .pilar-body p { color: var(--creme-70); font-size: 0.87rem; line-height: 1.6; }
+    .alpha-anchor { text-align: center; margin-top: 44px; font-family: var(--serif); font-style: italic; font-size: 1.15rem; color: var(--ouro); letter-spacing: 1px; }
+
+    /* ── EDUARDO ────────────────────────────────────────── */
+    .eduardo { background: var(--azul-m); }
+    .eduardo-intro { font-size: 1.05rem; color: var(--creme-70); line-height: 1.85; margin-bottom: 32px; }
+    .eduardo-intro .destaque { color: var(--creme); font-weight: 500; }
+    .creds { display: grid; gap: 12px; }
+    .cred { display: flex; gap: 14px; align-items: flex-start; padding: 16px 20px; border-radius: var(--r-sm); border: 1px solid var(--line); }
+    .cred-num { font-family: var(--serif); font-size: 1.6rem; font-weight: 700; color: var(--ouro); opacity: 0.6; flex-shrink: 0; line-height: 1; min-width: 32px; }
+    .cred-body { font-size: 0.92rem; color: var(--creme-70); line-height: 1.6; }
+    .cred-body strong { color: var(--creme); }
+    .eduardo-close { margin-top: 36px; padding: 24px 28px; border-left: 2px solid var(--ouro); font-family: var(--serif); font-style: italic; font-size: 1rem; color: var(--creme-70); line-height: 1.75; }
+    .eduardo-close strong { color: var(--creme); }
+
+    /* ── PROVA ──────────────────────────────────────────── */
+    .prova { background: var(--azul); }
+    .testimonials { display: grid; gap: 20px; }
+    .testimonial { background: var(--ouro-dim2); border: 1px solid var(--line); border-radius: var(--r-md); padding: 28px; }
+    .testimonial-quote { font-family: var(--serif); font-style: italic; font-size: 1rem; color: var(--creme); line-height: 1.75; margin-bottom: 18px; }
+    .testimonial-quote::before { content: '"'; color: var(--ouro); font-size: 1.4rem; }
+    .testimonial-quote::after  { content: '"'; color: var(--ouro); font-size: 1.4rem; }
+    .testimonial-meta { font-size: 0.82rem; color: var(--creme-45); }
+    .prova-placeholder { border: 1px dashed rgba(200,169,81,0.25); border-radius: var(--r-md); padding: 24px; text-align: center; color: var(--creme-45); font-size: 0.87rem; font-style: italic; }
+
+    /* ── PARA QUEM É ────────────────────────────────────── */
+    .para-quem { background: var(--azul-m); }
+    .criterios { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 36px; }
+    .criterio-col h4 { font-size: 0.82rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1px solid var(--line); }
+    .criterio-col.yes h4 { color: var(--ouro); }
+    .criterio-col.no  h4 { color: var(--creme-45); }
+    .criterio-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .criterio-list li { display: flex; gap: 10px; align-items: flex-start; font-size: 0.9rem; color: var(--creme-70); line-height: 1.5; }
+    .criterio-list li .marker { width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 0.7rem; margin-top: 2px; }
+    .criterio-col.yes .marker { background: var(--ouro-dim); color: var(--ouro); }
+    .criterio-col.no  .marker { background: var(--creme-20); color: var(--creme-45); }
+    .criterio-close { margin-top: 36px; text-align: center; font-size: 0.9rem; color: var(--creme-70); line-height: 1.8; }
+
+    /* ── QUIZ SECTION ───────────────────────────────────── */
+    .form-section { background: var(--azul); }
+    .form-transition { font-size: 1.05rem; color: var(--creme-70); line-height: 1.85; margin-bottom: 40px; }
+    .form-transition p { margin-bottom: 16px; }
+    .form-transition p.highlight { color: var(--creme); font-size: 1.1rem; }
+
+    .quiz-box {
+      background: var(--azul-m);
+      border: 1px solid var(--line);
+      border-radius: var(--r-lg);
+      overflow: hidden;
+      position: relative;
+    }
+    .quiz-box::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(to right, transparent, var(--ouro), transparent);
+      z-index: 1;
+    }
+
+    /* Progress bar */
+    .quiz-progress-wrap {
+      padding: 20px 32px 18px;
+      border-bottom: 1px solid var(--line);
+      display: flex; align-items: center; gap: 16px;
+    }
+    .quiz-progress-track {
+      flex: 1; height: 3px;
+      background: rgba(200,169,81,0.12);
+      border-radius: 2px; overflow: hidden;
+    }
+    .quiz-progress-fill {
+      height: 100%;
+      background: linear-gradient(to right, var(--ouro), var(--ouro-l));
+      border-radius: 2px;
+      transition: width 0.6s cubic-bezier(0.4,0,0.2,1);
+      width: 0%;
+    }
+    .quiz-step-info { font-size: 0.72rem; color: var(--creme-45); letter-spacing: 1.5px; text-transform: uppercase; white-space: nowrap; }
+
+    /* Body */
+    .quiz-body {
+      padding: 40px 36px 44px;
+      min-height: 380px;
+    }
+
+    /* Slide animation */
+    @keyframes quizSlideIn {
+      from { opacity: 0; transform: translateX(18px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    .quiz-slide { animation: quizSlideIn 0.32s ease forwards; }
+
+    /* Intro */
+    .quiz-intro-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--ouro); margin-bottom: 22px;
+      padding: 6px 14px; border: 1px solid rgba(200,169,81,0.3);
+      border-radius: 20px; background: var(--ouro-dim2);
+    }
+    .quiz-intro-badge::before { content: '◆'; font-size: 0.55rem; }
+    .quiz-intro-title {
+      font-family: var(--serif);
+      font-size: clamp(1.4rem, 4vw, 1.9rem);
+      color: var(--creme); line-height: 1.25; margin-bottom: 18px;
+    }
+    .quiz-intro-title em { font-style: italic; color: var(--ouro); }
+    .quiz-intro-sub { font-size: 0.95rem; color: var(--creme-70); line-height: 1.8; margin-bottom: 36px; max-width: 520px; }
+
+    /* Question */
+    .quiz-theme {
+      font-size: 0.68rem; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--ouro); opacity: 0.8; margin-bottom: 14px;
+    }
+    .quiz-question {
+      font-family: var(--serif);
+      font-size: clamp(1.1rem, 3vw, 1.32rem);
+      color: var(--creme); line-height: 1.5;
+      margin-bottom: 32px;
+    }
+    .quiz-question em { font-style: italic; color: var(--ouro-l); }
+
+    /* Options */
+    .quiz-options { display: flex; flex-direction: column; gap: 10px; }
+    .quiz-option {
+      display: flex; align-items: flex-start; gap: 14px;
+      padding: 15px 18px;
+      border: 1px solid rgba(200,169,81,0.14);
+      border-radius: var(--r-sm);
+      background: rgba(0,0,0,0.15);
+      cursor: pointer;
+      transition: border-color 0.18s, background 0.18s, transform 0.15s;
+      text-align: left; width: 100%;
+    }
+    .quiz-option:hover:not(:disabled) {
+      border-color: rgba(200,169,81,0.45);
+      background: rgba(200,169,81,0.07);
+      transform: translateX(4px);
+    }
+    .quiz-option:disabled { cursor: default; }
+    .quiz-option.selected {
+      border-color: var(--ouro);
+      background: var(--ouro-dim);
+    }
+    .quiz-option-dot {
+      width: 18px; height: 18px; border-radius: 50%;
+      border: 1.5px solid rgba(200,169,81,0.3);
+      flex-shrink: 0; margin-top: 3px;
+      transition: border-color 0.2s, background 0.2s;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .quiz-option.selected .quiz-option-dot { border-color: var(--ouro); background: var(--ouro); }
+    .quiz-option-dot-inner { width: 6px; height: 6px; border-radius: 50%; background: var(--azul); opacity: 0; transition: opacity 0.2s; }
+    .quiz-option.selected .quiz-option-dot-inner { opacity: 1; }
+    .quiz-option-label { font-size: 0.9rem; font-weight: 600; color: var(--creme); line-height: 1.3; margin-bottom: 2px; }
+    .quiz-option.selected .quiz-option-label { color: var(--ouro-l); }
+    .quiz-option-sub { font-size: 0.77rem; color: var(--creme-45); line-height: 1.4; }
+
+    /* Reaction */
+    .quiz-reaction {
+      margin-top: 22px; padding: 13px 18px;
+      background: var(--ouro-dim2); border-left: 2px solid var(--ouro);
+      border-radius: 0 var(--r-sm) var(--r-sm) 0;
+      font-family: var(--serif); font-style: italic;
+      font-size: 0.88rem; color: var(--creme-70);
+      opacity: 0; transform: translateY(4px);
+      transition: opacity 0.45s ease, transform 0.45s ease;
+    }
+    .quiz-reaction.visible { opacity: 1; transform: translateY(0); }
+
+    /* Open question */
+    .quiz-open-text {
+      width: 100%;
+      background: rgba(0,0,0,0.25);
+      border: 1px solid rgba(200,169,81,0.2);
+      border-radius: var(--r-sm);
+      color: var(--creme);
+      font-family: var(--sans); font-size: 0.95rem; line-height: 1.7;
+      padding: 16px;
+      resize: vertical; min-height: 130px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      margin-bottom: 20px;
+    }
+    .quiz-open-text::placeholder { color: var(--creme-45); }
+    .quiz-open-text:focus { outline: none; border-color: var(--ouro); box-shadow: 0 0 0 3px rgba(200,169,81,0.1); }
+
+    /* Result */
+    .quiz-result-badge {
+      text-align: center; padding: 28px 24px 24px;
+      background: var(--ouro-dim);
+      border: 1px solid rgba(200,169,81,0.3);
+      border-radius: var(--r-md);
+      margin-bottom: 32px;
+    }
+    .quiz-result-icon { font-size: 2rem; margin-bottom: 14px; }
+    .quiz-result-label {
+      font-size: 0.68rem; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--ouro); margin-bottom: 10px;
+    }
+    .quiz-result-title { font-family: var(--serif); font-size: clamp(1.2rem, 3vw, 1.55rem); color: var(--creme); line-height: 1.3; margin-bottom: 12px; }
+    .quiz-result-text { font-size: 0.9rem; color: var(--creme-70); line-height: 1.75; }
+
+    /* Contact form inside quiz */
+    .quiz-contact-intro { font-size: 0.92rem; color: var(--creme-70); margin-bottom: 20px; line-height: 1.7; }
+    .quiz-fields { display: grid; gap: 14px; margin-bottom: 20px; }
+    .quiz-field { display: flex; flex-direction: column; gap: 6px; }
+    .quiz-field label { font-size: 0.78rem; font-weight: 600; color: var(--creme-70); letter-spacing: 0.5px; }
+    .quiz-field label .req { color: var(--ouro); margin-left: 2px; }
+    .quiz-field input {
+      background: rgba(0,0,0,0.25);
+      border: 1px solid rgba(200,169,81,0.2);
+      border-radius: var(--r-sm);
+      color: var(--creme);
+      font-family: var(--sans); font-size: 0.95rem;
+      padding: 14px 16px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      width: 100%;
+    }
+    .quiz-field input::placeholder { color: var(--creme-45); }
+    .quiz-field input:focus { outline: none; border-color: var(--ouro); box-shadow: 0 0 0 3px rgba(200,169,81,0.1); }
+    .quiz-field input.error { border-color: rgba(230,100,100,0.6); }
+
+    /* CTA button */
+    .cta-btn {
+      display: block; width: 100%;
+      background: var(--ouro); color: var(--azul);
+      font-family: var(--sans); font-size: 1rem; font-weight: 700;
+      padding: 18px 32px; border: none; border-radius: var(--r-sm);
+      cursor: pointer; text-align: center; letter-spacing: 0.5px;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      margin-top: 4px;
+    }
+    .cta-btn:hover:not(:disabled) { background: var(--ouro-l); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(200,169,81,0.25); }
+    .cta-btn:active:not(:disabled) { transform: translateY(0); }
+    .cta-btn:disabled { opacity: 0.65; cursor: default; }
+    .cta-micro { text-align: center; font-size: 0.78rem; color: var(--creme-45); margin-top: 12px; }
+
+    /* Success */
+    .quiz-success { text-align: center; padding: 48px 20px; }
+    .quiz-success-icon { font-size: 2.5rem; margin-bottom: 16px; }
+    .quiz-success h3 { font-family: var(--serif); font-size: 1.5rem; color: var(--creme); margin-bottom: 12px; }
+    .quiz-success p { font-size: 0.95rem; color: var(--creme-70); line-height: 1.75; }
+
+    /* ── PRÓXIMOS PASSOS ────────────────────────────────── */
+    .steps-section { background: var(--azul-m); }
+    .steps { display: flex; flex-direction: column; gap: 0; margin-top: 36px; }
+    .step { display: flex; gap: 20px; align-items: flex-start; padding: 20px 0; position: relative; }
+    .step:not(:last-child) { border-bottom: 1px solid var(--line); }
+    .step-num { width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--ouro); color: var(--ouro); display: flex; align-items: center; justify-content: center; font-family: var(--serif); font-size: 1.1rem; font-weight: 700; flex-shrink: 0; }
+    .step-body h4 { color: var(--creme); font-size: 0.95rem; font-weight: 600; margin-bottom: 4px; }
+    .step-body p { color: var(--creme-70); font-size: 0.88rem; line-height: 1.6; }
+
+    /* ── FAQ ────────────────────────────────────────────── */
+    .faq-section { background: var(--azul); }
+    .faq-list { display: flex; flex-direction: column; gap: 0; margin-top: 40px; }
+    .faq-item { border-bottom: 1px solid var(--line); }
+    .faq-btn { display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 22px 0; background: none; border: none; cursor: pointer; text-align: left; gap: 16px; }
+    .faq-q { font-size: 0.95rem; font-weight: 600; color: var(--creme); line-height: 1.4; }
+    .faq-icon { width: 24px; height: 24px; border-radius: 50%; border: 1px solid var(--line); color: var(--ouro); display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; transition: transform 0.3s; }
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+    .faq-answer { font-size: 0.9rem; color: var(--creme-70); line-height: 1.8; padding-bottom: 20px; display: none; }
+    .faq-item.open .faq-answer { display: block; }
+
+    /* ── FINAL CTA ──────────────────────────────────────── */
+    .final-cta { background: var(--azul-m); padding: 80px 0; }
+    .final-cta-inner { text-align: center; max-width: 600px; margin: 0 auto; padding: 0 24px; }
+    .final-cta-label { font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: var(--ouro); opacity: 0.7; margin-bottom: 24px; }
+    .final-cta-text { font-family: var(--serif); font-size: clamp(1.4rem, 4vw, 2rem); color: var(--creme); line-height: 1.35; margin-bottom: 14px; }
+    .final-cta-sub { font-size: 0.95rem; color: var(--creme-70); margin-bottom: 36px; line-height: 1.7; }
+    .final-cta-btn { display: inline-block; background: transparent; border: 1px solid var(--ouro); color: var(--ouro); font-family: var(--sans); font-size: 0.95rem; font-weight: 700; padding: 16px 36px; border-radius: var(--r-sm); cursor: pointer; letter-spacing: 0.5px; transition: background 0.2s, color 0.2s; text-decoration: none; }
+    .final-cta-btn:hover { background: var(--ouro); color: var(--azul); }
+    .final-cta-micro { font-size: 0.78rem; color: var(--creme-45); margin-top: 14px; }
+
+    footer { padding: 32px 24px; text-align: center; border-top: 1px solid var(--line); }
+    .footer-brand { font-family: var(--serif); font-size: 0.82rem; letter-spacing: 3px; text-transform: uppercase; color: var(--creme-45); }
+    .footer-anchor { font-size: 0.78rem; color: rgba(200,169,81,0.4); margin-top: 8px; font-style: italic; }
+
+    /* ── FADE-IN ─────────────────────────────────────────── */
+    .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── RESPONSIVE ─────────────────────────────────────── */
+    @media (max-width: 640px) {
+      .section { padding: 56px 0; }
+      .hero { padding: 0 20px 56px; }
+      .quiz-body { padding: 28px 20px 36px; }
+      .quiz-progress-wrap { padding: 16px 20px 14px; }
+      .criterios { grid-template-columns: 1fr; }
+      .pull-quote { padding: 20px 22px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .fade-in { opacity: 1; transform: none; transition: none; }
+      .hero-scroll-line { animation: none; }
+      .quiz-slide { animation: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════ HERO ═══════════════════ -->
+<section class="hero">
+  <div class="hero-ornament"></div>
+  <div class="hero-logo-area">
+    <div class="hero-logo-text">Comunidade Alpha</div>
+  </div>
+  <div class="hero-content fade-in">
+    <p class="hero-eyebrow">Alta Performance · Método · Ambiente</p>
+    <h1 class="hero-headline">
+      O ambiente ao seu redor está<br>
+      determinando seu próximo resultado —<br>
+      <em>antes que você tome qualquer decisão.</em>
+    </h1>
+    <p class="hero-sub">
+      Não é falta de vontade. Não é falta de conhecimento.
+      A neurociência descobriu o que realmente separa quem avança de quem fica parado:
+      o ambiente onde você passa o seu tempo.
+      A Comunidade Alpha existe por causa disso.
+    </p>
+    <div class="hero-rule">Modernos no método. Ancestrais no caráter.</div>
+  </div>
+  <div class="hero-scroll"><div class="hero-scroll-line"></div></div>
+</section>
+
+<!-- ═══════════════════ PROBLEMA ═══════════════════ -->
+<section class="section problema">
+  <div class="wrap">
+    <div class="sh fade-in">
+      <span class="sh-label">01 · O Problema</span>
+      <h2 class="sh-title">O que ninguém te conta<br>sobre <em>resultados</em></h2>
+    </div>
+    <div class="problema-text fade-in">
+      <p>Você já fez tudo certo.</p>
+      <p>Estudou. Tentou. Se esforçou mais do que a maioria. E mesmo assim, em algum momento, olhou para os números — financeiros, de saúde, de relacionamento — e sentiu que algo não fechava.</p>
+      <p class="strong-line">Não é fraqueza. Não é azar.</p>
+      <p>É que a maior força que molda o comportamento humano não é interna. É externa. É o <strong>ambiente</strong>.</p>
+      <p>Quando as pessoas ao seu redor normalizam mediocridade, seu cérebro automaticamente ajusta o que considera "possível". Sem que você perceba. Sem que você escolha. Isso é neurobiologia, não opinião.</p>
+      <p class="conclusion">O problema não é você.<br>É o ambiente onde você está passando o seu tempo.</p>
+      <p>Mudar isso não exige mais esforço. Exige um ambiente diferente.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ═══════════════════ CIÊNCIA ═══════════════════ -->
+<section class="section ciencia">
+  <div class="wrap">
+    <div class="sh fade-in">
+      <span class="sh-label">02 · A Ciência</span>
+      <h2 class="sh-title">A ciência confirmou o que<br>poucos querem <em>ouvir</em></h2>
+    </div>
+    <div class="stat-cards fade-in">
+      <div class="stat-card">
+        <div class="stat-number">+20%</div>
+        <div class="stat-label">mais renda ao longo da vida</div>
+        <div class="stat-desc">Pesquisadores de Harvard e Stanford rastrearam 20 milhões de pessoas ao longo de décadas. Descoberta: cada 1% de aumento na exposição a pessoas de alta performance resulta em 20% mais renda. O código postal prediz resultado econômico com mais precisão do que a escolaridade.</div>
+        <div class="stat-source">Raj Chetty et al. · "The Opportunity Atlas" · Harvard & Stanford · 2018</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">+57%</div>
+        <div class="stat-label">de contágio de comportamento positivo</div>
+        <div class="stat-desc">Um único amigo que adota comportamentos de alta performance aumenta em 57% a probabilidade de você adotar os mesmos comportamentos. Comportamentos se propagam como vírus — para o bem ou para o mal. A escolha está em qual contágio você se expõe.</div>
+        <div class="stat-source">Christakis & Fowler · New England Journal of Medicine · 2007</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">233</div>
+        <div class="stat-label">milionários pesquisados ao longo de 5 anos</div>
+        <div class="stat-desc">Thomas Corley identificou o padrão: prosperidade não é sorte, não é herança, não é genética. É um conjunto de comportamentos diários praticados dentro de um ambiente que os normaliza. O ambiente é onde o padrão se instala — ou onde ele apodrece.</div>
+        <div class="stat-source">Thomas Corley · Rich Habits · Research Institute of America · 2010</div>
+      </div>
+    </div>
+    <div class="pull-quote fade-in">
+      <blockquote>Você não sobe ao nível das suas expectativas. Você cai ao nível dos seus sistemas — e os sistemas são moldados pelo ambiente ao redor.</blockquote>
+      <cite>— James Clear, Atomic Habits</cite>
+    </div>
+    <div class="ciencia-close fade-in">
+      A pergunta certa não é <em>"por que não estou avançando mais rápido?"</em><br>
+      A pergunta certa é: <strong>"Qual é o ambiente onde estou passando meu tempo?"</strong>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ═══════════════════ O QUE É A ALPHA ═══════════════════ -->
+<section class="section alpha-def">
+  <div class="wrap">
+    <div class="sh fade-in">
+      <span class="sh-label">03 · A Solução</span>
+      <h2 class="sh-title">A Comunidade Alpha<br>não é mais <em>uma comunidade</em></h2>
+    </div>
+    <div class="fade-in">
+      <p class="alpha-intro">A maioria das comunidades reúne pessoas. A Alpha reúne um ambiente.</p>
+      <p class="alpha-intro">Existe uma diferença enorme.</p>
+      <p class="alpha-distinction">A Comunidade Alpha foi construída ao longo de 10 anos com um critério central: criar o ambiente onde comportamentos de alta performance são normais — não excepcionais.</p>
+      <p class="alpha-intro">Aqui, treinar de manhã não é celebrado como exceção — é a referência do padrão. Quando você está cercado por pessoas assim, seu cérebro recalibra o que é normal. Isso não é discurso. É neuroplasticidade.</p>
+    </div>
+    <div class="pilares fade-in">
+      <div class="pilar">
+        <div class="pilar-icon">⚙️</div>
+        <div class="pilar-body">
+          <h4>Método</h4>
+          <p>Sistema documentado de geração de renda com protocolos testados, não teoria. Você sabe o que fazer, em que ordem, e por quê.</p>
+        </div>
+      </div>
+      <div class="pilar">
+        <div class="pilar-icon">🧬</div>
+        <div class="pilar-body">
+          <h4>Ambiente</h4>
+          <p>Convivência sistemática com pessoas que operam em padrão mais alto. O contágio positivo acontece naturalmente.</p>
+        </div>
+      </div>
+      <div class="pilar">
+        <div class="pilar-icon">🤝</div>
+        <div class="pilar-body">
+          <h4>Accountability</h4>
+          <p>Estrutura de acompanhamento entre membros — não dependência do fundador. O ambiente se autorregula.</p>
+        </div>
+      </div>
+      <div class="pilar">
+        <div class="pilar-icon">⚡</div>
+        <div class="pilar-body">
+          <h4>Ferramentas</h4>
+          <p>Automação, IA e processos que eliminam esforço bruto e liberam tempo para o que gera resultado.</p>
+        </div>
+      </div>
+      <div class="pilar">
+        <div class="pilar-icon">🎯</div>
+        <div class="pilar-body">
+          <h4>Acesso</h4>
+          <p>Pessoas em diferentes estágios à frente de onde você está hoje. O cross-class social capital que a ciência prova ser o maior preditor de mobilidade.</p>
+        </div>
+      </div>
+    </div>
+    <p class="alpha-anchor">Modernos no método. Ancestrais no caráter.</p>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ═══════════════════ EDUARDO ═══════════════════ -->
+<section class="section eduardo">
+  <div class="wrap">
+    <div class="sh fade-in">
+      <span class="sh-label">04 · Quem está por trás</span>
+      <h2 class="sh-title">Eduardo <em>Ferreira</em></h2>
+    </div>
+    <div class="fade-in">
+      <p class="eduardo-intro">Meu nome é Eduardo Ferreira.</p>
+      <p class="eduardo-intro">Não vou dizer que sou melhor do que ninguém. Vou dizer que <span class="destaque">escolhi um caminho com muita exigência</span> — e que esse caminho gerou resultados que me permitem ensinar o que aprendi.</p>
+    </div>
+    <div class="creds fade-in">
+      <div class="cred">
+        <div class="cred-num">14</div>
+        <div class="cred-body"><strong>anos de judô.</strong> Disciplina não é punição — é o preço da liberdade. Aprendi isso no tatame antes de aprender nos negócios.</div>
+      </div>
+      <div class="cred">
+        <div class="cred-num">🏅</div>
+        <div class="cred-body"><strong>Recordista mundial de resistência em 2019.</strong> O corpo e a mente operam em um nível muito além do que a maioria explora. Eu precisei provar isso para mim mesmo antes de ensinar.</div>
+      </div>
+      <div class="cred">
+        <div class="cred-num">⚔️</div>
+        <div class="cred-body"><strong>Origem na Academia Militar das Agulhas Negras (AMAN).</strong> Padrão alto não é arrogância — é respeito consigo mesmo. Esse ambiente moldou o que eu exijo de mim e do ambiente que construo.</div>
+      </div>
+      <div class="cred">
+        <div class="cred-num">R$</div>
+        <div class="cred-body"><strong>Mais de R$ 200 milhões em vendas em 11 mercados diferentes.</strong> Resultado não é sorte. É sistema replicado com método.</div>
+      </div>
+    </div>
+    <div class="eduardo-close fade-in">
+      Sou biohacker por convicção: testo, meço, ajusto. Aplico o mesmo rigor científico ao negócio, ao corpo, à mente. A Comunidade Alpha não nasceu de teoria. Nasceu de uma <strong>trajetória de 10 anos construindo o ambiente que eu mesmo precisei e não encontrei.</strong>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ═══════════════════ PROVA ═══════════════════ -->
+<section class="section prova">
+  <div class="wrap">
+    <div class="sh fade-in">
+      <span class="sh-label">05 · Prova de Resultado</span>
+      <h2 class="sh-title">O que acontece quando<br>o <em>ambiente muda</em></h2>
+    </div>
+    <div class="testimonials fade-in">
+      <div class="testimonial prova-placeholder">
+        <p>[ Depoimento real de membro — resultado financeiro e transformação de rotina. Substituir por relato autêntico com permissão. ]</p>
+      </div>
+      <div class="testimonial prova-placeholder">
+        <p>[ Depoimento real de membro — mudança de mentalidade e ambiente. Substituir por relato autêntico com permissão. ]</p>
+      </div>
+      <div class="testimonial prova-placeholder">
+        <p>[ Depoimento real de membro — resultado de longo prazo. Substituir por relato autêntico com permissão. ]</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ═══════════════════ PARA QUEM É ═══════════════════ -->
+<section class="section para-quem">
+  <div class="wrap">
+    <div class="sh fade-in">
+      <span class="sh-label">06 · Critério de Entrada</span>
+      <h2 class="sh-title">A Comunidade Alpha<br>não é para todo mundo —<br><em>e isso é intencional</em></h2>
+    </div>
+    <p class="fade-in" style="font-size:1rem; color:var(--creme-70); margin-bottom:8px;">Não existe inscrição aberta permanente. Existe um processo de entrada.</p>
+    <p class="fade-in" style="font-size:1rem; color:var(--creme-70); margin-bottom:0;">Isso não é elitismo. É cuidado com o ambiente que construímos juntos.</p>
+    <div class="criterios fade-in">
+      <div class="criterio-col yes">
+        <h4>Pode ser para você</h4>
+        <ul class="criterio-list">
+          <li><span class="marker">✓</span><span>Você acredita que resultado real exige método, não motivação</span></li>
+          <li><span class="marker">✓</span><span>Você está disposto a ser cobrado — e a cobrar a si mesmo primeiro</span></li>
+          <li><span class="marker">✓</span><span>Você valoriza um ambiente de verdade acima de um ambiente de conforto</span></li>
+          <li><span class="marker">✓</span><span>Você quer renda com consistência, não pico seguido de queda</span></li>
+          <li><span class="marker">✓</span><span>Você entende que crescimento é processo, não evento</span></li>
+        </ul>
+      </div>
+      <div class="criterio-col no">
+        <h4>Provavelmente não é</h4>
+        <ul class="criterio-list">
+          <li><span class="marker">✕</span><span>Você busca solução rápida sem processo</span></li>
+          <li><span class="marker">✕</span><span>Você não está disposto a ajustar comportamentos</span></li>
+          <li><span class="marker">✕</span><span>Você quer resultado sem participar do ambiente</span></li>
+          <li><span class="marker">✕</span><span>Você prefere conforto imediato a exigência com propósito</span></li>
+        </ul>
+      </div>
+    </div>
+    <p class="criterio-close fade-in">Ser criterioso na entrada é o que garante que o ambiente preserve o padrão.</p>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ═══════════════════ QUIZ / AVALIAÇÃO ═══════════════════ -->
+<section class="section form-section" id="formulario">
+  <div class="wrap">
+    <div class="sh fade-in">
+      <span class="sh-label">07 · Avaliação de Alinhamento</span>
+      <h2 class="sh-title">Antes de continuar —<br>preciso te <em>conhecer</em></h2>
+    </div>
+
+    <div class="form-transition fade-in">
+      <p>A Comunidade Alpha é criteriosa na entrada. Responda com honestidade — não há resposta certa ou errada.</p>
+      <p class="highlight">O objetivo é entender se existe alinhamento real entre o que você busca e o que o ambiente oferece.</p>
+    </div>
+
+    <div class="quiz-box fade-in" id="quizBox">
+      <div class="quiz-progress-wrap" id="quizProgressWrap" style="display:none;">
+        <div class="quiz-progress-track">
+          <div class="quiz-progress-fill" id="quizProgressFill"></div>
+        </div>
+        <div class="quiz-step-info" id="quizStepInfo"></div>
+      </div>
+      <div class="quiz-body" id="quizBody"></div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ═══════════════════ PRÓXIMOS PASSOS ═══════════════════ -->
+<section class="section-sm steps-section">
+  <div class="wrap">
+    <div class="sh fade-in" style="margin-bottom:0">
+      <span class="sh-label">O que acontece depois</span>
+      <h2 class="sh-title" style="font-size:1.4rem;">Processo transparente,<br>sem surpresas</h2>
+    </div>
+    <div class="steps fade-in">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h4>Confirmação via WhatsApp</h4>
+          <p>Você recebe uma confirmação em até 24h após preencher a avaliação.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h4>Conversa de alinhamento</h4>
+          <p>Uma conversa de 30-40 minutos com alguém do nosso time para entender o que você busca e o que a Alpha oferece.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <h4>Detalhes — se houver fit real</h4>
+          <p>Se existir alinhamento genuíno dos dois lados, você conhece como funciona a entrada na prática.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <h4>Você decide</h4>
+          <p>Sem pressão. Sem prazo artificial. Sem resposta certa ou errada. O processo existe para que a decisão seja sua — com clareza.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ═══════════════════ FAQ ═══════════════════ -->
+<section class="section faq-section">
+  <div class="wrap">
+    <div class="sh fade-in">
+      <span class="sh-label">08 · Perguntas</span>
+      <h2 class="sh-title">Perguntas honestas<br>merecem respostas <em>honestas</em></h2>
+    </div>
+    <div class="faq-list fade-in">
+      <div class="faq-item">
+        <button class="faq-btn" aria-expanded="false">
+          <span class="faq-q">Isso é uma pirâmide ou multinível?</span>
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-answer" role="region">
+          Não. A Comunidade Alpha é um ambiente de método e resultado onde membros aprendem, aplicam e crescem. Não há recrutamento obrigatório, estrutura de downline ou comissão por indicação como modelo central de negócio. O resultado vem do método — não de quem você trouxe.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-btn" aria-expanded="false">
+          <span class="faq-q">Preciso ter experiência prévia em negócios ou vendas?</span>
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-answer" role="region">
+          Não é pré-requisito, mas disposição para aprender é. O método é ensinável. O ambiente calibra quem tem disposição genuína. O que não funciona é entrar esperando resultado sem participar do processo.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-btn" aria-expanded="false">
+          <span class="faq-q">Quanto tempo por semana preciso dedicar?</span>
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-answer" role="region">
+          O modelo foi construído para funcionar em 15 a 20 horas semanais no início. Não é hobby, mas também não exige abandono da vida atual. A maioria dos membros começa enquanto ainda tem outra fonte de renda.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-btn" aria-expanded="false">
+          <span class="faq-q">Por que preciso responder a uma avaliação? Por que não há preço aqui?</span>
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-answer" role="region">
+          Porque entrada sem entendimento de ambos os lados gera frustração para todos. A avaliação inicia uma conversa — não uma transação. Queremos entender o que você busca antes de falar sobre qualquer número. Isso é respeito pelo seu tempo e pelo nosso ambiente.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-btn" aria-expanded="false">
+          <span class="faq-q">Vou ser pressionado a entrar depois da conversa?</span>
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-answer" role="region">
+          Não. Se a resposta for "não faz sentido agora", é a resposta certa. A Alpha não precisa de membros que entraram por pressão — precisa de membros que entram com clareza. A exigência começa pela honestidade do processo de entrada.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-btn" aria-expanded="false">
+          <span class="faq-q">A Alpha funciona para qualquer área de atuação?</span>
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-answer" role="region">
+          O método é aplicado principalmente em consultoria e serviços. Mas o que a Alpha entrega em termos de ambiente, mentalidade e sistema de resultados é aplicável a qualquer área. A conversa de alinhamento vai esclarecer isso para o seu contexto específico.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ═══════════════════ FINAL CTA ═══════════════════ -->
+<section class="final-cta">
+  <div class="final-cta-inner">
+    <div class="final-cta-label">Última chamada</div>
+    <h2 class="final-cta-text serif">
+      Você passou a página inteira.<br>
+      Isso já diz algo.
+    </h2>
+    <p class="final-cta-sub">
+      A maioria descarta rápido. Quem continua lendo reconhece algo aqui.<br>
+      Uma avaliação não te compromete a nada. Mas pode ser o ponto de virada que você vai reconhecer depois.
+    </p>
+    <a href="#formulario" class="final-cta-btn">Fazer minha avaliação</a>
+    <p class="final-cta-micro">Menos de 3 minutos · Sem pressão · Sem prazo artificial</p>
+  </div>
+</section>
+
+<!-- ═══════════════════ FOOTER ═══════════════════ -->
+<footer>
+  <div class="footer-brand">Comunidade Alpha · 10 anos</div>
+  <div class="footer-anchor">Modernos no método. Ancestrais no caráter.</div>
+</footer>
+
+<!-- ═══════════════════ SCRIPTS ═══════════════════ -->
+<script>
+  /* --- Fade-in on scroll --- */
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  document.querySelectorAll('.hero .fade-in').forEach(el => setTimeout(() => el.classList.add('visible'), 100));
+
+  /* --- FAQ Accordion --- */
+  document.querySelectorAll('.faq-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+      if (!isOpen) { item.classList.add('open'); btn.setAttribute('aria-expanded', 'true'); }
+      else { btn.setAttribute('aria-expanded', 'false'); }
+    });
+  });
+
+  /* ─────────────────────────────────────────────────────────
+     QUIZ ENGINE
+  ───────────────────────────────────────────────────────── */
+  (function () {
+
+    const QUESTIONS = [
+      {
+        id: 'mentoria',
+        theme: 'Mentoria Presente',
+        q: 'Imagine ter uma mentoria que acompanha sua evolução de perto e se reúne com você pelo menos <em>2 vezes por semana</em>. O quanto isso mudaria seus resultados hoje?',
+        opts: [
+          { v: 1, l: 'Não mudaria muito',           s: 'Consigo me organizar sozinho' },
+          { v: 2, l: 'Faria alguma diferença',       s: 'Às vezes sinto falta de direcionamento' },
+          { v: 3, l: 'Faria bastante diferença',     s: 'A consistência é meu maior desafio' },
+          { v: 4, l: 'Mudaria significativamente',   s: 'Me falta presença e estrutura real' },
+          { v: 5, l: 'Mudaria TUDO',                 s: 'É exatamente o que preciso agora' },
+        ],
+        r: {
+          low:  'Sua autonomia é um ponto forte. Continuando.',
+          mid:  'Consistência com estrutura real tende a multiplicar o resultado. Seguindo.',
+          high: 'Exatamente. Consistência não se sustenta no improviso — ela precisa de presença real.',
+        }
+      },
+      {
+        id: 'suporte',
+        theme: 'Suporte Real',
+        q: 'Ter alguém presente nos momentos críticos — antes de uma venda importante, quando o mês começa difícil, quando a dúvida paralisa. Você sente falta desse tipo de apoio hoje?',
+        opts: [
+          { v: 1, l: 'Não, consigo sozinho',         s: 'Prefiro resolver internamente' },
+          { v: 2, l: 'Às vezes seria útil',           s: 'Em momentos específicos' },
+          { v: 3, l: 'Sim, faz falta',                s: 'Sinto com frequência' },
+          { v: 4, l: 'Sim, faz muita falta',          s: 'Impacta meus resultados diretamente' },
+          { v: 5, l: 'É exatamente o que preciso',    s: 'Esse suporte mudaria tudo' },
+        ],
+        r: {
+          low:  'Independência tem valor. Mas o suporte certo multiplica o resultado.',
+          mid:  'Ter apoio nos momentos certos é o que separa avanço de estagnação.',
+          high: 'Quem cresce mais rápido raramente cresce sozinho. Você identificou isso.',
+        }
+      },
+      {
+        id: 'guardioes',
+        theme: 'Grupo de Foco · Guardiões',
+        q: 'Participar de sessões semanais com <em>Guardiões</em> — pessoas experientes que facilitam foco, clareza e decisões de qualidade em grupo. O quanto esse ambiente mudaria a sua semana?',
+        opts: [
+          { v: 1, l: 'Pouco relevante pra mim',      s: 'Prefiro trabalhar de forma independente' },
+          { v: 2, l: 'Seria interessante',            s: 'Mas não é prioridade agora' },
+          { v: 3, l: 'Faria diferença real',          s: 'Grupo certo tem poder real' },
+          { v: 4, l: 'Faria muita diferença',         s: 'Accountability em grupo muda o jogo' },
+          { v: 5, l: 'Seria transformador',           s: 'É o ambiente que sempre busquei' },
+        ],
+        r: {
+          low:  'Entendido. Continuando.',
+          mid:  'O grupo certo é o que recalibra o que é possível — para cima.',
+          high: 'É exatamente o que a ciência do ambiente comprova. Você entende o conceito.',
+        }
+      },
+      {
+        id: 'vendas',
+        theme: 'Vendas ao Vivo · Lado a Lado',
+        q: 'Ter alguém que fecha vendas junto com você — ao vivo, em call, em reunião — enquanto você domina o processo. O quanto isso aceleraria seus resultados?',
+        opts: [
+          { v: 1, l: 'Consigo sozinho',               s: 'Já tenho o processo bem mapeado' },
+          { v: 2, l: 'Ajudaria um pouco',             s: 'Seria um suporte adicional' },
+          { v: 3, l: 'Ajudaria bastante',             s: 'Aprendo mais fazendo junto' },
+          { v: 4, l: 'Aceleraria muito',              s: 'Vendas é meu maior gargalo hoje' },
+          { v: 5, l: 'Seria um divisor de águas',     s: 'Isso mudaria o jogo completamente' },
+        ],
+        r: {
+          low:  'Vender bem sozinho é raro. Mas há mérito na sua autonomia.',
+          mid:  'Aprender ao lado de quem já domina comprime anos em meses.',
+          high: 'A curva de aprendizado em vendas cai drasticamente com presença real ao lado.',
+        }
+      },
+      {
+        id: 'metodos',
+        theme: 'Métodos + Metodologia Validada',
+        q: 'Ter acesso a metodologias documentadas, testadas e validadas — sistemas que já funcionaram para centenas de pessoas, com mais de <em>R$ 200 milhões em vendas</em> gerados. O quanto isso importa pra você?',
+        opts: [
+          { v: 1, l: 'Prefiro criar meu próprio caminho', s: 'Gosto de descobrir por conta própria' },
+          { v: 2, l: 'Seria útil como referência',        s: 'Para comparar com o que já faço' },
+          { v: 3, l: 'É importante ter base sólida',      s: 'Método economiza tempo e erro' },
+          { v: 4, l: 'É fundamental para mim',            s: 'Reinventar a roda é desperdício' },
+          { v: 5, l: 'É exatamente o que busco',          s: 'Quero sistema, não tentativa e erro' },
+        ],
+        r: {
+          low:  'Criar seu caminho tem valor. Mas atalhos validados têm muito mais.',
+          mid:  'Método documentado é o que transforma esforço em sistema replicável.',
+          high: 'Você entende o que separa quem tenta de quem avança com consistência real.',
+        }
+      },
+    ];
+
+    let step = 0;
+    let score = 0;
+    let openAnswer = '';
+
+    function reaction(q, v) {
+      if (v <= 2) return q.r.low;
+      if (v === 3) return q.r.mid;
+      return q.r.high;
+    }
+
+    function resultData(s) {
+      if (s >= 20) return {
+        label: 'Alinhamento Excepcional',
+        title: 'Você tem exatamente o perfil que buscamos.',
+        text: 'Suas respostas indicam que você entende o valor de um ambiente estruturado e está pronto para operar nesse nível. O próximo passo é uma conversa para confirmar o alinhamento.',
+      };
+      if (s >= 14) return {
+        label: 'Alto Alinhamento',
+        title: 'Seu perfil indica forte compatibilidade.',
+        text: 'Você reconhece o impacto que método, suporte e ambiente certo têm nos seus resultados. Uma conversa vai esclarecer como isso se aplica ao seu momento atual.',
+      };
+      return {
+        label: 'Alinhamento Identificado',
+        title: 'Há espaço real para uma conversa.',
+        text: 'Mesmo que nem todos os critérios ressoem com a mesma intensidade agora, o alinhamento fundamental está presente. O próximo passo é uma conversa para entender seu momento e verificar o fit real.',
+      };
+    }
+
+    function setProgress(s) {
+      const wrap = document.getElementById('quizProgressWrap');
+      const fill = document.getElementById('quizProgressFill');
+      const info = document.getElementById('quizStepInfo');
+      if (s === 0 || s >= 8) { wrap.style.display = 'none'; return; }
+      wrap.style.display = 'flex';
+      if (s >= 1 && s <= 5) {
+        fill.style.width = ((s / 6) * 100) + '%';
+        info.textContent = 'Pergunta ' + s + ' de 6';
+      } else if (s === 6) {
+        fill.style.width = ((5 / 6) * 100) + '%';
+        info.textContent = 'Última pergunta';
+      } else if (s === 7) {
+        fill.style.width = '100%';
+        info.textContent = 'Avaliação concluída ✦';
+      }
+    }
+
+    function render(s) {
+      const body = document.getElementById('quizBody');
+      setProgress(s);
+
+      let inner = '';
+
+      if (s === 0) {
+        inner = `
+          <div class="quiz-intro-badge">3 minutos · 6 perguntas</div>
+          <h3 class="quiz-intro-title">Antes de qualquer conversa,<br>preciso te <em>conhecer</em>.</h3>
+          <p class="quiz-intro-sub">A Comunidade Alpha é criteriosa na entrada. Responda com honestidade — não existe resposta certa ou errada. O objetivo é entender se existe alinhamento real entre o que você busca e o que o ambiente oferece.</p>
+          <button class="cta-btn" id="qStart" type="button" style="max-width:320px;">→ Iniciar minha avaliação</button>
+          <p class="cta-micro">Sem compromisso. Apenas clareza.</p>
+        `;
+      } else if (s >= 1 && s <= 5) {
+        const q = QUESTIONS[s - 1];
+        inner = `
+          <div class="quiz-theme">${q.theme}</div>
+          <p class="quiz-question">${q.q}</p>
+          <div class="quiz-options" id="qOptions">
+            ${q.opts.map(o => `
+              <button class="quiz-option" data-v="${o.v}" type="button">
+                <div class="quiz-option-dot"><div class="quiz-option-dot-inner"></div></div>
+                <div>
+                  <div class="quiz-option-label">${o.l}</div>
+                  <div class="quiz-option-sub">${o.s}</div>
+                </div>
+              </button>
+            `).join('')}
+          </div>
+          <div class="quiz-reaction" id="qReaction"></div>
+        `;
+      } else if (s === 6) {
+        inner = `
+          <div class="quiz-theme">Sobre Você</div>
+          <p class="quiz-question">Com base no que você acabou de revelar — por que você acredita que a Comunidade Alpha é o ambiente certo para você <em>agora</em>?<br>Por que você deveria ser aprovado?</p>
+          <textarea class="quiz-open-text" id="qOpen" placeholder="Seja honesto. Não existe resposta certa — existe a sua resposta."></textarea>
+          <button class="cta-btn" id="qOpenNext" type="button">Finalizar avaliação →</button>
+          <p class="cta-micro">Seus dados ficam restritos à equipe Alpha.</p>
+        `;
+      } else if (s === 7) {
+        const rd = resultData(score);
+        inner = `
+          <div class="quiz-result-badge">
+            <div class="quiz-result-icon">✦</div>
+            <div class="quiz-result-label">${rd.label}</div>
+            <h3 class="quiz-result-title">${rd.title}</h3>
+            <p class="quiz-result-text">${rd.text}</p>
+          </div>
+          <p class="quiz-contact-intro">Para darmos o próximo passo, preciso de 2 informações:</p>
+          <div class="quiz-fields">
+            <div class="quiz-field">
+              <label for="qNome">Nome completo<span class="req">*</span></label>
+              <input type="text" id="qNome" placeholder="Seu nome completo" autocomplete="name">
+            </div>
+            <div class="quiz-field">
+              <label for="qTel">WhatsApp com DDD<span class="req">*</span></label>
+              <input type="tel" id="qTel" placeholder="(00) 00000-0000" autocomplete="tel">
+            </div>
+          </div>
+          <button class="cta-btn" id="qSubmit" type="button">Solicitar minha entrada →</button>
+          <p class="cta-micro">Alguém do time entra em contato via WhatsApp em até 24h.</p>
+        `;
+      } else if (s === 8) {
+        inner = `
+          <div class="quiz-success">
+            <div class="quiz-success-icon">✦</div>
+            <h3>Solicitação recebida.</h3>
+            <p>Alguém do nosso time vai entrar em contato via WhatsApp em até 24 horas para uma conversa de alinhamento.<br><br>Sem pressão. Sem prazo artificial. Só clareza.</p>
+          </div>
+        `;
+      }
+
+      body.innerHTML = '<div class="quiz-slide">' + inner + '</div>';
+      bind(s);
+    }
+
+    function bind(s) {
+      if (s === 0) {
+        document.getElementById('qStart').addEventListener('click', () => { step = 1; render(step); });
+
+      } else if (s >= 1 && s <= 5) {
+        const q = QUESTIONS[s - 1];
+        document.querySelectorAll('.quiz-option').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const v = parseInt(btn.dataset.v);
+            document.querySelectorAll('.quiz-option').forEach(b => { b.classList.remove('selected'); b.disabled = true; });
+            btn.classList.add('selected');
+            score += v;
+            const rx = document.getElementById('qReaction');
+            rx.textContent = reaction(q, v);
+            rx.classList.add('visible');
+            setTimeout(() => { step++; render(step); }, 1500);
+          });
+        });
+
+      } else if (s === 6) {
+        document.getElementById('qOpenNext').addEventListener('click', () => {
+          openAnswer = (document.getElementById('qOpen').value || '').trim();
+          step = 7; render(step);
+          document.getElementById('quizBox').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+
+      } else if (s === 7) {
+        /* Phone mask */
+        const tel = document.getElementById('qTel');
+        tel.addEventListener('input', () => {
+          let v = tel.value.replace(/\D/g, '').slice(0, 11);
+          if (v.length > 6)      v = '(' + v.slice(0,2) + ') ' + v.slice(2,7) + '-' + v.slice(7);
+          else if (v.length > 2) v = '(' + v.slice(0,2) + ') ' + v.slice(2);
+          else if (v.length > 0) v = '(' + v;
+          tel.value = v;
+        });
+
+        document.getElementById('qSubmit').addEventListener('click', async () => {
+          const nome     = document.getElementById('qNome').value.trim();
+          const whatsapp = document.getElementById('qTel').value.trim();
+          let ok = true;
+          if (!nome)     { document.getElementById('qNome').classList.add('error'); ok = false; }
+          if (!whatsapp) { document.getElementById('qTel').classList.add('error'); ok = false; }
+          if (!ok) return;
+
+          const btn = document.getElementById('qSubmit');
+          btn.textContent = 'Enviando...';
+          btn.disabled = true;
+
+          /* ── INTEGRAÇÃO ─────────────────────────────────────────
+             Descomente e configure conforme o webhook escolhido:
+
+             await fetch('SEU_WEBHOOK_URL', {
+               method: 'POST',
+               headers: { 'Content-Type': 'application/json' },
+               body: JSON.stringify({
+                 nome, whatsapp, score, openAnswer,
+                 origem: 'quiz-captacao-alpha',
+                 data: new Date().toISOString()
+               })
+             });
+          ───────────────────────────────────────────────────────── */
+
+          await new Promise(r => setTimeout(r, 900));
+          step = 8; render(step);
+          document.getElementById('quizBox').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        });
+      }
+    }
+
+    render(0);
+  })();
+</script>
+</body>
+</html>
