@@ -379,6 +379,64 @@
       margin-top: 0;
     }
 
+    /* ── HUNTERS CTA ───────────────────────────────────── */
+    .hunters-cta {
+      margin-top: 28px;
+      border: 1px solid rgba(200,169,81,0.35);
+      border-radius: 12px;
+      overflow: hidden;
+      background: linear-gradient(135deg, rgba(200,169,81,0.08), rgba(13,31,45,0.6));
+    }
+    .hunters-cta-header {
+      padding: 20px 24px 16px;
+      border-bottom: 1px solid rgba(200,169,81,0.15);
+    }
+    .hunters-cta-eyebrow {
+      font-size: 9px; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--ouro); opacity: 0.7; margin-bottom: 8px;
+    }
+    .hunters-cta-title {
+      font-family: var(--serif); font-size: 1.05rem; font-weight: 700;
+      color: var(--creme); line-height: 1.35; margin-bottom: 8px;
+    }
+    .hunters-cta-sub {
+      font-size: 0.82rem; color: var(--creme-70); line-height: 1.6;
+    }
+    .hunters-cta-choices {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 0;
+    }
+    .hunters-choice {
+      padding: 16px 20px;
+      background: none; border: none; cursor: pointer;
+      font-family: var(--sans); font-size: 0.88rem; font-weight: 600;
+      transition: background 0.18s, color 0.18s;
+      display: flex; align-items: center; gap: 8px;
+      justify-content: center;
+    }
+    .hunters-choice:first-child {
+      border-right: 1px solid rgba(200,169,81,0.15);
+    }
+    .hunters-choice.yes { color: var(--creme-70); }
+    .hunters-choice.no  { color: var(--creme-45); }
+    .hunters-choice.yes:hover, .hunters-choice.yes.selected {
+      background: rgba(200,169,81,0.15); color: var(--ouro);
+    }
+    .hunters-choice.no:hover, .hunters-choice.no.selected {
+      background: rgba(255,255,255,0.04); color: var(--creme-70);
+    }
+    .hunters-choice .hc-dot {
+      width: 14px; height: 14px; border-radius: 50%;
+      border: 1px solid currentColor; flex-shrink: 0;
+      position: relative; transition: background 0.18s;
+    }
+    .hunters-choice.selected .hc-dot { background: currentColor; }
+    .hunters-note {
+      font-size: 0.75rem; color: var(--creme-45);
+      text-align: center; padding: 10px 20px 14px;
+      border-top: 1px solid rgba(200,169,81,0.1);
+    }
+
     /* CTA button */
     .cta-btn {
       display: block; width: 100%;
@@ -1131,6 +1189,23 @@
               <input type="text" id="qMembroContato" placeholder="@instagram ou (00) 00000-0000">
             </div>
           </div>
+          <div class="hunters-cta">
+            <div class="hunters-cta-header">
+              <div class="hunters-cta-eyebrow">Antes de enviar</div>
+              <div class="hunters-cta-title">Quer conhecer o Alpha Hunters — a profissão da nova economia?</div>
+              <div class="hunters-cta-sub">Um dos métodos de construção de renda da Comunidade Alpha. Tecnologia a favor da sua liberdade.</div>
+            </div>
+            <div class="hunters-cta-choices">
+              <button class="hunters-choice yes" id="huntersYes" type="button">
+                <span class="hc-dot"></span> Sim, quero conhecer
+              </button>
+              <button class="hunters-choice no selected" id="huntersNo" type="button">
+                <span class="hc-dot"></span> Agora não
+              </button>
+            </div>
+            <div class="hunters-note">Se clicar em Sim, você será direcionado após o envio.</div>
+          </div>
+
           <button class="cta-btn" id="qSubmit" type="button">Solicitar minha entrada →</button>
           <p class="cta-micro">Alguém do time entra em contato via WhatsApp em até 24h.</p>
         `;
@@ -1175,6 +1250,19 @@
         });
 
       } else if (s === 7) {
+        /* Hunters Sim/Não */
+        let wantsHunters = false;
+        document.getElementById('huntersYes').addEventListener('click', () => {
+          wantsHunters = true;
+          document.getElementById('huntersYes').classList.add('selected');
+          document.getElementById('huntersNo').classList.remove('selected');
+        });
+        document.getElementById('huntersNo').addEventListener('click', () => {
+          wantsHunters = false;
+          document.getElementById('huntersNo').classList.add('selected');
+          document.getElementById('huntersYes').classList.remove('selected');
+        });
+
         /* Membro condicional — exibe campo de contato ao digitar nome */
         const membroNome = document.getElementById('qMembroNome');
         const membroContatoField = document.getElementById('qMembroContatoField');
@@ -1239,8 +1327,13 @@
           ───────────────────────────────────────────────────────── */
 
           await new Promise(r => setTimeout(r, 900));
-          step = 8; render(step);
-          document.getElementById('quizBox').scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+          if (wantsHunters) {
+            window.location.href = '../landpage-funil/';
+          } else {
+            step = 8; render(step);
+            document.getElementById('quizBox').scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
         });
       }
     }
